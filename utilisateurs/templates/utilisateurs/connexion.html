@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'utilisateurs/style.css' %}">
 </head>
 <body>
-    <h2>Connexion</h2>
-    {% if error %}
-        <p style="color: red;">{{ error }}</p>
-    {% endif %}
-    <form method="post">
-        {% csrf_token %}
-        <label>Nom d'utilisateur ou Email :</label>
-        <input type="text" name="identifiant" required>
-        <label>Mot de passe :</label>
-        <input type="password" name="password" required>
-        <button type="submit">Se connecter</button>
-    </form>
-    <a href="{% url 'inscription' %}">Pas encore inscrit ?</a>
+    <div class="container">
+        <h2>Connexion</h2>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="identifiant" placeholder="Nom d'utilisateur ou Email" required>
+            <input type="password" name="password" placeholder="Mot de passe" required>
+            <button type="submit" class="btn">Se connecter</button>
+        </form>
+        <p class="login-link">Pas encore inscrit ? <a href="{% url 'inscription' %}">Créez un compte</a></p>
+    </div>
 </body>
 </html>

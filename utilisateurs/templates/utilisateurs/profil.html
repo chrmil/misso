@@ -1,13 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'utilisateurs/style.css' %}">
 </head>
 <body>
-    <h2>Bienvenue {{ user.username }}</h2>
-    <p>Email : {{ user.email }}</p>
-    <p>Date de naissance : {{ user.date_de_naissance }}</p>
-    <p>Genre : {{ user.get_genre_display }}</p>
-    <a href="{% url 'deconnexion' %}">Se déconnecter</a>
+    <div class="container">
+        <h2>Bonjour, {{ user.username }} ! 👋</h2>
+        <div class="profile-info">
+            <p><strong>Email :</strong> {{ user.email }}</p>
+            <p><strong>Date de naissance :</strong> {{ user.date_de_naissance }}</p>
+            <p><strong>Genre :</strong> {{ user.get_genre_display }}</p>
+        </div>
+        <a href="{% url 'deconnexion' %}" class="btn logout-btn">Se déconnecter</a>
+    </div>
 </body>
 </html>
