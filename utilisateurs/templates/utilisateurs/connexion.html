@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Connexion</title>
+</head>
+<body>
+    <h2>Connexion</h2>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <label>Nom d'utilisateur ou Email :</label>
+        <input type="text" name="identifiant" required>
+        <label>Mot de passe :</label>
+        <input type="password" name="password" required>
+        <button type="submit">Se connecter</button>
+    </form>
+    <a href="{% url 'inscription' %}">Pas encore inscrit ?</a>
+</body>
+</html>
