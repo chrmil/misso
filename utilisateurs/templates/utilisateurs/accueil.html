@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misso - Restaurant Coréen à Paris</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'utilisateurs/accueil.css' %}">
+</head>    
+<body>
+    <header>
+        <nav>
+            <div class="logo">🥢 Misso</div>
+            <ul>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="{% url 'connexion' %}" class="btn">Se connecter</a></li>
+            </ul>
+        </nav>
+        <div class="hero">
+            <h1>Découvrez l'authenticité coréenne</h1>
+            <p>Un voyage culinaire au cœur de Séoul, en plein Paris.</p>
+            <a href="#menu" class="btn">Voir le menu</a>
+        </div>
+    </header>
+
+    <section id="menu" class="menu">
+        <h2>Notre Menu</h2>
+        <div class="menu-container">
+            <div class="menu-item">
+                <img src="{% static 'restaurant/img/bibimbap.jpg' %}" alt="Bibimbap">
+                <h3>Bibimbap</h3>
+                <p>Riz chaud, légumes sautés, bœuf mariné et œuf, servi avec une sauce piquante.</p>
+                <span class="price">14,90€</span>
+            </div>
+            <div class="menu-item">
+                <img src="{% static 'restaurant/img/pancakes.jpg' %}" alt="Pancakes Coréens">
+                <h3>Pancakes Coréens</h3>
+                <p>Pancakes salés aux légumes et fruits de mer, croustillants à l'extérieur, fondants à l'intérieur.</p>
+                <span class="price">9,50€</span>
+            </div>
+            <div class="menu-item">
+                <img src="{% static 'restaurant/img/bulgogi.jpg' %}" alt="Bulgogi">
+                <h3>Bulgogi</h3>
+                <p>Bœuf mariné à la sauce soja sucrée, grillé à la perfection.</p>
+                <span class="price">16,50€</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <h2>À propos de Misso</h2>
+        <p>Situé au cœur du **Quartier de la Butte Aux Cailles**, **Misso** vous invite à une immersion totale dans la gastronomie coréenne.</p>
+        <p>Nous sommes fiers de vous proposer des plats authentiques, préparés avec passion, dans une ambiance chaleureuse et conviviale.</p>
+        <p>Avec une note de **4.7 sur Google**, nous remercions nos fidèles clients pour leur confiance !</p>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Nous contacter</h2>
+        <p>📍 **123 Rue des Délices, 75013 Paris, France**</p>
+        <p>📞 **+33 1 23 45 67 89**</p>
+        <p>📧 **contact@misso-paris.fr**</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Misso - Restaurant Coréen à Paris | Tous droits réservés</p>
+    </footer>
+</body>
+</html>

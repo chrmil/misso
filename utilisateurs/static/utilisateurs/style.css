@@ -15,9 +15,12 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px; /* Augmenter la largeur maximale */
     width: 100%;
-    max-width: 400px;
     text-align: center;
+    overflow-x: hidden;
+    overflow-y: auto; /* Ajouter une barre de défilement si nécessaire */
+    max-height: 90vh; /* Limiter la hauteur à 90% de la hauteur de la vue */
 }
 
 /* Titre */
@@ -40,6 +43,7 @@ input {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+    width: 100%; /* Assurer que les champs prennent toute la largeur */
 }
 
 /* Bouton principal */
@@ -52,10 +56,7 @@ input {
     cursor: pointer;
     font-size: 16px;
     transition: background 0.3s;
-}
-
-.btn:hover {
-    background-color: #0056b3;
+    width: 100%; /* Assurer que le bouton prend toute la largeur */
 }
 
 /* Lien vers inscription/connexion */

@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from .forms import InscriptionForm
 
+def accueil(request):
+    return render(request, 'utilisateurs/accueil.html')
+
+
 def inscription(request):
     if request.method == "POST":
         form = InscriptionForm(request.POST)
