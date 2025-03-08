@@ -6,7 +6,20 @@
     <title>Connexion</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'utilisateurs/style.css' %}">
+    <link rel="stylesheet" href="{% static 'utilisateurs/navigation.css' %}">
 </head>
+<header>
+    <nav>
+        <div class="logo">🥢 Misso</div>
+        <ul>
+            <li><a href="{% url 'accueil' %}#accueil">Accueil</a></li>
+            <li><a href="{% url 'accueil' %}#menu">Menu</a></li>
+            <li><a href="{% url 'accueil' %}#about">À propos</a></li>
+            <li><a href="{% url 'accueil' %}#contact">Contact</a></li>
+            <li><a href="{% url 'connexion' %}" class="btns">Se connecter</a></li>
+        </ul>
+    </nav>
+</header>
 <body>
     <div class="container">
         <h2>Connexion</h2>

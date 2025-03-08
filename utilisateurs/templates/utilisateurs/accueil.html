@@ -6,23 +6,24 @@
     <title>Misso - Restaurant Coréen à Paris</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'utilisateurs/accueil.css' %}">
+    <link rel="stylesheet" href="{% static 'utilisateurs/navigation.css' %}">
 </head>    
 <body>
     <header>
         <nav>
             <div class="logo">🥢 Misso</div>
             <ul>
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#menu">Menu</a></li>
-                <li><a href="#about">À propos</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="{% url 'connexion' %}" class="btn">Se connecter</a></li>
+                <li><a href="{% url 'accueil' %}#accueil">Accueil</a></li>
+                <li><a href="{% url 'accueil' %}#menu">Menu</a></li>
+                <li><a href="{% url 'accueil' %}#about">À propos</a></li>
+                <li><a href="{% url 'accueil' %}#contact">Contact</a></li>
+                <li><a href="{% url 'connexion' %}" class="btns">Se connecter</a></li>
             </ul>
         </nav>
         <div class="hero">
             <h1>Découvrez l'authenticité coréenne</h1>
             <p>Un voyage culinaire au cœur de Séoul, en plein Paris.</p>
-            <a href="#menu" class="btn">Voir le menu</a>
+            <a href="#menu" class="btns">Voir le menu</a>
         </div>
     </header>
 
