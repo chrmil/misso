@@ -40,8 +40,7 @@ input {
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px;
-    width: 100%; /* Assurer que les champs prennent toute la largeur */
+    font-size: 16px; /* Assurer que les champs prennent toute la largeur */
 }
 
 /* Bouton principal */
@@ -93,4 +92,46 @@ input {
 
 .logout-btn:hover {
     background-color: #a71d2a;
+}
+
+.errorlist {
+    color: red;
+    background-color: #ffe6e6;
+    padding: 10px;
+    border: 1px solid red;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.error-field {
+    border-color: red;
+}
+
+ul {
+    list-style-type : none;
+}
+
+/* ...existing code... */
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        max-width: 90%;
+    }
+
+    .btn {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+        max-width: 100%;
+    }
+
+    .btn {
+        padding: 6px;
+    }
 }

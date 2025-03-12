@@ -79,3 +79,39 @@ footer {
     padding: 10px;
     margin-top: 20px;
 }
+
+/* ...existing code... */
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .menu-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-item {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .menu-item {
+        width: 100%;
+    }
+}
