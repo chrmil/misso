@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription</title>
+    <title>Misso - Restaurant Coréen à Paris</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'utilisateurs/style.css' %}">
+    <link rel="stylesheet" href="{% static 'utilisateurs/histoire.css' %}">
     <link rel="stylesheet" href="{% static 'utilisateurs/navigation.css' %}">
-</head>
-<header>
-    <nav>
-        <div class="logo">🥢 Misso</div>
-        <ul>
+</head>    
+<body>
+    <header>
+        <nav>
+            <div class="logo"> Misso </div>
+            <ul>
                 <li><a href="{% url 'accueil' %}">Accueil</a></li>
                 <li><a href="{% url 'traiteur' %}">Traiteur</a></li>
                 <li><a href="{% url 'hanok' %}">Hanok Restaurant</a></li>
@@ -21,20 +22,21 @@
                 <li><a href="{% url 'accueil' %}">À propos</a></li>
                 <li><a href="{% url 'accueil' %}">Contact</a></li>
                 <li><a href="{% url 'connexion' %}" class="btns">Se connecter</a></li>
-        </ul>
-    </nav>
-</header>
-<body>
-    <div class="container">
-        <h2>Inscription</h2>
-        <form method="post">
-            {% csrf_token %}
-            <div class="form-group">
-                {{ form.as_p }}
-            </div>
-            <button type="submit" class="btn">S'inscrire</button>
-        </form>
-        <p class="login-link">Déjà inscrit ? <a href="{% url 'connexion' %}">Connectez-vous</a></p>
-    </div>
+            </ul>
+        </nav>
+    </header>
+    <div class="main">
+    <p> Mettre portfolio et histoire de Misso ici</p>
+     </div>
+    <section id="contact" class="contact">
+        <h2>Nous contacter</h2>
+        <p>📍 **123 Rue des Délices, 75013 Paris, France**</p>
+        <p>📞 **+33 1 23 45 67 89**</p>
+        <p>📧 **contact@misso-paris.fr**</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Misso - Culture et Cuisine Coréenne en France | Tous droits réservés</p>
+    </footer>
 </body>
 </html>

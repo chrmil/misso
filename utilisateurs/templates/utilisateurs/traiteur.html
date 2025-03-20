@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misso - Restaurant Coréen à Paris</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'utilisateurs/traiteur.css' %}">
+    <link rel="stylesheet" href="{% static 'utilisateurs/navigation.css' %}">
+</head>    
+<body>
+    <header>
+        <nav>
+            <div class="logo"> Misso </div>
+            <ul>
+                 <li><a href="{% url 'accueil' %}">Accueil</a></li>
+                 <li><a href="{% url 'traiteur' %}">Traiteur</a></li>
+                 <li><a href="{% url 'hanok' %}">Hanok Restaurant</a></li>
+                 <li><a href="{% url 'terrasse' %}">Terrasse</a></li>
+                 <li><a href="{% url 'evenements' %}">Evenements</a></li> 
+                 <li><a href="{% url 'institut' %}">Institut</a></li>                 
+                <li><a href="{% url 'histoire' %}">À propos</a></li>
+                <li><a href="{% url 'accueil' %}#contact">Contact</a></li>
+                 <li><a href="{% url 'connexion' %}" class="btns">Se connecter</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="main">
+    
+        <h2>Misso Corée </h2>
+        <h3>Le goût qui vous fait sourire</3>
+         <p> 27 rue du Moulin des Prés 75013 Paris</p>
+ 
+     </div>
+    <section id="contact" class="contact">
+        <h2>Nous contacter</h2>
+        <p>📍 **123 Rue des Délices, 75013 Paris, France**</p>
+        <p>📞 **+33 1 23 45 67 89**</p>
+        <p>📧 **contact@misso-paris.fr**</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Misso - Culture et Cuisine Coréenne en France | Tous droits réservés</p>
+    </footer>
+</body>
+</html>

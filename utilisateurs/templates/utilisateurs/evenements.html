@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
+    <title>Misso - Restaurant Coréen à Paris</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'utilisateurs/style.css' %}">
+    <link rel="stylesheet" href="{% static 'utilisateurs/evenements.css' %}">
     <link rel="stylesheet" href="{% static 'utilisateurs/navigation.css' %}">
-</head>
-<header>
-    <nav>
-        <div class="logo"> Misso</div>
-        <ul>
-                <li><a href="{% url 'accueil' %}#accueil">Accueil</a></li>
+</head>    
+<body>
+    <header>
+        <nav>
+            <div class="logo"> Misso </div>
+            <ul>
+                <li><a href="{% url 'accueil' %}">Accueil</a></li>
                 <li><a href="{% url 'traiteur' %}">Traiteur</a></li>
                 <li><a href="{% url 'hanok' %}">Hanok Restaurant</a></li>
                 <li><a href="{% url 'terrasse' %}">Terrasse</a></li>
@@ -22,18 +23,24 @@
                 <li><a href="{% url 'accueil' %}#contact">Contact</a></li>
                 <li><a href="{% url 'connexion' %}" class="btns">Se connecter</a></li>
             </ul>
-    </nav>
-</header>
-<body>
-    <div class="container">
-        <h2>Connexion</h2>
-        <form method="post">
-            {% csrf_token %}
-            <input type="text" name="identifiant" placeholder="Nom d'utilisateur ou Email" required>
-            <input type="password" name="password" placeholder="Mot de passe" required>
-            <button type="submit" class="btn">Se connecter</button>
-        </form>
-        <p class="login-link">Pas encore inscrit ? <a href="{% url 'inscription' %}">Créez un compte</a></p>
-    </div>
+        </nav>
+    </header>
+    <div class="main">
+   
+       <h2>Evenements </h2>
+       <h3>Concerts, buffets, marriages...</h3>
+        <p> </p>
+     
+     </div>
+    <section id="contact" class="contact">
+        <h2>Nous contacter</h2>
+        <p>📍 **123 Rue des Délices, 75013 Paris, France**</p>
+        <p>📞 **+33 1 23 45 67 89**</p>
+        <p>📧 **contact@misso-paris.fr**</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Misso - Culture et Cuisine Coréenne en France | Tous droits réservés</p>
+    </footer>
 </body>
 </html>

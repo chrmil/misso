@@ -11,53 +11,52 @@
 <body>
     <header>
         <nav>
-            <div class="logo">🥢 Misso</div>
+            <div class="logo"> Misso </div>
             <ul>
                 <li><a href="{% url 'accueil' %}#accueil">Accueil</a></li>
-                <li><a href="{% url 'accueil' %}#menu">Menu</a></li>
-                <li><a href="{% url 'accueil' %}#about">À propos</a></li>
+                <li><a href="{% url 'traiteur' %}">Traiteur</a></li>
+                <li><a href="{% url 'hanok' %}">Hanok Restaurant</a></li>
+                <li><a href="{% url 'terrasse' %}">Terrasse</a></li>
+                <li><a href="{% url 'evenements' %}">Evenements</a></li> 
+                <li><a href="{% url 'institut' %}">Institut</a></li>                 
+                <li><a href="{% url 'histoire' %}">À propos</a></li>
                 <li><a href="{% url 'accueil' %}#contact">Contact</a></li>
                 <li><a href="{% url 'connexion' %}" class="btns">Se connecter</a></li>
             </ul>
         </nav>
-        <div class="hero">
-            <h1>Découvrez l'authenticité coréenne</h1>
-            <p>Un voyage culinaire au cœur de Séoul, en plein Paris.</p>
-            <a href="#menu" class="btns">Voir le menu</a>
-        </div>
     </header>
-
-    <section id="menu" class="menu">
-        <h2>Notre Menu</h2>
-        <div class="menu-container">
-            <div class="menu-item">
-                <img src="{% static 'restaurant/img/bibimbap.jpg' %}" alt="Bibimbap">
-                <h3>Bibimbap</h3>
-                <p>Riz chaud, légumes sautés, bœuf mariné et œuf, servi avec une sauce piquante.</p>
-                <span class="price">14,90€</span>
-            </div>
-            <div class="menu-item">
-                <img src="{% static 'restaurant/img/pancakes.jpg' %}" alt="Pancakes Coréens">
-                <h3>Pancakes Coréens</h3>
-                <p>Pancakes salés aux légumes et fruits de mer, croustillants à l'extérieur, fondants à l'intérieur.</p>
-                <span class="price">9,50€</span>
-            </div>
-            <div class="menu-item">
-                <img src="{% static 'restaurant/img/bulgogi.jpg' %}" alt="Bulgogi">
-                <h3>Bulgogi</h3>
-                <p>Bœuf mariné à la sauce soja sucrée, grillé à la perfection.</p>
-                <span class="price">16,50€</span>
-            </div>
+    <div class="main">
+    <div class="top"  onclick='location.href="{% url 'traiteur'  %}";'>
+        <h2>Misso Corée </h2>
+        <h3>Le goût qui vous fait sourire</3>
+         <p> 27 rue du Moulin des Prés 75013 Paris</p>
         </div>
-    </section>
-
-    <section id="about" class="about">
-        <h2>À propos de Misso</h2>
-        <p>Situé au cœur du **Quartier de la Butte Aux Cailles**, **Misso** vous invite à une immersion totale dans la gastronomie coréenne.</p>
-        <p>Nous sommes fiers de vous proposer des plats authentiques, préparés avec passion, dans une ambiance chaleureuse et conviviale.</p>
-        <p>Avec une note de **4.7 sur Google**, nous remercions nos fidèles clients pour leur confiance !</p>
-    </section>
-
+     <div class="center" onclick='location.href="{% url 'histoire'  %}";'>
+         <img src= "{% static 'restaurant/img/misso_logo_old.jpg' %}" alt="logo">
+         <h1>Since 2006</h1>
+         <p></p>
+    </div>
+   <div class="right" onclick='location.href="{% url 'evenements'  %}";'>
+       <h2>Evenements </h2>
+       <h3>Concerts, buffets, marriages...</h3>
+        <p> </p>
+       </div>
+   <div class="left" onclick='location.href="{% url 'institut'  %}";'>
+       <h2>Institut du Goût Coréen en France</h2>
+       <h3>Le goût qui vous fait sourire</h3>
+        <p> </p>
+       </div>
+   <div class="bottom" onclick='location.href="{% url 'terrasse'  %}";'>
+       <h2>La Terrasse</h2>
+       <h3>Au Musée Guimet des Arts Asiatiques</h3>
+        <p> </p>
+       </div>
+   <div class="bottom-left" onclick='location.href="{% url 'hanok'  %}";' >
+       <h2>Hanok Restaurant</h2>
+       <h3>Au Musée Guimet des Arts Asiatiques</h3>
+        <p> </p>
+       </div>
+     </div>
     <section id="contact" class="contact">
         <h2>Nous contacter</h2>
         <p>📍 **123 Rue des Délices, 75013 Paris, France**</p>
@@ -66,7 +65,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2025 Misso - Restaurant Coréen à Paris | Tous droits réservés</p>
+        <p>&copy; 2025 Misso - Culture et Cuisine Coréenne en France | Tous droits réservés</p>
     </footer>
 </body>
 </html>

@@ -10,13 +10,17 @@
 </head>
 <header>
     <nav>
-        <div class="logo">🥢 Misso</div>
+        <div class="logo">🥢Misso</div>
         <ul>
-            <li><a href="{% url 'accueil' %}#accueil">Accueil</a></li>
-            <li><a href="{% url 'accueil' %}#menu">Menu</a></li>
-            <li><a href="{% url 'accueil' %}#about">À propos</a></li>
-            <li><a href="{% url 'accueil' %}#contact">Contact</a></li>
-            <li><a href="{% url 'connexion' %}" class="btns">Se connecter</a></li>
+                 <li><a href="{% url 'accueil' %}">Accueil</a></li>
+                 <li><a href="{% url 'traiteur' %}">Traiteur</a></li>
+                 <li><a href="{% url 'hanok' %}">Hanok Restaurant</a></li>
+                 <li><a href="{% url 'terrasse' %}">Terrasse</a></li>
+                 <li><a href="{% url 'evenements' %}">Evenements</a></li> 
+                 <li><a href="{% url 'institut' %}">Institut</a></li>                 
+                 <li><a href="{% url 'accueil' %}">À propos</a></li>
+                 <li><a href="{% url 'accueil' %}">Contact</a></li>
+                 <li><a href="{% url 'connexion' %}" class="btns">Se connecter</a></li>
         </ul>
     </nav>
 </header>
