@@ -5,6 +5,23 @@ from .forms import InscriptionForm
 def accueil(request):
     return render(request, 'utilisateurs/accueil.html')
 
+def hanok(request):
+    return render(request, 'utilisateurs/hanok.html')
+
+def traiteur(request):
+    return render(request, 'utilisateurs/traiteur.html')
+
+def terrasse(request):
+    return render(request, 'utilisateurs/terrasse.html')
+
+def institut(request):
+    return render(request, 'utilisateurs/institut.html')
+
+def evenements(request):
+    return render(request, 'utilisateurs/evenements.html')
+
+def histoire(request):
+    return render(request, 'utilisateurs/histoire.html')
 
 def inscription(request):
     if request.method == "POST":
