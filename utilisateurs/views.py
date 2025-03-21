@@ -1,15 +1,24 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from .forms import InscriptionForm
+from .models import *
+from menu.models import *
 
 def accueil(request):
     return render(request, 'utilisateurs/accueil.html')
 
 def hanok(request):
-    return render(request, 'utilisateurs/hanok.html')
+    restaurant = get_object_or_404(Restaurant, name='hanok')
+    categories = Category.objects.filter(restaurant=restaurant)
+    menu_items = MenuItem.objects.filter(category__in=categories)
+    return render(request, 'utilisateurs/hanok.html' , {'restaurant': restaurant, 'categories': categories, 'menu_items': menu_items})
+    
 
 def traiteur(request):
-    return render(request, 'utilisateurs/traiteur.html')
+      restaurant = get_object_or_404(Restaurant, name='traiteur')
+      categories = Category.objects.filter(restaurant=restaurant)
+      menu_items = MenuItem.objects.filter(category__in=categories)
+      return render(request, 'utilisateurs/traiteur.html' , {'restaurant': restaurant, 'categories': categories, 'menu_items': menu_items})
 
 def terrasse(request):
     return render(request, 'utilisateurs/terrasse.html')
@@ -22,6 +31,7 @@ def evenements(request):
 
 def histoire(request):
     return render(request, 'utilisateurs/histoire.html')
+
 
 def inscription(request):
     if request.method == "POST":

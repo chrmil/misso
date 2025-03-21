@@ -1,0 +1,188 @@
+/* Import d'une police élégante */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap');
+
+/* Style global */
+body {
+    font-family: 'Quicksand', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: block;
+    height: 100vh;
+    color: white; 
+    background: black;
+    
+}
+
+
+
+/* Menu container */
+.menu-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: lightgrey;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    color:black;
+}
+
+/* Menu heading */
+.menu-container h1 {
+    font-size: 2.5rem;
+    color: black;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Category title styles */
+.menu-container h2 {
+    font-size: 1.8rem;
+    color: #444;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Menu item list */
+.menu-container ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+/* Menu item style */
+.menu-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 15px;
+}
+
+.menu-item strong {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Price style */
+.menu-item .price {
+    font-size: 1.2rem;
+    color: black;
+}
+
+/* Description style */
+.menu-item .description {
+    font-size: 1rem;
+    color: #666;
+    margin-top: 10px;
+    flex: 1;
+}
+
+/* Image styles */
+.menu-item img {
+    border-radius: 8px;
+    margin-left: 15px;
+    object-fit: cover;
+}
+
+/* Empty category message */
+.menu-container p {
+    font-size: 1.2rem;
+    color: #888;
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .menu-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .menu-item img {
+        max-width: 100%;
+        max-height: 150px;
+        margin-left: 0;
+        margin-top: 15px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .menu-item strong {
+        font-size: 1.2rem;
+    }
+
+    .menu-item .price {
+        font-size: 1rem;
+    }
+}
+
+
+/* About Section */
+.about, .contact {
+    text-align: center;
+    padding: 50px;
+    background: #ffcc00;
+    color: black;
+}
+
+/* Footer */
+footer {
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+/* ...existing code... */
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .menu-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-item {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .menu-item {
+        width: 100%;
+    }
+}

@@ -30,7 +30,16 @@
         <h2>Misso Corée </h2>
         <h3>Le goût qui vous fait sourire</3>
          <p> 27 rue du Moulin des Prés 75013 Paris</p>
- 
+         <section id="menu" class="menu">
+
+
+
+        
+
+       
+        {% include 'partials/menu.html' with categories=categories menu_items=menu_items  %}
+
+    </section>
      </div>
     <section id="contact" class="contact">
         <h2>Nous contacter</h2>

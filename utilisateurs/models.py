@@ -11,3 +11,5 @@ class Utilisateur(AbstractUser):
     ]
     genre = models.CharField(max_length=1, choices=GENRE_CHOIX, null=True, blank=True)
 
+
+

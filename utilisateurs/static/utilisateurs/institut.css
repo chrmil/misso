@@ -1,0 +1,67 @@
+/* Import d'une police élégante */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap');
+
+/* Style global */
+body {
+    font-family: 'Quicksand', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: block;
+    height: 100vh;
+    color: white;
+    background: black;
+}
+
+
+/* About Section */
+.about, .contact {
+    text-align: center;
+    padding: 50px;
+    background: #ffcc00;
+    color: black;
+}
+
+/* Footer */
+footer {
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+/* ...existing code... */
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .menu-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-item {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .menu-item {
+        width: 100%;
+    }
+}
