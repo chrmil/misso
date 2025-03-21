@@ -1,0 +1,30 @@
+<!-- templates/partials/menu.html -->
+{% load static %}
+
+
+
+{% block content %}
+<section id="menu" class="menu">
+    <div class="menu-container">
+        <h1>Notre Menu</h1><br>
+        {% for category in categories %}
+            <h2>{{ category.name }}</h2><br>
+            <ul>
+                {% for item in menu_items %}
+                    {% if item.category.id == category.id %}
+                        <li class="menu-item">
+                            <strong>{{ item.name }}</strong> - ${{ item.price }}<br>
+                            {% if item.image_path %}
+                                <img src="{% static item.image_path %}" alt="{{ item.name }}" style="max-width:200px; max-height:200px;"><br>
+                            {% endif %}<br>
+                            {{ item.description }}
+                        </li><br>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% empty %}
+            <p>Aucune catégorie disponible.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
