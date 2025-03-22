@@ -10,29 +10,50 @@ body {
     height: 100vh;
 }
 
-.main{
+.main {
     position: relative;
     width: 100%;
     height: 100%;
-    background: #000000;
+    background: #F5F5DC;
 }
 
-.main div{
+.main div {
     text-wrap: balance;
-    background: #FFFFFF;
+    background: rgba(231, 161, 95, 0.5);
     color: black;
-    size: 10px;
     text-align: center;
-    line-height: 40px;
+    line-height: 1.5;
     border-radius: 15px;
-    border-color: #000000;
+    border: 1px solid #000000;
     position: absolute;
-    overflow : auto;
+    overflow: auto;
     cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
+.center img {
+    width: 45%; /* Taille par défaut de l'image */
+    height: auto; /* Maintient les proportions */
+    transition: width 0.3s ease; /* Transition fluide pour le redimensionnement */
+}
+
+.about, .contact {
+    text-align: center;
+    padding: 50px;
+    background: #ffcc00;
+    color: black;
+}
+
+footer {
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+/* Positionnement et tailles des divs */
 .center {
-    padding-top: 35px;
     top: 35%;
     left: 40%;
     width: 20%;
@@ -67,7 +88,6 @@ body {
     height: 20%;
 }
 
-
 .bottom-left {
     bottom: 5%;
     left: 10%;
@@ -75,108 +95,38 @@ body {
     height: 20%;
 }
 
-/* Hero Section */
-.hero {
-    background:  #5d6d7e ;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
+/* Animation au survol */
+.main div:hover {
+    transform: scale(1.1); /* Agrandissement */
+    background-color: #f0f0f0; /* Couleur légèrement modifiée */
 }
 
-.hero h1 {
-    font-size: 50px;
-    margin-bottom: 10px;
+/* Media Queries pour rendre les divs et les polices responsive */
+@media (max-width: 1024px) {
+    .main div {
+        font-size: 0.9rem; /* Taille de police par défaut */
+    }
+
+    .center img {
+        width: 70%; /* Réduit la taille de l'image pour les tablettes */
+    }
 }
 
-.hero p {
-    font-size: 20px;
-    margin-bottom: 20px;
-}
-
-/* Menu Section */
-.menu {
-    text-align: center;
-    padding: 50px;
-}
-
-.menu-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.menu-item {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
-}
-
-.menu-item img {
-    width: 100%;
-    border-radius: 10px;
-}
-
-.menu-item .price {
-    color: #ff6600;
-    font-weight: bold;
-}
-
-/* About Section */
-.about, .contact {
-    text-align: center;
-    padding: 50px;
-    background: #ffcc00;
-    color: black;
-}
-
-/* Footer */
-footer {
-    background: black;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    margin-top: 20px;
-}
-
-/* ...existing code... */
-
-/* Media Queries */
 @media (max-width: 768px) {
-    .hero h1 {
-        font-size: 36px;
+    .main div {
+        font-size: 0.8rem; /* Taille de police par défaut */
     }
 
-    .hero p {
-        font-size: 16px;
+    .center img {
+        width: 100%; /* Réduit la taille de l'image pour les tablettes */
     }
 
-    .menu-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .menu-item {
-        width: 90%;
-    }
 }
 
 @media (max-width: 480px) {
-    .hero h1 {
-        font-size: 28px;
+    .main div {
+        font-size: 0.6rem; /* Taille de police par défaut */
     }
 
-    .hero p {
-        font-size: 14px;
-    }
 
-    .menu-item {
-        width: 100%;
-    }
 }
