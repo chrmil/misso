@@ -4,7 +4,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 15px 50px;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(253, 211, 172, 0.85);
     top: 0;
     left: 0;
     z-index: 1000;
@@ -29,7 +29,7 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #fff;
+    color: #000000;
     font-weight: 500;
     transition: color 0.3s;
 }
