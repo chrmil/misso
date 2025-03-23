@@ -1,0 +1,23 @@
+# Fichiers Python compilés
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Base de données SQLite
+db.sqlite3
+
+# Environnement virtuel
+venv/
+.env
+
+# Clés et configurations sensibles
+*.env
+
+# Logs et fichiers temporaires
+*.log
+*.tmp
+*.bak
+
+# Dossier des fichiers statiques collectés
+staticfiles/

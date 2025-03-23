@@ -3,6 +3,9 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from .forms import InscriptionForm
 from .models import *
 from menu.models import *
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 def accueil(request):
     return render(request, 'utilisateurs/accueil.html')
@@ -37,11 +40,25 @@ def inscription(request):
     if request.method == "POST":
         form = InscriptionForm(request.POST)
         if form.is_valid():
-            form.save()
+            # Sauvegarde l'utilisateur
+            user = form.save()
+
+            # Envoi de l'email de confirmation
+            send_welcome_email(user.email)
+
+            # Redirige vers la page de connexion
             return redirect('connexion')
     else:
         form = InscriptionForm()
+
     return render(request, 'utilisateurs/inscription.html', {'form': form})
+
+def send_welcome_email(email):
+    subject = 'Bienvenue sur notre site!'
+    message = 'Merci de vous être inscrit sur notre site. Nous sommes heureux de vous avoir parmi nous.'
+    from_email = settings.EMAIL_HOST_USER  # Ton adresse email définie dans settings.py
+    recipient_list = [email]  # L'email de l'utilisateur
+    send_mail(subject, message, from_email, recipient_list)
 
 def connexion(request):
     if request.method == "POST":
