@@ -24,7 +24,10 @@ def traiteur(request):
       return render(request, 'utilisateurs/traiteur.html' , {'restaurant': restaurant, 'categories': categories, 'menu_items': menu_items})
 
 def terrasse(request):
-    return render(request, 'utilisateurs/terrasse.html')
+    restaurant = get_object_or_404(Restaurant, name='rooftop')
+    categories = Category.objects.filter(restaurant=restaurant)
+    menu_items = MenuItem.objects.filter(category__in=categories)
+    return render(request, 'utilisateurs/terrasse.html', {'restaurant': restaurant, 'categories': categories, 'menu_items': menu_items})
 
 def institut(request):
     return render(request, 'utilisateurs/institut.html')
