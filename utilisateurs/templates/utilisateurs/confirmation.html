@@ -1,0 +1,28 @@
+{% load static %}
+<!-- utilisateurs/templates/utilisateurs/confirmation.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation de réservation</title>
+    <link rel="stylesheet" href="{% static 'utilisateurs/styles.css' %}"> <!-- Si tu utilises un fichier CSS externe -->
+</head>
+<body>
+    <div class="confirmation-container">
+        <h1>Réservation confirmée !</h1>
+        <p>Merci d'avoir réservé avec nous. Nous avons bien pris en compte votre demande.</p>
+
+        <h3>Détails de votre réservation :</h3>
+        <ul>
+            <li>Date : {{ reservation.date }}</li>
+            <li>Heure : {{ reservation.time }}</li>
+            <li>Nombre de personnes : {{ reservation.num_people }}</li>
+        </ul>
+
+        <p>Nous avons hâte de vous accueillir !</p>
+
+        <a href="{% url 'accueil' %}">Retour à l'accueil</a>
+    </div>
+</body>
+</html>

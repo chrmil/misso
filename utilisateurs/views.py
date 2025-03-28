@@ -129,3 +129,9 @@ def deconnexion(request):
 
 def profil(request):
     return render(request, "utilisateurs/profil.html", {"user": request.user})
+
+def reservation_page(request):
+    return render(request, "reservation.html")  # Assure-toi d'avoir ce template
+
+def confirmer_reservation(request):
+    return render(request, "utilisateurs/confirmation.html")

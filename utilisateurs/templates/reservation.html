@@ -1,0 +1,61 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réservation</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'utilisateurs/style.css' %}">
+    <link rel="stylesheet" href="{% static 'utilisateurs/navigation.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🥢Misso</div>
+            <ul>
+                <li><a href="{% url 'accueil' %}">Accueil</a></li>
+                <li><a href="{% url 'traiteur' %}">Traiteur</a></li>
+                <li><a href="{% url 'hanok' %}">Hanok Restaurant</a></li>
+                <li><a href="{% url 'terrasse' %}">Terrasse</a></li>
+                <li><a href="{% url 'evenements' %}">Événements</a></li>
+                <li><a href="{% url 'institut' %}">Institut</a></li>
+                <li><a href="{% url 'histoire' %}">À propos</a></li>
+                <li><a href="{% url 'accueil' %}#contact">Contact</a></li>
+                <li><a href="{% url 'connexion' %}" class="btns">Se connecter</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Réservez votre table 🍽️</h2>
+        
+        <form method="POST" action="{% url 'confirmer_reservation' %}">
+            {% csrf_token %}
+
+            <!-- Étape 1 : Choix de la date -->
+            <label for="date">Choisissez une date :</label>
+            <input type="date" id="date" name="date" required>
+
+            <!-- Étape 2 : Choix de l'heure -->
+            <label for="heure">Choisissez une heure :</label>
+            <select id="heure" name="heure" required>
+                <option value="12:00">12:00</option>
+                <option value="12:30">12:30</option>
+                <option value="13:00">13:00</option>
+                <option value="19:00">19:00</option>
+                <option value="19:30">19:30</option>
+                <option value="20:00">20:00</option>
+            </select>
+
+            <!-- Étape 3 : Nombre de personnes -->
+            <label for="personnes">Nombre de personnes :</label>
+            <input type="number" id="personnes" name="personnes" min="1" max="10" required>
+
+            <!-- Bouton de confirmation -->
+            <button type="submit" class="confirm-btn">Confirmer la réservation</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -28,6 +28,10 @@
 <body>
     <div class="container">
         <h2>Bonjour, {{ user.username }} ! 👋</h2>
+        
+        <!-- Bouton Réserver ajouté ici -->
+        <a href="{% url 'reservation' %}" class="btn reserve-btn">Réserver</a>
+
         <div class="profile-info">
             <p><strong>Email :</strong> {{ user.email }}</p>
             <p><strong>Date de naissance :</strong> {{ user.date_de_naissance }}</p>
