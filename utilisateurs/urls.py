@@ -1,6 +1,9 @@
 from django.urls import path
-from .views import *
-from menu.views import *
+from .views import (
+    inscription, connexion, deconnexion, profil, accueil,
+    hanok, traiteur, institut, terrasse, evenements,
+    histoire, verifier_email
+)
 
 urlpatterns = [
     path('inscription/', inscription, name='inscription'),
@@ -14,4 +17,5 @@ urlpatterns = [
     path('terrasse/', terrasse, name='terrasse'),
     path('evenements/', evenements, name='evenements'),
     path('histoire/', histoire, name='histoire'),
+    path('verifier_email/<int:user_id>/', verifier_email, name='verifier_email'),  # Ajout du paramètre user_id
 ]

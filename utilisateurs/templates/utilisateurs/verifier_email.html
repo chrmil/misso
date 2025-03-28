@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vérification de l'email</title>
+    <!-- Tu peux ajouter ici des liens vers des fichiers CSS si tu en as -->
+</head>
+<body>
+    <div class="container">
+        <h2>Vérification de l'email</h2>
+        <p>Un code de vérification a été envoyé à votre adresse email. Veuillez entrer ce code ci-dessous pour activer votre compte.</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <label for="verification_code">Code de vérification :</label>
+            <input type="text" id="verification_code" name="verification_code" required>
+            <button type="submit">Vérifier</button>
+        </form>
+
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        
+        <p>Si vous n'avez pas reçu l'email, vérifiez votre boîte de réception ou <a href="#">demandez un nouveau code</a>.</p>
+    </div>
+</body>
+</html>

@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout, get_user_model
-from .forms import InscriptionForm
-from .models import *
-from menu.models import *
+from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
-
+from .forms import InscriptionForm
+from .models import EmailVerification
+from menu.models import Restaurant, Category, MenuItem
+import random
+import string
 
 def accueil(request):
     return render(request, 'utilisateurs/accueil.html')
@@ -14,20 +16,16 @@ def hanok(request):
     restaurant = get_object_or_404(Restaurant, name='hanok')
     categories = Category.objects.filter(restaurant=restaurant)
     menu_items = MenuItem.objects.filter(category__in=categories)
-    return render(request, 'utilisateurs/hanok.html' , {'restaurant': restaurant, 'categories': categories, 'menu_items': menu_items})
-    
+    return render(request, 'utilisateurs/hanok.html', {'restaurant': restaurant, 'categories': categories, 'menu_items': menu_items})
 
 def traiteur(request):
-      restaurant = get_object_or_404(Restaurant, name='traiteur')
-      categories = Category.objects.filter(restaurant=restaurant)
-      menu_items = MenuItem.objects.filter(category__in=categories)
-      return render(request, 'utilisateurs/traiteur.html' , {'restaurant': restaurant, 'categories': categories, 'menu_items': menu_items})
-
-def terrasse(request):
-    restaurant = get_object_or_404(Restaurant, name='rooftop')
+    restaurant = get_object_or_404(Restaurant, name='traiteur')
     categories = Category.objects.filter(restaurant=restaurant)
     menu_items = MenuItem.objects.filter(category__in=categories)
-    return render(request, 'utilisateurs/terrasse.html', {'restaurant': restaurant, 'categories': categories, 'menu_items': menu_items})
+    return render(request, 'utilisateurs/traiteur.html', {'restaurant': restaurant, 'categories': categories, 'menu_items': menu_items})
+
+def terrasse(request):
+    return render(request, 'utilisateurs/terrasse.html')
 
 def institut(request):
     return render(request, 'utilisateurs/institut.html')
@@ -43,50 +41,91 @@ def inscription(request):
     if request.method == "POST":
         form = InscriptionForm(request.POST)
         if form.is_valid():
-            # Sauvegarde l'utilisateur
-            user = form.save()
+            # Assure-toi qu'il n'y a pas déjà un utilisateur avec cet email
+            email = form.cleaned_data["email"]
+            if get_user_model().objects.filter(email=email).exists():
+                messages.error(request, "Un utilisateur avec cet email existe déjà.")
+                return render(request, "utilisateurs/inscription.html", {'form': form})
 
-            # Envoi de l'email de confirmation
-            send_welcome_email(user.email)
+            user = form.save(commit=False)
+            user.is_active = False  # Utilisateur désactivé jusqu'à vérification
+            user.save()
 
-            # Redirige vers la page de connexion
-            return redirect('connexion')
+            # Génération du code de vérification
+            verification_code = ''.join(random.choices(string.digits, k=6))
+            
+            # Stocker le code dans la base de données
+            EmailVerification.objects.create(user=user, verification_code=verification_code)
+
+            # Envoi du code de vérification par email
+            send_mail(
+                subject="Votre code de vérification",
+                message=f"Bonjour {user.username},\n\nVotre code de vérification est : {verification_code}\n\nMerci de confirmer votre adresse email.",
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[user.email],
+                fail_silently=False,
+            )
+
+            messages.success(request, "Inscription réussie ! Un email de vérification vous a été envoyé.")
+            return redirect("verifier_email", user_id=user.id)
     else:
         form = InscriptionForm()
-
     return render(request, 'utilisateurs/inscription.html', {'form': form})
 
-def send_welcome_email(email):
-    subject = 'Bienvenue sur notre site!'
-    message = 'Merci de vous être inscrit sur notre site. Nous sommes heureux de vous avoir parmi nous.'
-    from_email = settings.EMAIL_HOST_USER  # Ton adresse email définie dans settings.py
-    recipient_list = [email]  # L'email de l'utilisateur
-    send_mail(subject, message, from_email, recipient_list)
+
+def verifier_email(request, user_id):
+    try:
+        email_verif = EmailVerification.objects.get(user_id=user_id, is_verified=False)
+        print(f"Code de vérification trouvé pour l'utilisateur {user_id}")
+    except EmailVerification.DoesNotExist:
+        print(f"EmailVerification.DoesNotExist déclenché pour l'utilisateur {user_id}")
+        messages.error(request, "Utilisateur ou code introuvable.")
+        return redirect("accueil")
+
+    # Vérification si un code est déjà saisi et si la méthode est POST
+    if request.method == "POST":
+        code_saisi = request.POST.get("verification_code")
+        if code_saisi == email_verif.verification_code:
+            email_verif.is_verified = True
+            email_verif.save()
+
+            # Activer le compte utilisateur
+            user = email_verif.user
+            user.is_active = True
+            user.save()
+            messages.success(request, "Email vérifié avec succès ! Vous pouvez maintenant vous connecter.")
+            return redirect("connexion")
+        else:
+            messages.error(request, "Code de vérification incorrect. Réessayez.")
+    
+    # La page d'affichage si ce n'est pas un POST (juste un GET)
+    return render(request, "utilisateurs/verifier_email.html", {"user_id": user_id})
+
 
 def connexion(request):
     if request.method == "POST":
-        identifiant = request.POST['identifiant']  # Peut être email ou username
-        password = request.POST['password']
+        identifiant = request.POST["identifiant"]  # Peut être email ou username
+        password = request.POST["password"]
         Utilisateur = get_user_model()
 
         try:
             user = Utilisateur.objects.get(email=identifiant)
-            identifiant = user.username  # On récupère le username associé à l'email
+            identifiant = user.username  # Récupérer le username associé
         except Utilisateur.DoesNotExist:
-            pass  # Si ce n'est pas un email, Django vérifiera le username
+            pass  # Si ce n'est pas un email, Django testera le username
 
         user = authenticate(request, username=identifiant, password=password)
         if user is not None:
             login(request, user)
-            return redirect('profil')
+            return redirect("profil")
         else:
-            return render(request, 'utilisateurs/connexion.html', {'error': "Identifiant ou mot de passe incorrect"})
+            messages.error(request, "Identifiant ou mot de passe incorrect.")
 
-    return render(request, 'utilisateurs/connexion.html')
+    return render(request, "utilisateurs/connexion.html")
 
 def deconnexion(request):
     logout(request)
-    return redirect('connexion')
+    return redirect("connexion")
 
 def profil(request):
-    return render(request, 'utilisateurs/profil.html', {'user': request.user})
+    return render(request, "utilisateurs/profil.html", {"user": request.user})

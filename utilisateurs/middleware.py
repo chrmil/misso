@@ -7,7 +7,7 @@ class LoginRequiredMiddleware:
 
     def __call__(self, request):
         # Liste des pages accessibles sans connexion
-        pages_publiques = ['accueil', 'connexion', 'inscription','histoire','traiteur','evenements','hanok', 'institut','terrasse']
+        pages_publiques = ['accueil', 'connexion', 'inscription','histoire','traiteur','evenements','hanok', 'institut','terrasse','verifier_email']
         #Pour pouvoir accéder au site admin (site protégé par Django)
         if request.path.startswith('/admin/'):
             return self.get_response(request)

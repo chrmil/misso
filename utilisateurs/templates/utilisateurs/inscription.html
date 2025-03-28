@@ -12,30 +12,37 @@
     <nav>
         <div class="logo">🥢 Misso</div>
         <ul>
-                <li><a href="{% url 'accueil' %}">Accueil</a></li>
-                <li><a href="{% url 'traiteur' %}">Traiteur</a></li>
-                <li><a href="{% url 'hanok' %}">Hanok Restaurant</a></li>
-                <li><a href="{% url 'terrasse' %}">Terrasse</a></li>
-                <li><a href="{% url 'evenements' %}">Evenements</a></li> 
-                <li><a href="{% url 'institut' %}">Institut</a></li>                 
-                <li><a href="{% url 'histoire' %}">À propos</a></li>
-                <li><a href="{% url 'accueil' %}#contact">Contact</a></li>
-                <li><a href="{% url 'connexion' %}" class="btns">Se connecter</a></li>
-                <link rel="icon" type="image/png" href="{% static 'restaurant/img/misso_logo_old.jpg' %}">
+            <li><a href="{% url 'accueil' %}">Accueil</a></li>
+            <li><a href="{% url 'traiteur' %}">Traiteur</a></li>
+            <li><a href="{% url 'hanok' %}">Hanok Restaurant</a></li>
+            <li><a href="{% url 'terrasse' %}">Terrasse</a></li>
+            <li><a href="{% url 'evenements' %}">Evenements</a></li> 
+            <li><a href="{% url 'institut' %}">Institut</a></li>                 
+            <li><a href="{% url 'histoire' %}">À propos</a></li>
+            <li><a href="{% url 'accueil' %}#contact">Contact</a></li>
+            <li><a href="{% url 'connexion' %}" class="btns">Se connecter</a></li>
+            <link rel="icon" type="image/png" href="{% static 'restaurant/img/misso_logo_old.jpg' %}">
         </ul>
     </nav>
 </header>
 <body>
     <div class="container">
         <h2>Inscription</h2>
-        <form method="post">
+        <form method="post" id="inscription-form">
             {% csrf_token %}
             <div class="form-group">
                 {{ form.as_p }}
             </div>
-            <button type="submit" class="btn">S'inscrire</button>
+            <button type="submit" class="btn" id="submit-button">S'inscrire</button>
         </form>
         <p class="login-link">Déjà inscrit ? <a href="{% url 'connexion' %}">Connectez-vous</a></p>
     </div>
+
+    <script>
+        document.getElementById('inscription-form').addEventListener('submit', function() {
+            document.getElementById('submit-button').disabled = true;
+            document.getElementById('submit-button').innerText = "En cours...";
+        });
+    </script>
 </body>
 </html>
