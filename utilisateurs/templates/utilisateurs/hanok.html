@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Misso - Restaurant Coréen à Paris</title>
+    <title>MiSSO - Restaurant Coréen à Paris</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'utilisateurs/hanok.css' %}">
     <link rel="stylesheet" href="{% static 'utilisateurs/navigation.css' %}">
@@ -12,7 +12,7 @@
 <body>
     <header>
         <nav>
-            <div class="logo"> Misso </div>
+            <div class="logo"> MiSSO </div>
             <ul>
                 <li><a href="{% url 'accueil' %}">Accueil</a></li>
                 <li><a href="{% url 'traiteur' %}">Traiteur</a></li>
@@ -32,10 +32,25 @@
             </ul>
         </nav>
     </header>
+    <h1 class="title"> Hanok Restaurant, <br>le meilleur de la gastronomie coréenne</h1>
     <div class="main">
+      <p> 
 
-        <p> Hanok Restaurant</p>
-
+        <br>   Évocation des hanok (한옥), habitations coréennes traditionnelles en bois, chaleureuses et ouvertes sur la nature, le restaurant du musée Guimet vous propose une pause hors du temps dans un cadre sobre et élégant.
+            
+            <br>  Derrière la porte dont les motifs reprennent ceux du palais royal de Gyeongbok à Séoul, la cuisine de Misso célèbre l’authenticité des saveurs coréennes, avec des plats qui éveillent les sens, invitent au voyage et racontent l’histoire d’une gastronomie millénaire.
+            
+            <br>   Créé en 2006 par la cheffe coréenne Young Kyoung Lee, Misso (qui signifie  « sourire ») propose une cuisine traditionnelle et familiale, inspirée des recettes ancestrales transmises par sa mère.
+            
+            <br>  Hanok restaurant est ouvert toute la journée, et vous accueille également pour déguster un thé, un café, une boisson, une glace ou une pâtisserie coréenne.
+            
+          <br>  Horaires d'ouverture :
+            
+            <br>Du lundi au dimanche sauf le mardi, de 10h à 18h
+            
+            <br> Réservations : hanok.misso@gmail.com / 01 56 52 53 55
+            </p>
+            <img src="{% static 'restaurant/img/hanok_28.jpg' %}" alt="Hanok restaurant" style="max-width:800px; max-height:600px;">
     </div>
       {% include 'partials/menu.html' %}
 

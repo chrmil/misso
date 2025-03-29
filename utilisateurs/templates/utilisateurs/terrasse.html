@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Misso - Restaurant Coréen à Paris</title>
+    <title>MiSSO - Restaurant Coréen à Paris</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'utilisateurs/terrasse.css' %}">
     <link rel="stylesheet" href="{% static 'utilisateurs/navigation.css' %}">
@@ -12,7 +12,7 @@
 <body>
     <header>
         <nav>
-            <div class="logo"> Misso </div>
+            <div class="logo"> MiSSO </div>
             <ul>
                 <li><a href="{% url 'accueil' %}">Accueil</a></li>
                 <li><a href="{% url 'traiteur' %}">Traiteur</a></li>
@@ -32,13 +32,14 @@
             </ul>
         </nav>
     </header>
+    <h1 class="title"> Guimet Rooftop <br>Au Musée Guimet des Arts Asiatiques</h1>
     <div class="main">
+      <p> 
+       
+            </p>
+            <img src="{% static 'restaurant/img/rooftop.jpg' %}" alt="MiSSO Corée" style="max-width:800px; max-height:600px;">
+    </div>
 
-  
-       <h2>La Terrasse</h2>
-       <h3>Au Musée Guimet des Arts Asiatiques</h3>
-        <p> </p>
-       </div>
   {% include 'partials/menu.html' with categories=categories menu_items=menu_items  %}
     <section id="contact" class="contact">
         <h2>Nous contacter</h2>

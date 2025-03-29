@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Misso - Restaurant Coréen à Paris</title>
+    <title>MiSSO - Restaurant Coréen à Paris</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'utilisateurs/traiteur.css' %}">
     <link rel="stylesheet" href="{% static 'utilisateurs/navigation.css' %}">
@@ -12,7 +12,7 @@
 <body>
     <header>
         <nav>
-            <div class="logo"> Misso </div>
+            <div class="logo"> MiSSO </div>
             <ul>
                  <li><a href="{% url 'accueil' %}">Accueil</a></li>
                  <li><a href="{% url 'traiteur' %}">Traiteur</a></li>
@@ -32,22 +32,21 @@
             </ul>
         </nav>
     </header>
+    <h1 class="title"> MiSSO Corée, <br>Le goût qui vous fait sourire</h1>
     <div class="main">
-    
-        <h2>Misso Corée </h2>
-        <h3>Le goût qui vous fait sourire</3>
-         <p> 27 rue du Moulin des Prés 75013 Paris</p>
-         <section id="menu" class="menu">
+      <p> 
+        L'équipe Misso Corée souhaite vous faire vivre à 100 % l'expérience coréenne au travers de la cuisine.
 
-
-
-        
-
+        <br>Buffet, traiteur, cours de cuisine à domicile, chef à domicile, laissez-vous embarquer pour un voyage plein de saveurs.
        
+            </p>
+            <img src="{% static 'restaurant/img/menu.jpg' %}" alt="MiSSO Corée" style="max-width:800px; max-height:600px;">
+    </div>
+    <section id="menu" class="menu">   
         {% include 'partials/menu.html' with categories=categories menu_items=menu_items  %}
 
     </section>
-     </div>
+    
     <section id="contact" class="contact">
         <h2>Nous contacter</h2>
         <p>📍 **123 Rue des Délices, 75013 Paris, France**</p>
