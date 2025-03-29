@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "utilisateurs",
     "menu",
+    "evenements",
 ]
 
 MEDIA_URL = '/media/'
