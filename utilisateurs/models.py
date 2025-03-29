@@ -4,6 +4,7 @@ from django.conf import settings
 
 
 
+
 class Utilisateur(AbstractUser):
     email = models.EmailField(unique=True)  # Empêche les doublons
     date_de_naissance = models.DateField(null=True, blank=True)
@@ -19,6 +20,7 @@ class EmailVerification(models.Model):
     verification_code = models.CharField(max_length=6, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     is_verified = models.BooleanField(default=False)  # Ajoute ce champ
+
 
 
 

@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
-from .forms import InscriptionForm
+from .forms import InscriptionForm, ProfilForm
 from .models import EmailVerification
 from menu.models import Restaurant, Category, MenuItem
 import random
@@ -145,3 +146,18 @@ def reservation_page(request):
 
 def confirmer_reservation(request):
     return render(request, "utilisateurs/confirmation.html")
+
+@login_required
+def modifier_profil(request):
+    user = request.user
+    if request.method == "POST":
+        form = ProfilForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Votre profil a été mis à jour avec succès.")
+            return redirect("profil")
+        else:
+            messages.error(request, "Veuillez corriger les erreurs ci-dessous.")
+    else:
+        form = ProfilForm(instance=user)
+    return render(request, "utilisateurs/modifier_profil.html", {"form": form})
