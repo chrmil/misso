@@ -12,6 +12,73 @@ body {
     background: #F5F5DC;
 }
 
+.description {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    padding: 10px;
+}
+
+/* Content Section */
+.content {
+    max-width: 800px;
+    margin: 1% auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* List Styles */
+.evenements ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.evenements  li {
+    padding: 10px;
+    background-color: #fafafa;
+    margin: 5px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.evenements ul li a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.evenements ul li a:hover {
+    color: #ffcc00;
+}
+
+/* Empty Message */
+.evenements p {
+    text-align: center;
+    color: #777;
+    font-style: italic;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .content {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    li {
+        font-size: 14px;
+    }
+}
 
 
 /* About Section */
