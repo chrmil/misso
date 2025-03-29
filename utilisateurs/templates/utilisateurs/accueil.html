@@ -31,39 +31,70 @@
                 </li>
             </ul>
         </nav>
-    </header>
-    <div class="main">
-    <div class="top"  onclick='location.href="{% url 'traiteur'  %}";'>
-        <h2>MiSSO Corée </h2>
+    </header>    
+   
+    
+    <div  id="background" class="main">
+    <div id="traiteur" class="top"   onmouseover="toggleContent('traiteur')" onmouseout="toggleContent('traiteur')" onclick='location.href="{% url 'traiteur'  %}";'>
+        <p class="text-content">  <h2>MiSSO Corée </h2>
         <h3>Le goût qui vous fait sourire</3>
-         <p> 27 rue du Moulin des Prés 75013 Paris</p>
+         27 rue du Moulin des Prés 75013 Paris</p>
+         <img class="image-content" src="{% static 'restaurant/img/traiteur.jpg' %}" alt="Traiteur" >
         </div>
-     <div class="center" onclick='location.href="{% url 'histoire'  %}";'>
+     <div id="histoire" class="center" onclick='location.href="{% url 'histoire'  %}";'>
          <img src= "{% static 'restaurant/img/misso_logo_old.jpg' %}" alt="logo">
          <h1>Since 2006</h1>
          <p></p>
     </div>
-   <div class="right" onclick='location.href="{% url 'evenements'  %}";'>
-       <h2>Evenements </h2>
+   <div  id="evenements" class="right"  onmouseover="toggleContent('evenements')" onmouseout="toggleContent('evenements')" onclick='location.href="{% url 'evenements'  %}";'>
+    <p class="text-content"><h2>Evenements </h2>
        <h3>Concerts, buffets, marriages, réceptions ...</h3>
-        <p> </p>
+        </p>
+        <img class="image-content" src="{% static 'restaurant/img/event.jpg' %}" alt="Evenements" >
        </div>
-   <div class="left" onclick='location.href="{% url 'institut'  %}";'>
-       <h2>Institut du Goût Coréen en France</h2>
+   <div class="left"  id="institut" class="bottom" onmouseover="toggleContent('institut')" onmouseout="toggleContent('institut')" onclick='location.href="{% url 'institut'  %}";'>
+    <p class="text-content"><h2>Institut du Goût Coréen en France</h2>
        <h3>Culture et Cuisine Coréenne en France</h3>
-        <p> </p>
+        </p>
+        <img class="image-content" src="{% static 'restaurant/img/placeholder.jpg' %}" alt="Institut" >
        </div>
-   <div class="bottom" onclick='location.href="{% url 'terrasse'  %}";'>
-       <h2>La Terrasse</h2>
+   <div id="rooftop" class="bottom" onmouseover="toggleContent('rooftop')" onmouseout="toggleContent('rooftop')" onclick='location.href="{% url 'terrasse'  %}";'>
+    <p class="text-content"><h2>Guimet Rooftop</h2>
        <h3>Au Musée Guimet des Arts Asiatiques</h3>
-        <p> </p>
+       </p>
+        <img class="image-content" src="{% static 'restaurant/img/rooftop.jpg' %}" alt="Guimet Rooftop" >
        </div>
-   <div class="bottom-left" onclick='location.href="{% url 'hanok'  %}";' >
-       <h2>Hanok Restaurant</h2>
+   <div id="hanok" class="bottom-left" onmouseover="toggleContent('hanok')" onmouseout="toggleContent('hanok')" onclick='location.href="{% url 'hanok'  %}";' >
+    <p class="text-content">  <h2>Hanok Restaurant</h2>
        <h3>Au Musée Guimet des Arts Asiatiques</h3>
-        <p> </p>
+         </p>  
+         <img class="image-content" src="{% static 'restaurant/img/hanok_28.jpg' %}" alt="Hanok Restaurant" >
        </div>
      </div>
+     
+    
+    
+     <script>
+        
+        function toggleContent(targetId) {
+            
+            var targetDiv = document.getElementById(targetId);
+            
+            
+            var textContent = targetDiv.querySelector('.text-content');
+            var imageContent = targetDiv.querySelector('.image-content');
+            
+           
+            if (textContent.style.display === "none") {
+                textContent.style.display = "block";
+                imageContent.style.display = "none";
+            } else {
+                textContent.style.display = "none";
+                imageContent.style.display = "block";
+            }
+        }
+    </script>
+    
     <section id="contact" class="contact">
         <h2>Nous contacter</h2>
         <p>📍 **123 Rue des Délices, 75013 Paris, France**</p>
