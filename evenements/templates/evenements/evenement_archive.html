@@ -1,0 +1,19 @@
+{% extends "evenements/base.html" %}
+
+
+{% load static %}
+
+{% block content %}
+  <div class="evenements"> 
+    <ul>
+        {% for evenement in latest %}
+            <li  class="btns"><a href="{{ evenement.get_absolute_url }}">{{ evenement.date }} :  {{ evenement.titre }}</a></li>
+            
+             {% empty %}
+                    <p>Aucun événement disponible.</p>
+        {% endfor %}
+    </ul>
+    </div>
+{% endblock %}
+
+

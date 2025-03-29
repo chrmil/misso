@@ -1,0 +1,15 @@
+{% extends "evenements/base.html" %}
+
+
+{% block content %}
+<div class="content">
+<h1>{{ object.titre }}</h1>
+<p>Date : {{ object.date|date }}</p>
+<pre><p class="description">{{ object.description }} 
+    {% if object.description == null %}
+        Aucune description disponible.
+    {%endif%}
+</p></pre>
+<a href="{% url 'evenements' %}" class="btns">Retourner à la page principale </a>
+</div>
+{% endblock %}
