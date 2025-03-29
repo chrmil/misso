@@ -23,7 +23,13 @@
                 <li><a href="{% url 'institut' %}">Institut</a></li>
                 <li><a href="{% url 'histoire' %}">À propos</a></li>
                 <li><a href="{% url 'accueil' %}#contact">Contact</a></li>
-                <li><a href="{% url 'connexion' %}" class="btns">Se connecter</a></li>
+                <li>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'profil' %}" class="btns">Profil</a>
+                    {% else %}
+                        <a href="{% url 'connexion' %}" class="btns">Se connecter</a>
+                    {% endif %}
+                </li>
             </ul>
         </nav>
     </header>

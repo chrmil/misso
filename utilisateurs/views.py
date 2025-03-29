@@ -38,6 +38,9 @@ def histoire(request):
 
 
 def inscription(request):
+    if request.user.is_authenticated:  # Vérifie si l'utilisateur est connecté
+        return redirect("profil")
+    
     if request.method == "POST":
         form = InscriptionForm(request.POST)
         if form.is_valid():
@@ -93,6 +96,10 @@ def verifier_email(request, user_id):
             user = email_verif.user
             user.is_active = True
             user.save()
+
+            # Supprimer l'entrée de la table EmailVerification
+            email_verif.delete()
+            
             messages.success(request, "Email vérifié avec succès ! Vous pouvez maintenant vous connecter.")
             return redirect("connexion")
         else:
@@ -103,6 +110,9 @@ def verifier_email(request, user_id):
 
 
 def connexion(request):
+    if request.user.is_authenticated:  # Vérifie si l'utilisateur est connecté
+        return redirect("profil")
+
     if request.method == "POST":
         identifiant = request.POST["identifiant"]  # Peut être email ou username
         password = request.POST["password"]
@@ -131,7 +141,7 @@ def profil(request):
     return render(request, "utilisateurs/profil.html", {"user": request.user})
 
 def reservation_page(request):
-    return render(request, "reservation.html")  # Assure-toi d'avoir ce template
+    return render(request, "utilisateurs/reservation.html")  # Assure-toi d'avoir ce template
 
 def confirmer_reservation(request):
     return render(request, "utilisateurs/confirmation.html")
