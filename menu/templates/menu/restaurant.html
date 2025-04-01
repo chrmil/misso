@@ -1,0 +1,24 @@
+{% extends "menu/base.html" %}
+
+
+{% load static %}
+{% block title%}
+<pre>{{restaurant.titre}}</pre>
+{%endblock%}
+{% block main%}
+<pre>{{restaurant.description}}</pre>
+{% if restaurant.image_path%}
+  <img src='{% static '{{restaurant.image_path}}' %}' alt={{restaurant.nom}}>
+{%endif%}
+{%endblock%}
+{% block content %}
+  {%for menu in menus%}
+    {%if menu.visible%}
+      {%include 'partials/menu.html'%}
+    {%endif%}
+    {%empty%}
+    <p>Aucun menu disponible</p>
+  {%endfor%}
+{% endblock %}
+
+

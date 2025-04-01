@@ -7,24 +7,81 @@
 <section id="menu" class="menu">
     <div class="menu-container">
         <h1>Notre Menu</h1><br>
-        {% for category in categories %}
-            <h2>{{ category.name }}</h2><br>
-            <ul>
-                {% for item in menu_items %}
-                    {% if item.category.id == category.id %}
+        {% for categorie in categoriesPlats %}
+            <h2>{{ categorie.nom }}</h2><br>
+            <ol class="plats">
+                {% for item in plats %}
+                    {% if item.categorie.id == categorie.id and item.menu.id == menu.id %}
                         <li class="menu-item">
-                            <strong>{{ item.name }}</strong> - ${{ item.price }}<br>
+                            <p class="nom">{{ item.nom }}</p> 
+                            <p class="prix">- ${{ item.prix }}</p><br>
                             {% if item.image_path %}
-                                <img src="{% static item.image_path %}" alt="{{ item.name }}" style="max-width:200px; max-height:200px;"><br>
+                                <img src="{% static item.image_path %}" alt="{{ item.nom }}"><br>
                             {% endif %}<br>
-                            {{ item.description }}
+                            <pre><p class="description"> {{ item.description }}</p></pre>
+                            <ul class="accompagnements">
+                            {% for accompagnement in accompanementsPlats %}
+                                {% if item.id == accompagnement.plat.id %}
+                                    <li class ="accompagnement">
+                                    <p class="nom">{{ accompagnement.nom }}</p> 
+                                    <p class="prix">+ ${{ accompagnement.prix }}</p><br>
+                                    {% if accompagnement.image_path %}
+                                        <img src="{% static accompagnement.image_path %}" alt="{{ accompagnement.nom }}"><br>
+                                    {% endif %}<br>
+                                    <pre><p class="description"> {{ accompagnement.description }}</p></pre>
+                                    </li>
+                                {% endif %}<br>
+                            {% endfor %}
+                            </ul>
                         </li><br>
                     {% endif %}
+                {% empty %}
+                    <p>Aucun plat disponible.</p>
                 {% endfor %}
-            </ul>
+            </ol>
         {% empty %}
             <p>Aucune catégorie disponible.</p>
         {% endfor %}
+        {% for categorie in categoriesBoissons %}
+        <h2>{{ categorie.nom }}</h2><br>
+        <ol class="boissons">
+            {% for item in boissons %}
+                {% if item.categorie.id == categorie.id  and item.menu.id == menu.id%}
+                    <li class="menu-item">
+                        <p class="nom">{{ item.nom }}</p> 
+                        {% if item.prixBouteille %}
+                        <p class="prix">Verre - ${{ item.prixVerre}}</p>
+                            <p class="prix">Bouteille - ${{ item.prixBouteille }}</p><br>
+                        {% else %}
+                            <p class="prix">- ${{ item.prixVerre }}</p><br>
+                        {%endif%}
+                        {% if item.image_path %}
+                            <img src="{% static item.image_path %}" alt="{{ item.nom }}"><br>
+                        {% endif %}<br>
+                        <pre><p class="description"> {{ item.description }}</p></pre>
+                        <ul class="accompagnements">
+                        {% for accompagnement in accompanementsBoissons %}
+                            {% if item.id == accompagnement.plat.id %}
+                                <li class ="accompagnement">
+                                <p class="nom">{{ accompagnement.nom }}</p> 
+                                <p class="prix">+ ${{ accompagnement.prix }}</p><br>
+                                {% if accompagnement.image_path %}
+                                    <img src="{% static accompagnement.image_path %}" alt="{{ accompagnement.nom }}"><br>
+                                {% endif %}<br>
+                                <pre><p class="description"> {{ accompagnement.description }}</p></pre>
+                                </li>
+                            {% endif %}<br>
+                        {% endfor %}
+                        </ul>
+                    </li><br>
+                {% endif %}
+                {% empty %}
+                <p>Aucune boisson disponible.</p>
+            {% endfor %}
+        </ol>
+    {% empty %}
+        <p>Aucune catégorie disponible.</p>
+    {% endfor %}
     </div>
 </section>
 {% endblock %}

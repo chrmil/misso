@@ -5,6 +5,6 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('<str:restaurant_name>/', menu, name='menu'),
+    path('<str:restaurant_nom>/', menu, name='menu'),
 ]
 
