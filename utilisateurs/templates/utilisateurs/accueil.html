@@ -15,9 +15,9 @@
             <div class="logo"> MiSSO </div>
             <ul>
                 <li><a href="{% url 'accueil' %}#accueil">Accueil</a></li>
-                <li><a href="{% url 'traiteur' %}">Traiteur</a></li>
-                <li><a href="{% url 'hanok' %}">Hanok Restaurant</a></li>
-                <li><a href="{% url 'terrasse' %}">Terrasse</a></li>
+                <li><a href="{% url 'menu' 'traiteur' %}">Traiteur</a></li>
+                <li><a href="{% url 'menu' 'hanok' %}">Hanok Restaurant</a></li>
+                <li><a href="{% url 'menu' 'rooftop' %}">Terrasse</a></li>
                 <li><a href="{% url 'evenements' %}">Evenements</a></li> 
                 <li><a href="{% url 'institut' %}">Institut</a></li>                 
                 <li><a href="{% url 'histoire' %}">À propos</a></li>
@@ -35,7 +35,7 @@
    
     
     <div  id="background" class="main">
-    <div id="traiteur" class="top"   onmouseover="toggleContent('traiteur')" onmouseout="toggleContent('traiteur')" onclick='location.href="{% url 'traiteur'  %}";'>
+    <div id="traiteur" class="top"   onmouseover="toggleContent('traiteur')" onmouseout="toggleContent('traiteur')" onclick='location.href="{% url 'menu' 'traiteur' %}";'>
         <p class="text-content">  <h2>MiSSO Corée </h2>
         <h3>Le goût qui vous fait sourire</3>
          27 rue du Moulin des Prés 75013 Paris</p>
@@ -58,13 +58,13 @@
         </p>
         <img class="image-content" src="{% static 'restaurant/img/placeholder.jpg' %}" alt="Institut" >
        </div>
-   <div id="rooftop" class="bottom" onmouseover="toggleContent('rooftop')" onmouseout="toggleContent('rooftop')" onclick='location.href="{% url 'terrasse'  %}";'>
+   <div id="rooftop" class="bottom" onmouseover="toggleContent('rooftop')" onmouseout="toggleContent('rooftop')" onclick='location.href="{% url 'menu' 'rooftop' %}";'>
     <p class="text-content"><h2>Guimet Rooftop</h2>
        <h3>Au Musée Guimet des Arts Asiatiques</h3>
        </p>
         <img class="image-content" src="{% static 'restaurant/img/rooftop.jpg' %}" alt="Guimet Rooftop" >
        </div>
-   <div id="hanok" class="bottom-left" onmouseover="toggleContent('hanok')" onmouseout="toggleContent('hanok')" onclick='location.href="{% url 'hanok'  %}";' >
+   <div id="hanok" class="bottom-left" onmouseover="toggleContent('hanok')" onmouseout="toggleContent('hanok')" onclick='location.href="{% url 'menu' 'hanok' %}";' >
     <p class="text-content">  <h2>Hanok Restaurant</h2>
        <h3>Au Musée Guimet des Arts Asiatiques</h3>
          </p>  
