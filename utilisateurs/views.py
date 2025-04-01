@@ -17,9 +17,6 @@ def accueil(request):
 def institut(request):
     return render(request, 'utilisateurs/institut.html')
 
-def evenements(request):
-    return render(request, 'utilisateurs/evenements.html')
-
 def histoire(request):
     return render(request, 'utilisateurs/histoire.html')
 
