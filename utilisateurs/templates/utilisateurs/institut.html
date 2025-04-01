@@ -14,15 +14,15 @@
         <nav>
             <div class="logo"> MiSSO </div>
             <ul>
-                  <li><a href="{% url 'accueil' %}">Accueil</a></li>
-                  <li><a href="{% url 'traiteur' %}">Traiteur</a></li>
-                  <li><a href="{% url 'hanok' %}">Hanok Restaurant</a></li>
-                  <li><a href="{% url 'terrasse' %}">Terrasse</a></li>
-                  <li><a href="{% url 'evenements' %}">Evenements</a></li> 
-                  <li><a href="{% url 'institut' %}">Institut</a></li>                 
-                  <li><a href="{% url 'histoire' %}">À propos</a></li>
-                  <li><a href="{% url 'accueil' %}#contact">Contact</a></li>
-                  <li>
+                <li><a href="{% url 'accueil' %}#accueil">Accueil</a></li>
+                <li><a href="{% url 'menu' 'traiteur' %}">Traiteur</a></li>
+                <li><a href="{% url 'menu' 'hanok' %}">Hanok Restaurant</a></li>
+                <li><a href="{% url 'menu' 'rooftop' %}">Terrasse</a></li>
+                <li><a href="{% url 'evenements' %}">Evenements</a></li> 
+                <li><a href="{% url 'institut' %}">Institut</a></li>                 
+                <li><a href="{% url 'histoire' %}">À propos</a></li>
+                <li><a href="{% url 'accueil' %}#contact">Contact</a></li>
+                <li>
                     {% if user.is_authenticated %}
                         <a href="{% url 'profil' %}" class="btns">Profil</a>
                     {% else %}
@@ -31,7 +31,7 @@
                 </li>
             </ul>
         </nav>
-    </header>
+    </header>    
     <div class="main">
   
        <h2>Institut du Goût Coréen en France</h2>
