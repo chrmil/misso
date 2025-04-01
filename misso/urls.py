@@ -3,7 +3,7 @@ from django.urls import path, include
 from django.shortcuts import redirect
 
 urlpatterns = [
-    path('menu/', include('menu.urls')),
+    path('restaurants/', include('menu.urls')),
     path('admin/', admin.site.urls),
     path('', include('utilisateurs.urls')),
     path('evenements/',include('evenements.urls')),
