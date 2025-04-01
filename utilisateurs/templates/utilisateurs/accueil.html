@@ -32,48 +32,48 @@
             </ul>
         </nav>
     </header>    
-   
-    
-    <div  id="background" class="main">
-    <div id="traiteur" class="top"   onmouseover="toggleContent('traiteur')" onmouseout="toggleContent('traiteur')" onclick='location.href="{% url 'menu' 'traiteur' %}";'>
-        <p class="text-content">  <h2>MiSSO Corée </h2>
-        <h3>Le goût qui vous fait sourire</3>
-         27 rue du Moulin des Prés 75013 Paris</p>
-         <img class="image-content" src="{% static 'restaurant/img/traiteur.jpg' %}" alt="Traiteur" >
-        </div>
-     <div id="histoire" class="center" onclick='location.href="{% url 'histoire'  %}";'>
-         <img src= "{% static 'restaurant/img/misso_logo_old.jpg' %}" alt="logo">
-         <h1>Since 2006</h1>
-         <p></p>
-    </div>
-   <div  id="evenements" class="right"  onmouseover="toggleContent('evenements')" onmouseout="toggleContent('evenements')" onclick='location.href="{% url 'evenements'  %}";'>
+    <div class="main">
+    <div id="histoire" onclick='location.href="{% url 'histoire'  %}";'>
+        <img src= "{% static 'restaurant/img/misso_logo_old.jpg' %}" alt="logo">
+        <h1>Since 2006</h1>
+        <p></p>
+   </div>
+   <div  id="evenements"   onclick='location.href="{% url 'evenements'  %}";'>
     <p class="text-content"><h2>Evenements </h2>
        <h3>Concerts, buffets, marriages, réceptions ...</h3>
         </p>
         <img class="image-content" src="{% static 'restaurant/img/event.jpg' %}" alt="Evenements" >
        </div>
-   <div class="left"  id="institut" class="bottom" onmouseover="toggleContent('institut')" onmouseout="toggleContent('institut')" onclick='location.href="{% url 'institut'  %}";'>
-    <p class="text-content"><h2>Institut du Goût Coréen en France</h2>
-       <h3>Culture et Cuisine Coréenne en France</h3>
-        </p>
-        <img class="image-content" src="{% static 'restaurant/img/placeholder.jpg' %}" alt="Institut" >
-       </div>
-   <div id="rooftop" class="bottom" onmouseover="toggleContent('rooftop')" onmouseout="toggleContent('rooftop')" onclick='location.href="{% url 'menu' 'rooftop' %}";'>
+    <div  class="restaurants">
+    <div id="traiteur"    onclick='location.href="{% url 'menu' 'traiteur' %}";'>
+        <p class="text-content">  <h2>MiSSO Corée </h2>
+        <h3>Le goût qui vous fait sourire</3>
+         27 rue du Moulin des Prés 75013 Paris</p>
+         <img class="image-content" src="{% static 'restaurant/img/traiteur.jpg' %}" alt="Traiteur" >
+        </div>
+        <div id="hanok" onclick='location.href="{% url 'menu' 'hanok' %}";' >
+            <p class="text-content">  <h2>Hanok Restaurant</h2>
+               <h3>Au Musée Guimet des Arts Asiatiques</h3>
+                 </p>  
+                 <img class="image-content" src="{% static 'restaurant/img/hanok_28.jpg' %}" alt="Hanok Restaurant" >
+               </div>
+   <div id="rooftop" onclick='location.href="{% url 'menu' 'rooftop' %}";'>
     <p class="text-content"><h2>Guimet Rooftop</h2>
        <h3>Au Musée Guimet des Arts Asiatiques</h3>
        </p>
         <img class="image-content" src="{% static 'restaurant/img/rooftop.jpg' %}" alt="Guimet Rooftop" >
        </div>
-   <div id="hanok" class="bottom-left" onmouseover="toggleContent('hanok')" onmouseout="toggleContent('hanok')" onclick='location.href="{% url 'menu' 'hanok' %}";' >
-    <p class="text-content">  <h2>Hanok Restaurant</h2>
-       <h3>Au Musée Guimet des Arts Asiatiques</h3>
-         </p>  
-         <img class="image-content" src="{% static 'restaurant/img/hanok_28.jpg' %}" alt="Hanok Restaurant" >
-       </div>
-     </div>
-     
+
+    </div>
     
-    
+     <div  id="institut"   onclick='location.href="{% url 'institut'  %}";'>
+        <p class="text-content"><h2>Institut du Goût Coréen en France</h2>
+           <h3>Culture et Cuisine Coréenne en France</h3>
+            </p>
+            <img class="image-content" src="{% static 'restaurant/img/placeholder.jpg' %}" alt="Institut" >
+           </div>
+    </div>
+
      <script>
         
         function toggleContent(targetId) {
