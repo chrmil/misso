@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth import authenticate, login, logout, get_user_model, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
@@ -12,8 +13,6 @@ import string
 
 def accueil(request):
     return render(request, 'utilisateurs/accueil.html')
-
-
 
 def institut(request):
     return render(request, 'utilisateurs/institut.html')
@@ -134,14 +133,29 @@ def confirmer_reservation(request):
 @login_required
 def modifier_profil(request):
     user = request.user
+    profil_form = ProfilForm(instance=user)
+    password_form = PasswordChangeForm(user=user)
+
     if request.method == "POST":
-        form = ProfilForm(request.POST, instance=user)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Votre profil a été mis à jour avec succès.")
-            return redirect("profil")
-        else:
-            messages.error(request, "Veuillez corriger les erreurs ci-dessous.")
-    else:
-        form = ProfilForm(instance=user)
-    return render(request, "utilisateurs/modifier_profil.html", {"form": form})
+        if "profil_submit" in request.POST:  # Si le formulaire de profil est soumis
+            profil_form = ProfilForm(request.POST, instance=user)
+            if profil_form.is_valid():
+                profil_form.save()
+                messages.success(request, "Votre profil a été mis à jour avec succès.")
+                return redirect("profil")
+            else:
+                messages.error(request, "Veuillez corriger les erreurs dans le formulaire de profil.")
+        elif "password_submit" in request.POST:  # Si le formulaire de mot de passe est soumis
+            password_form = PasswordChangeForm(user=user, data=request.POST)
+            if password_form.is_valid():
+                password_form.save()
+                update_session_auth_hash(request, password_form.user)  # Maintient la session active
+                messages.success(request, "Votre mot de passe a été modifié avec succès.")
+                return redirect("profil")
+            else:
+                messages.error(request, "Veuillez corriger les erreurs dans le formulaire de mot de passe.")
+
+    return render(request, "utilisateurs/modifier_profil.html", {
+        "profil_form": profil_form,
+        "password_form": password_form,
+    })

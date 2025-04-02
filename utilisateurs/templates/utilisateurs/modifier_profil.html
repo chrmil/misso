@@ -12,10 +12,10 @@
         <h2>Modifier votre profil</h2>
         <form method="post">
             {% csrf_token %}
-            {% if form.errors %}
+            {% if profil_form.errors %}
                 <div class="error-messages">
                     <ul>
-                        {% for field, errors in form.errors.items %}
+                        {% for field, errors in profil_form.errors.items %}
                             {% for error in errors %}
                                 <li>{{ error }}</li>
                             {% endfor %}
@@ -23,9 +23,28 @@
                     </ul>
                 </div>
             {% endif %}
-            {{ form.as_p }}
-            <button type="submit" class="btn">Enregistrer les modifications</button>
+            {{ profil_form.as_p }}
+            <button type="submit" name="profil_submit" class="btn">Enregistrer les modifications</button>
         </form>
+
+        <h2>Modifier votre mot de passe</h2>
+        <form method="post">
+            {% csrf_token %}
+            {% if password_form.errors %}
+                <div class="error-messages">
+                    <ul>
+                        {% for field, errors in password_form.errors.items %}
+                            {% for error in errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            {{ password_form.as_p }}
+            <button type="submit" name="password_submit" class="btn">Modifier le mot de passe</button>
+        </form>
+
         <a href="{% url 'profil' %}" class="btn">Annuler</a>
     </div>
 </body>
