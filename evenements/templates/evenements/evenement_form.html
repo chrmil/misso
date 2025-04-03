@@ -1,0 +1,26 @@
+{% extends "evenements/base.html" %}
+
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <h2>Demande</h2>
+  <form method="post" id="evenement-form">
+      <div class="form-group">
+      {% csrf_token %}
+          {{ form.as_p }}
+      </div>
+      <button type="submit" class="btn" id="submit-button">Envoyer</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById('evenement-form').addEventListener('submit', function() {
+      document.getElementById('submit-button').disabled = true;
+      document.getElementById('submit-button').innerText = "En cours...";
+  });
+</script>
+{% endblock %}
+
+

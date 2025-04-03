@@ -15,6 +15,7 @@ urlpatterns = [
       EvenementArchiveIndexView.as_view(model=Evenement, date_field="date"),
       name="evenements",
   ),
+    path('form/', demande_evenement, name='evenement_form'),
     path("<slug:slug>/", EvenementDetailView.as_view(), name="evenement-detail"),
 ]
 

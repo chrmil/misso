@@ -22,13 +22,15 @@
                 <li><a href="{% url 'institut' %}">Institut</a></li>                 
                 <li><a href="{% url 'histoire' %}">À propos</a></li>
                 <li><a href="{% url 'accueil' %}#contact">Contact</a></li>
-                <li>
                     {% if user.is_authenticated %}
+                    <li> <a href="{% url 'evenement_form' %}" class="btns">Postuler</a></li>
+                    <li>
                         <a href="{% url 'profil' %}" class="btns">Profil</a>
                     {% else %}
+                    <li>
                         <a href="{% url 'connexion' %}" class="btns">Se connecter</a>
                     {% endif %}
-                </li>
+                    </li>
             </ul>
         </nav>
     </header>
@@ -38,9 +40,7 @@
     <div id="content">
         {% block content %}{% endblock %}
     </div>
-</body>
-</html>
-
+ 
 
    <section id="contact" class="contact">
         <h2>Nous contacter</h2>
