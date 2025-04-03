@@ -4,6 +4,8 @@ from .models import ObjetConnecte
 
 @login_required
 def liste_objets(request):
+    user = request.user
+    user.ajouter_experience(50)  # Ajoute 50 points d'expérience
     objets = ObjetConnecte.objects.all()  # Récupère tous les objets connectés
     return render(request, "objets_connectes/liste_objets.html", {"objets": objets})
 

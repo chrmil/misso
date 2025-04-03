@@ -4,7 +4,6 @@ from django.conf import settings
 
 
 
-
 class Utilisateur(AbstractUser):
     email = models.EmailField(unique=True)  # Empêche les doublons
     date_de_naissance = models.DateField(null=True, blank=True)
@@ -30,12 +29,11 @@ class Utilisateur(AbstractUser):
         return self.niveau * 100  # Exemple : 100 points par niveau
 
 
+
 class EmailVerification(models.Model):
     user = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
     verification_code = models.CharField(max_length=6, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     is_verified = models.BooleanField(default=False)  # Ajoute ce champ
-
-
 
 
