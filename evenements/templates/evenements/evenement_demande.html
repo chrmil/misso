@@ -1,0 +1,28 @@
+{% extends "evenements/base.html" %}
+
+
+{% load static %}
+
+{% block content %}
+  <div class="evenements"> 
+    <ul>
+        {%if user.is_authenticated%}
+          {% for evenement in demandes %}
+            {%if evenement.email == user.email%}
+              <li  class="btns"><a href="{{ evenement.get_absolute_url }}">{{ evenement.date }} :  {{ evenement.titre }}</a></li>
+              <p class="demande">Status de la demande : 
+              {%if evenement.est_valide%}
+                Validée.
+              {%else%}
+                En cours.
+              {%endif%}
+            </p>
+            {%endif%} 
+            {%empty%}
+              <p> Aucune demande disponible. </p>
+          {% endfor %}
+        {%endif%}
+    </ul>
+    </div>
+{% endblock %}
+
