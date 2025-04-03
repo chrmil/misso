@@ -69,19 +69,16 @@ def verifier_email(request, user_id):
         messages.error(request, "Utilisateur ou code introuvable.")
         return redirect("accueil")
 
-    # Vérification si un code est déjà saisi et si la méthode est POST
     if request.method == "POST":
         code_saisi = request.POST.get("verification_code")
         if code_saisi == email_verif.verification_code:
             email_verif.is_verified = True
             email_verif.save()
 
-            # Activer le compte utilisateur
             user = email_verif.user
             user.is_active = True
             user.save()
 
-            # Supprimer l'entrée de la table EmailVerification
             email_verif.delete()
             
             messages.success(request, "Email vérifié avec succès ! Vous pouvez maintenant vous connecter.")
@@ -89,8 +86,7 @@ def verifier_email(request, user_id):
         else:
             messages.error(request, "Code de vérification incorrect. Réessayez.")
     
-    # La page d'affichage si ce n'est pas un POST (juste un GET)
-    return render(request, "utilisateurs/verifier_email.html", {"user_id": user_id})
+    return render(request, "utilisateurs/verifier_email.html", {"email": email_verif.user.email})
 
 
 def connexion(request):
