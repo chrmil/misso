@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informations sur l'Objet</title>
+</head>
+<body>
+    <h1>Informations sur l'Objet : {{ objet.nom }}</h1>
+    <p><strong>Description :</strong> {{ objet.description }}</p>
+    <p><strong>Niveau requis :</strong> {{ objet.niveau_requis }}</p>
+    <p><strong>Dernière consultation :</strong> {{ objet.derniere_consultation|date:"d/m/Y H:i" }}</p>
+    <p><strong>Dernière utilisation :</strong> {{ objet.derniere_utilisation|date:"d/m/Y H:i" }}</p>
+    <p><strong>Statut :</strong> {% if objet.actif %} Actif {% else %} Inactif {% endif %}</p>
+    <a href="{% url 'liste_objets' %}">Retour à la liste</a>
+</body>
+</html>

@@ -6,7 +6,7 @@
     <title>Objets Connectés</title>
 </head>
 <body>
-    <h1>Vos Objets Connectés</h1>
+    <h1>Objets Connectés Disponibles</h1>
     <ul>
         {% for objet in objets %}
             <li>
@@ -22,6 +22,7 @@
                     {% if objet.actif %} Désactiver {% else %} Activer {% endif %}
                 </a>
                 <a href="{% url 'modifier_objet' objet.id %}">Modifier</a>
+                <a href="{% url 'info_objet' objet.id %}">Info</a> <!-- Nouveau bouton "Info" -->
             </li>
         {% endfor %}
     </ul>

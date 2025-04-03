@@ -3,7 +3,7 @@ from django.conf import settings
 from django.utils.timezone import now
 
 class ObjetConnecte(models.Model):
-    utilisateur = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="objets_connectes")
+    id = models.AutoField(primary_key=True)
     nom = models.CharField(max_length=100)  # Nom de l'objet
     description = models.TextField(blank=True, null=True)  # Description de l'objet
     niveau_requis = models.PositiveIntegerField(default=1)  # Niveau requis pour modifier l'objet
