@@ -8,4 +8,5 @@ urlpatterns = [
     path('', include('utilisateurs.urls')),
     path('evenements/',include('evenements.urls')),
     path('', lambda request: redirect('accueil/', permanent=False)),
+    path("objets_connectes/", include("objets_connectes.urls")),
 ]

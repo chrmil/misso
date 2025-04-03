@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier Objet</title>
+</head>
+<body>
+    <h1>Modifier l'Objet : {{ objet.nom }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="nom">Nom :</label>
+        <input type="text" name="nom" id="nom" value="{{ objet.nom }}" required>
+        <label for="description">Description :</label>
+        <textarea name="description" id="description">{{ objet.description }}</textarea>
+        <button type="submit">Enregistrer</button>
+    </form>
+    <a href="{% url 'liste_objets' %}">Annuler</a>
+</body>
+</html>

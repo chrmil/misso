@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objets Connectés</title>
+</head>
+<body>
+    <h1>Vos Objets Connectés</h1>
+    <ul>
+        {% for objet in objets %}
+            <li>
+                <strong>{{ objet.nom }}</strong> - {{ objet.description }}
+                <br>
+                Niveau requis : {{ objet.niveau_requis }}
+                <br>
+                Dernière consultation : {{ objet.derniere_consultation|date:"d/m/Y H:i" }}
+                <br>
+                Dernière utilisation : {{ objet.derniere_utilisation|date:"d/m/Y H:i" }}
+                <br>
+                <a href="{% url 'activer_objet' objet.id %}">
+                    {% if objet.actif %} Désactiver {% else %} Activer {% endif %}
+                </a>
+                <a href="{% url 'modifier_objet' objet.id %}">Modifier</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

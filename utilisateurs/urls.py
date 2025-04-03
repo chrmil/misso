@@ -13,4 +13,5 @@ urlpatterns = [
     path("reservation/", reservation_page, name="reservation"),
     path("confirmer_reservation/", confirmer_reservation, name="confirmer_reservation"),
     path('modifier_profil/', modifier_profil, name='modifier_profil'),
+    path('ajouter_experience/', ajouter_experience, name='ajouter_experience'),
 ]

@@ -121,8 +121,16 @@ def deconnexion(request):
     logout(request)
     return redirect("connexion")
 
+@login_required
 def profil(request):
-    return render(request, "utilisateurs/profil.html", {"user": request.user})
+    user = request.user
+    experience_necessaire = user.niveau * 100  # Calcul de l'expérience nécessaire
+    progression = int((user.experience / experience_necessaire) * 100)  # Calcul en pourcentage
+    return render(request, "utilisateurs/profil.html", {
+        "user": user,
+        "experience_necessaire": experience_necessaire,
+        "progression": progression,
+    })
 
 def reservation_page(request):
     return render(request, "utilisateurs/reservation.html")  # Assure-toi d'avoir ce template
@@ -159,3 +167,10 @@ def modifier_profil(request):
         "profil_form": profil_form,
         "password_form": password_form,
     })
+
+@login_required
+def ajouter_experience(request):
+    user = request.user
+    user.ajouter_experience(50)  # Ajoute 50 points d'expérience
+    messages.success(request, "Vous avez gagné 50 points d'expérience !")
+    return redirect("profil")

@@ -43,6 +43,13 @@
             <p><strong>Email :</strong> {{ user.email }}</p>
             <p><strong>Date de naissance :</strong> {{ user.date_de_naissance }}</p>
             <p><strong>Genre :</strong> {{ user.get_genre_display }}</p>
+            <p><strong>Niveau :</strong> {{ user.niveau }}</p>
+            <p><strong>Expérience :</strong> {{ user.experience }}/{{ experience_necessaire }}</p>
+
+            <!-- Barre d'expérience -->
+            <div class="experience-bar">
+                <div class="experience-fill" style="width: {{ progression }}%;"></div>
+            </div>
         </div>
         <a href="{% url 'deconnexion' %}" class="btn logout-btn">Se déconnecter</a>
     </div>
