@@ -51,10 +51,15 @@ def demande_evenement(request):
             evenement.etat = False  # Demande désactivée jusqu'à vérification
             evenement.save()
             messages.success(request, "Votre demande a été envoyée.")
-            return redirect("profil")
+            return redirect("vos_evenements")
     else:
         form = EvenementForm()
     return render(request, 'evenements/evenement_form.html', {'form': form})
 
-   
 
+
+@login_required(redirect_field_name="connexion")
+def voir_demande(request):
+    user = request.user
+    demandes = Evenement.objects.filter(email=user.email)
+    return render(request, 'evenements/evenement_demande.html', { 'demandes': demandes})

@@ -23,6 +23,7 @@
                 <li><a href="{% url 'histoire' %}">À propos</a></li>
                 <li><a href="{% url 'accueil' %}#contact">Contact</a></li>
                     {% if user.is_authenticated %}
+                    <li> <a href="{% url 'vos_evenements' %}" class="btns">Vos événements</a></li>
                     <li> <a href="{% url 'evenement_form' %}" class="btns">Postuler</a></li>
                     <li>
                         <a href="{% url 'profil' %}" class="btns">Profil</a>

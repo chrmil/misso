@@ -7,7 +7,7 @@ from django.utils.text import slugify
 
 class Evenement(models.Model):
     titre = models.CharField(max_length=200,unique=True, blank=True)
-    date = models.DateField()
+    date = models.DateField(unique=True)
     debut = models.TimeField()
     fin = models.TimeField()
     email = models.EmailField()

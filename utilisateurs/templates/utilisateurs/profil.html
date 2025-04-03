@@ -36,8 +36,9 @@
         <h2>Bonjour, {{ user.username }} ! 👋</h2>
         
         <!-- Bouton Réserver ajouté ici -->
-        <a href="{% url 'reservation' %}" class="btn reserve-btn">Réserver</a>
-        <a href="{% url 'modifier_profil' %}" class="btn">Modifier le profil</a>
+        <a href="{% url 'reservation' %}" class="btns">Réserver</a>
+        <a href="{% url 'vos_evenements' %}" class="btns">Vos événements</a>
+        <a href="{% url 'modifier_profil' %}" class="btns">Modifier le profil</a>
 
         <div class="profile-info">
             <p><strong>Email :</strong> {{ user.email }}</p>
