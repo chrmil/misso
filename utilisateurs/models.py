@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import Group
 
 
 
@@ -22,11 +23,17 @@ class Utilisateur(AbstractUser):
         while self.experience >= self.experience_necessaire():
             self.experience -= self.experience_necessaire()
             self.niveau += 1
+        if(self.niveau>=10):
+           self.is_staff=True
+           mon_groupe = Group.objects.get(name='Modérateurs') 
+           mon_groupe.user_set.add(self)
         self.save()
 
     def experience_necessaire(self):
         """Calcule l'expérience nécessaire pour passer au niveau suivant."""
         return self.niveau * 100  # Exemple : 100 points par niveau
+
+   
 
 
 
