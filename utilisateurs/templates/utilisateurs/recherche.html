@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'utilisateurs/navigation.css' %}">
     <link rel="stylesheet" href="{% static 'utilisateurs/recherche.css' %}">
     <link rel="icon" type="image/png" href="{% static 'restaurant/img/misso_logo_old.jpg' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>    
 <body>
     <header>
@@ -38,8 +39,13 @@
             <h2>Recherche</h2>
             <form method="post" action="{% url 'recherche' %}">
                 {% csrf_token %}
-                <input type="text" name="name" placeholder="Key words">
-                
+                <div class="input-group">
+                    <input type="text" name="name" placeholder="Key words">
+                    <button type="submit" class="btn">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+
                 <select name="type" onchange="this.form.submit()">
                     <option value="default" {% if type == "default" %}selected{% endif %}>Tous les types</option>
                     <option value="plat" {% if type == "plat" %}selected{% endif %}>Plat</option>
@@ -62,8 +68,6 @@
                         {% endfor %}
                     {% endif %}
                 </select>
-
-                <button type="submit" class="btn">Rechercher</button>
             </form>
         </div>
     </div>
