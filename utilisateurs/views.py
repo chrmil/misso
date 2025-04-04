@@ -12,8 +12,7 @@ from django.db.models import Q
 import random
 import string
 
-def accueil(request):
-    return render(request, 'utilisateurs/accueil.html')
+
 
 def institut(request):
     return render(request, 'utilisateurs/institut.html')

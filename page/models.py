@@ -18,7 +18,7 @@ class Section(models.Model):
     sous_titre = models.TextField(max_length=500, blank=True, null=True)
     visible = models.BooleanField(default=True) 
     def __str__(self):
-        return self.nom
+        return self.page.nom+"/"+self.nom
 
 class Paragraphe(models.Model):
     nom = models.CharField(max_length=100, unique=True)
@@ -27,11 +27,11 @@ class Paragraphe(models.Model):
     sous_titre = models.TextField(max_length=500, blank=True, null=True)
     texte = models.TextField(blank=True, null=True)
     def __str__(self):
-        return self.nom
+        return self.section.page.nom+"/"+self.section.nom+"/"+self.nom
 
 class Image(models.Model):
     nom = models.CharField(max_length=100, unique=True)
     section = models.ForeignKey(Section, on_delete=models.CASCADE)
     image_path = models.CharField(max_length=300, blank=True, null=True) 
     def __str__(self):
-        return self.nom
+        return self.section.page.nom+"/"+self.section.nom+"/"+self.nom
