@@ -12,4 +12,4 @@ def menu(request,restaurant_nom):
     accompagnementsPlats = AccompagnementPlat.objects.filter(plat__in=plats)
     boissons = Boisson.objects.filter(categorie__in=categoriesBoissons, menu__in=menus)
     accompagnementsBoissons = AccompagnementBoisson.objects.filter(boisson__in=boissons)
-    return render(request, 'menu/restaurant.html', { 'restaurant': restaurant,'menus': menus, 'categoriesPlats': categoriesPlats, 'plats': plats, 'accompagnementsPlats':accompagnementsPlats,'boissons':boissons,'accompagnementsBoissons':accompagnementsBoissons})
+    return render(request, 'menu/restaurant.html', { 'restaurant': restaurant,'menus': menus, 'categoriesPlats': categoriesPlats, 'plats': plats, 'accompagnementsPlats':accompagnementsPlats, 'categoriesBoissons': categoriesBoissons, 'boissons':boissons,'accompagnementsBoissons':accompagnementsBoissons})

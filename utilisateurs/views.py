@@ -22,22 +22,29 @@ def histoire(request):
     return render(request, 'utilisateurs/histoire.html')
 
 def recherche(request):
+    plats = Plat.objects.all()
+    boissons = Boisson.objects.all()
     restaurants = Restaurant.objects.all()
     menus = Menu.objects.all()
     categoriesPlats = CategoriePlat.objects.all()
-    categoriesBoissons= CategorieBoisson.objects.all()
+    categoriesBoissons = CategorieBoisson.objects.all()
     accompagnementsPlats = AccompagnementPlat.objects.all()
     accompagnementsBoissons = AccompagnementBoisson.objects.all()
 
     if request.method == "POST":
         query = request.POST.get("name")
-        plats = Plat.objects.filter(Q(nom__icontains=query) | Q(description__icontains=query))
-        boissons = Boisson.objects.filter(Q(nom__icontains=query) | Q(description__icontains=query))
-    else:
-        plats = Plat.objects.all()
-        boissons = Boisson.objects.all()
+        search_type = request.POST.get("type")
 
-    return render(request, 'utilisateurs/recherche.html', { 'restaurants': restaurants,'menus': menus, 'categoriesPlats': categoriesPlats, 'plats': plats, 'accompagnementsPlats':accompagnementsPlats,'boissons':boissons,'accompagnementsBoissons':accompagnementsBoissons})
+        if search_type == "default" or search_type == "plat":
+            plats = Plat.objects.filter(Q(nom__icontains=query) | Q(description__icontains=query))
+        else:
+            plats = Plat.objects.none()
+        if search_type == "default" or search_type == "boisson":
+            boissons = Boisson.objects.filter(Q(nom__icontains=query) | Q(description__icontains=query))
+        else:
+            boissons = Boisson.objects.none()
+
+    return render(request, 'utilisateurs/recherche.html', { 'restaurants': restaurants,'menus': menus, 'categoriesPlats': categoriesPlats, 'categoriesBoissons': categoriesBoissons, 'plats': plats, 'accompagnementsPlats':accompagnementsPlats,'boissons':boissons,'accompagnementsBoissons':accompagnementsBoissons})
 
 def inscription(request):
     if request.user.is_authenticated:  # Vérifie si l'utilisateur est connecté

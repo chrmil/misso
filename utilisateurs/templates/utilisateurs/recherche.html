@@ -38,7 +38,12 @@
             <h2>Recherche</h2>
             <form method="post" action="{% url 'recherche' %}">
                 {% csrf_token %}
-                <input type="text" name="name" placeholder="Nom du plat" required>
+                <input type="text" name="name" placeholder="Nom du plat">
+                <select name="type">
+                    <option value="default">Type</option>
+                    <option value="plat">Plat</option>
+                    <option value="boisson">Boisson</option>
+                </select>
                 <button type="submit" class="btn">Rechercher</button>
             </form>
         </div>
