@@ -17,6 +17,8 @@ class Section(models.Model):
     titre = models.TextField(max_length=500, blank=True, null=True)
     sous_titre = models.TextField(max_length=500, blank=True, null=True)
     visible = models.BooleanField(default=True) 
+    view_onclick = models.CharField(max_length=300, blank=True, null=True)
+    view_param_onclick = models.CharField(max_length=300, blank=True, null=True)
     def __str__(self):
         return self.page.nom+"/"+self.nom
 

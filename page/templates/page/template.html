@@ -11,7 +11,12 @@
 {% block content %}
   {%for section in sections %}
     {%if section.visible%}
-      <section class="section">
+      {%if section.view_onclick%}
+      <section class="section" onclick="location.href='{% url section.view_onclick section.view_param_onclick %}';">
+
+      {%else%}
+        <section class="section">
+      {%endif%}
       <h2 class="section">{{section.titre}}</h2>
       <h3 class="section">{{section.sous_titre}}</h3>
       {%for paragraphe in paragraphes%}
