@@ -1,30 +1,24 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Objets Connectés</title>
-</head>
-<body>
-    <h1>Objets Connectés Disponibles</h1>
-    <ul>
+{%extends "objets_connectes/base.html"%}
+{%block title%}Objets Connectés Disponibles{%endblock%}
+{%block content%}    <ul>
         {% for objet in objets %}
             <li>
-                <strong>{{ objet.nom }}</strong> - {{ objet.description }}
-                <br>
-                Niveau requis : {{ objet.niveau_requis }}
-                <br>
-                Dernière consultation : {{ objet.derniere_consultation|date:"d/m/Y H:i" }}
-                <br>
-                Dernière utilisation : {{ objet.derniere_utilisation|date:"d/m/Y H:i" }}
-                <br>
-                <a href="{% url 'activer_objet' objet.id %}">
+                <div class="objet">
+                <ul>
+                <li><strong>{{ objet.nom }}</strong> - {{ objet.description }} </li>
+                <li> Niveau requis : {{ objet.niveau_requis }} </li>
+                <li> Dernière consultation : {{ objet.derniere_consultation|date:"d/m/Y H:i" }} </li>
+                <li>Dernière utilisation : {{ objet.derniere_utilisation|date:"d/m/Y H:i" }} </li>
+                <li class="button-group">
+                <a href="{% url 'activer_objet' objet.id %}" class="btns">
                     {% if objet.actif %} Désactiver {% else %} Activer {% endif %}
                 </a>
-                <a href="{% url 'modifier_objet' objet.id %}">Modifier</a>
-                <a href="{% url 'info_objet' objet.id %}">Info</a> <!-- Nouveau bouton "Info" -->
+                <a href="{% url 'modifier_objet' objet.id %}"  class="btns">Modifier</a>
+                <a href="{% url 'info_objet' objet.id %}"  class="btns">Info</a> <!-- Nouveau bouton "Info" -->
+                </li>
+                </ul>
+            </div>
             </li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{%endblock%}
