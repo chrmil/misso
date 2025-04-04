@@ -1,0 +1,41 @@
+{% extends "page/base.html" %}
+
+
+{% load static %}
+{% block titre%}
+<h1 class="titre"><pre>{{page.titre}}</pre></h1>
+{%endblock%}
+{% block sous_titre%}
+<h2 class="sous_titre"><pre>{{page.sous_titre}}</pre></h2>
+{%endblock%}
+{% block content %}
+  {%for section in sections %}
+    {%if section.visible%}
+      <section class="section">
+      <h2 class="section">{{section.titre}}</h2>
+      <h3 class="section">{{section.sous_titre}}</h3>
+      {%for paragraphe in paragraphes%}
+        {%if paragraphe.section.id == section.id %}
+          <div class="paragraphe">
+          <h3 class="paragraphe">{{paragraphe.titre}}</h3>
+          <h4 class="paragraphe">{{paragraphe.sous_titre}}</h4>
+          <pre class="paragraphe">
+          {{paragraphe.texte}}
+          </pre>
+        {%for image in images%}
+          {%if image.paragraphe.id == paragraphe.id %}
+          <div class="image">
+            <img src="{% static image.image_path %}" alt="{{ image.nom }}">
+          </div>
+          {%endif%}
+        {%endfor%}
+        </div>
+        {%endif%}
+        {%endfor%}
+      </section>
+    {%endif%}
+  {% endfor %}
+{% endblock %}
+
+
+

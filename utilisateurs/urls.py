@@ -6,7 +6,6 @@ urlpatterns = [
     path('connexion/', connexion, name='connexion'),
     path('deconnexion/', deconnexion, name='deconnexion'),
     path('profil/', profil, name='profil'),
-    path('accueil/', accueil, name='accueil'),
     path('institut/', institut, name='institut'),
     path('histoire/', histoire, name='histoire'),
     path('recherche/', recherche, name='recherche'),

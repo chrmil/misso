@@ -31,7 +31,7 @@ class Paragraphe(models.Model):
 
 class Image(models.Model):
     nom = models.CharField(max_length=100, unique=True)
-    section = models.ForeignKey(Section, on_delete=models.CASCADE)
+    paragraphe = models.ForeignKey(Paragraphe, on_delete=models.CASCADE)
     image_path = models.CharField(max_length=300, blank=True, null=True) 
     def __str__(self):
-        return self.section.page.nom+"/"+self.section.nom+"/"+self.nom
+        return self.paragraphe.section.page.nom+"/"+self.paragraphe.section.nom+"/"+self.paragraphe.nom+"/"+self.nom
