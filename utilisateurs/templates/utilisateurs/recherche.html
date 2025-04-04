@@ -14,7 +14,6 @@
         <nav>
             <div class="logo"> MiSSO </div>
             <ul>
-                <li><a href="{% url 'accueil' %}#accueil">Accueil</a></li>
                 <li><a href="{% url 'menu' 'traiteur' %}">Traiteur</a></li>
                 <li><a href="{% url 'menu' 'hanok' %}">Hanok Restaurant</a></li>
                 <li><a href="{% url 'menu' 'rooftop' %}">Terrasse</a></li>
@@ -55,7 +54,7 @@
                             <p class="nom">{{ item.nom }}</p> 
                             <p class="prix">- ${{ item.prix }}</p><br>
                             {% if item.image_path %}
-                                <img src="{% static 'restaurant/img/'|add:item.image_path %}" alt="{{ item.nom }}"><br>
+                                <img src="{% static item.image_path %}" alt="{{ item.nom }}"><br>
                             {% endif %}<br>
                             <pre><p class="description"> {{ item.description }}</p></pre>
                         </li><br>
@@ -74,7 +73,7 @@
                                 <p class="prix">- ${{ item.prixBouteille }}</p><br>
                             {% endif %}
                             {% if item.image_path %}
-                                <img src="{% static 'restaurant/img/'|add:item.image_path %}" alt="{{ item.nom }}"><br>
+                                <img src="{% static item.image_path %}" alt="{{ item.nom }}"><br>
                             {% endif %}<br>
                             <pre><p class="description"> {{ item.description }}</p></pre>
                         </li><br>
