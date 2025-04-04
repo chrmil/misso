@@ -9,7 +9,20 @@ body {
     display: block;
     overflow-y: auto;
     min-height: 100vh;
-    background-color: beige;
+    margin: 0;
+    padding: 0;
+    background-image: url('../restaurant/img/texture.jpg');
+}
+
+.mini_logo {
+    width: auto; /* Préserve les proportions de l'image */
+    height: auto; /* Préserve également les proportions */
+    max-width: 5%; /* Contrôle la largeur maximale tout en gardant les proportions */
+    max-height: 5%;
+    position: absolute; /* Permet un placement précis */
+    top: 0 ; /* Place l'image en haut de l'écran */
+    left: 0; /* Place l'image à gauche de l'écran */
+    margin: 10px;
 }
 
 .main {
@@ -17,9 +30,11 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
-    background-color:beige;
-    background-size: cover;
-    background-position: center;
+    
+    margin: 0;
+    padding: 0;
+    background-image: url('../restaurant/img/texture.jpg');
+
     padding-bottom: 1%;
 }
 
@@ -42,7 +57,7 @@ body {
     z-index: 1;
     height: 30%;
     text-wrap: balance;
-    color: black;
+    color: rgb(15, 43, 36);
     margin-left: 0;
     margin-right: 0;
     margin-top: 2%;
@@ -50,7 +65,7 @@ body {
     text-align: left;
     line-height: 1.5;
     border-radius: 0;
-    background-color: beige;
+    /*background-color: beige;*/    
     border: solid darkgoldenrod;
     overflow: auto;
     cursor: pointer;
@@ -70,12 +85,12 @@ body {
 .about, .contact {
     text-align: center;
     padding: 50px;
-    background: black;
+    background: rgb(15, 43, 36);
     color: goldenrod;
 }
 
 footer {
-    background: black;
+    background: rgb(15, 43, 36);
     color: goldenrod;
     text-align: center;
     padding: 10px;
