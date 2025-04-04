@@ -3,7 +3,6 @@ from django.conf import settings
 from django.utils.timezone import now
 
 class ObjetConnecte(models.Model):
-    id = models.AutoField(primary_key=True)
     nom = models.CharField(max_length=100)  # Nom de l'objet
     description = models.TextField(blank=True, null=True)  # Description de l'objet
     niveau_requis = models.PositiveIntegerField(default=1)  # Niveau requis pour modifier l'objet
