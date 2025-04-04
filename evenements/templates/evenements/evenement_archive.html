@@ -8,7 +8,7 @@
     <ul>
         {% for evenement in latest %}
           {%if evenement.est_valide%}
-            <li  class="btns"><a href="{{ evenement.get_absolute_url }}">{{ evenement.date }} :  {{ evenement.titre }}</a></li>
+            <li  class="btns" onclick='location.href="{{ evenement.get_absolute_url }}";'>{{ evenement.date }} :  {{ evenement.titre }}</li>
           {%endif%} 
              {% empty %}
                     <p>Aucun événement disponible.</p>
