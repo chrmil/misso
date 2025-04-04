@@ -10,12 +10,10 @@
     <link rel="icon" type="image/png" href="{% static 'restaurant/img/misso_logo_old.jpg' %}">
 </head>    
 <body>
-    <header>
         <header>
             <nav>
-                <div class="logo"> MiSSO </div>
+                <div class="logo"> <a href="{% url 'accueil' %}#accueil">MiSSO</a> </div>
                 <ul>
-                    <li><a href="{% url 'accueil' %}#accueil">Accueil</a></li>
                     <li><a href="{% url 'menu' 'traiteur' %}">Traiteur</a></li>
                     <li><a href="{% url 'menu' 'hanok' %}">Hanok Restaurant</a></li>
                     <li><a href="{% url 'menu' 'rooftop' %}">Terrasse</a></li>

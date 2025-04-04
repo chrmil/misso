@@ -27,7 +27,7 @@ nav ul li {
     display: inline;
 }
 
-nav ul li a {
+nav a {
     text-decoration: none;
     color: goldenrod;
     ;
@@ -35,7 +35,7 @@ nav ul li a {
     transition: color 0.3s;
 }
 
-nav ul li a:hover {
+nav a:hover {
     color: #f3f0e4;
 }
 

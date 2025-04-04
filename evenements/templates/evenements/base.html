@@ -12,9 +12,8 @@
 <body>
     <header>
         <nav>
-            <div class="logo"> Misso </div>
+            <div class="logo"> <a href="{% url 'accueil' %}#accueil">MiSSO</a> </div>
             <ul>
-               <li><a href="{% url 'accueil' %}#accueil">Accueil</a></li>
                 <li><a href="{% url 'menu' 'traiteur' %}">Traiteur</a></li>
                 <li><a href="{% url 'menu' 'hanok' %}">Hanok Restaurant</a></li>
                 <li><a href="{% url 'menu' 'rooftop' %}">Terrasse</a></li>

@@ -9,7 +9,7 @@
         {%if user.is_authenticated%}
           {% for evenement in demandes %}
             {%if evenement.email == user.email%}
-              <li  class="btns"><a href="{{ evenement.get_absolute_url }}">{{ evenement.date }} :  {{ evenement.titre }}</a></li>
+            <li  class="btns" onclick='location.href="{{ evenement.get_absolute_url }}";'>{{ evenement.date }} :  {{ evenement.titre }}</li>
               <p class="demande">Status de la demande : 
               {%if evenement.est_valide%}
                 Validée.
