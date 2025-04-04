@@ -9,6 +9,7 @@ urlpatterns = [
     path('accueil/', accueil, name='accueil'),
     path('institut/', institut, name='institut'),
     path('histoire/', histoire, name='histoire'),
+    path('recherche/', recherche, name='recherche'),
     path('verifier_email/<int:user_id>/', verifier_email, name='verifier_email'),  # Ajout du paramètre user_id
     path("reservation/", reservation_page, name="reservation"),
     path("confirmer_reservation/", confirmer_reservation, name="confirmer_reservation"),

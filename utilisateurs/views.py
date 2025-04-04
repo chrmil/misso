@@ -8,6 +8,7 @@ from django.conf import settings
 from .forms import InscriptionForm, ProfilForm
 from .models import EmailVerification
 from menu.models import *
+from django.db.models import Q
 import random
 import string
 
@@ -20,6 +21,23 @@ def institut(request):
 def histoire(request):
     return render(request, 'utilisateurs/histoire.html')
 
+def recherche(request):
+    restaurants = Restaurant.objects.all()
+    menus = Menu.objects.all()
+    categoriesPlats = CategoriePlat.objects.all()
+    categoriesBoissons= CategorieBoisson.objects.all()
+    accompagnementsPlats = AccompagnementPlat.objects.all()
+    accompagnementsBoissons = AccompagnementBoisson.objects.all()
+
+    if request.method == "POST":
+        query = request.POST.get("name")
+        plats = Plat.objects.filter(Q(nom__icontains=query) | Q(description__icontains=query))
+        boissons = Boisson.objects.filter(Q(nom__icontains=query) | Q(description__icontains=query))
+    else:
+        plats = Plat.objects.all()
+        boissons = Boisson.objects.all()
+
+    return render(request, 'utilisateurs/recherche.html', { 'restaurants': restaurants,'menus': menus, 'categoriesPlats': categoriesPlats, 'plats': plats, 'accompagnementsPlats':accompagnementsPlats,'boissons':boissons,'accompagnementsBoissons':accompagnementsBoissons})
 
 def inscription(request):
     if request.user.is_authenticated:  # Vérifie si l'utilisateur est connecté

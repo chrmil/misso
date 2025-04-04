@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recherche</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'utilisateurs/navigation.css' %}">
+    <link rel="stylesheet" href="{% static 'utilisateurs/recherche.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'restaurant/img/misso_logo_old.jpg' %}">
+</head>    
+<body>
+    <header>
+        <nav>
+            <div class="logo"> MiSSO </div>
+            <ul>
+                <li><a href="{% url 'accueil' %}#accueil">Accueil</a></li>
+                <li><a href="{% url 'menu' 'traiteur' %}">Traiteur</a></li>
+                <li><a href="{% url 'menu' 'hanok' %}">Hanok Restaurant</a></li>
+                <li><a href="{% url 'menu' 'rooftop' %}">Terrasse</a></li>
+                <li><a href="{% url 'evenements' %}">Evenements</a></li> 
+                <li><a href="{% url 'institut' %}">Institut</a></li>                 
+                <li><a href="{% url 'histoire' %}">À propos</a></li>
+                <li><a href="{% url 'recherche' %}">Recherche</a></li>
+                <li><a href="{% url 'accueil' %}#contact">Contact</a></li>
+                <li>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'profil' %}" class="btns">Profil</a>
+                    {% else %}
+                        <a href="{% url 'connexion' %}" class="btns">Se connecter</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main">
+        <div class="container">
+            <h2>Recherche</h2>
+            <form method="post" action="{% url 'recherche' %}">
+                {% csrf_token %}
+                <input type="text" name="name" placeholder="Nom du plat" required>
+                <button type="submit" class="btn">Rechercher</button>
+            </form>
+        </div>
+    </div>
+
+
+    <section id="resultat" class="resultat">
+        <div class="menu-container">
+            {% if plats %}
+                <ol class="plats">
+                    {% for item in plats %}
+                        <li class="menu-item">
+                            <p class="nom">{{ item.nom }}</p> 
+                            <p class="prix">- ${{ item.prix }}</p><br>
+                            {% if item.image_path %}
+                                <img src="{% static 'restaurant/img/'|add:item.image_path %}" alt="{{ item.nom }}"><br>
+                            {% endif %}<br>
+                            <pre><p class="description"> {{ item.description }}</p></pre>
+                        </li><br>
+                    {% endfor %}
+                </ol>
+            {% endif %}
+            {% if boissons %}
+                <ol class="boisson">
+                    {% for item in boissons %}
+                        <li class="menu-item">
+                            <p class="nom">{{ item.nom }}</p>
+                            {% if item.prixVerre %}
+                                <p class="prix">- ${{ item.prixVerre }}</p><br>
+                            {% endif %}
+                            {% if item.prixBouteille %}
+                                <p class="prix">- ${{ item.prixBouteille }}</p><br>
+                            {% endif %}
+                            {% if item.image_path %}
+                                <img src="{% static 'restaurant/img/'|add:item.image_path %}" alt="{{ item.nom }}"><br>
+                            {% endif %}<br>
+                            <pre><p class="description"> {{ item.description }}</p></pre>
+                        </li><br>
+                    {% endfor %}
+                </ol>
+            {% if not plats and not boissons %}
+                <p>Aucune résultat trouvée.</p>
+            {% endif %}
+            {% endif %}
+        </div>
+    </section>
+ 
+    <section id="contact" class="contact">
+        <h2>Nous contacter</h2>
+        <p>📍 **123 Rue des Délices, 75013 Paris, France**</p>
+        <p>📞 **+33 1 23 45 67 89**</p>
+        <p>📧 **contact@misso-paris.fr**</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 MiSSO - Culture et Cuisine Coréenne en France | Tous droits réservés</p>
+    </footer>
+</body>
+</html>

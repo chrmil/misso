@@ -41,6 +41,8 @@ input {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px; /* Assurer que les champs prennent toute la largeur */
+    width: calc(100% - 20px);
+    margin: 5px 0;
 }
 
 /* Bouton principal */
@@ -54,6 +56,8 @@ input {
     font-size: 16px;
     transition: background 0.3s;
     width: 100%; /* Assurer que le bouton prend toute la largeur */
+    width: calc(100% - 20px);
+    margin: 5px 0;
 }
 
 /* Lien vers inscription/connexion */
