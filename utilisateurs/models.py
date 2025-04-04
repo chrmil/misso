@@ -43,4 +43,3 @@ class EmailVerification(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     is_verified = models.BooleanField(default=False)  # Ajoute ce champ
 
-

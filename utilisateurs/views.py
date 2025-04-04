@@ -22,10 +22,9 @@ def histoire(request):
     return render(request, 'utilisateurs/histoire.html')
 
 def recherche(request):
-    plats = Plat.objects.all()
-    boissons = Boisson.objects.all()
+    plats = Plat.objects.none()
+    boissons = Boisson.objects.none()
     restaurants = Restaurant.objects.all()
-    menus = Menu.objects.all()
     categoriesPlats = CategoriePlat.objects.all()
     categoriesBoissons = CategorieBoisson.objects.all()
     accompagnementsPlats = AccompagnementPlat.objects.all()
@@ -33,18 +32,30 @@ def recherche(request):
 
     if request.method == "POST":
         query = request.POST.get("name")
-        search_type = request.POST.get("type")
+        type = request.POST.get("type")
+        categorie = request.POST.get("categorie")
 
-        if search_type == "default" or search_type == "plat":
+        if type == "default" or type == "plat":
             plats = Plat.objects.filter(Q(nom__icontains=query) | Q(description__icontains=query))
-        else:
-            plats = Plat.objects.none()
-        if search_type == "default" or search_type == "boisson":
+            if categorie != "default":
+                plats = plats.filter(categorie=categorie)
+            
+        if type == "default" or type == "boisson":
             boissons = Boisson.objects.filter(Q(nom__icontains=query) | Q(description__icontains=query))
-        else:
-            boissons = Boisson.objects.none()
+            if categorie != "default":
+                boissons = boissons.filter(categorie=categorie)
+    
+    else:
+        type = "default"
 
-    return render(request, 'utilisateurs/recherche.html', { 'restaurants': restaurants,'menus': menus, 'categoriesPlats': categoriesPlats, 'categoriesBoissons': categoriesBoissons, 'plats': plats, 'accompagnementsPlats':accompagnementsPlats,'boissons':boissons,'accompagnementsBoissons':accompagnementsBoissons})
+    return render(request, 'utilisateurs/recherche.html', {'type': type, 
+                                                           'restaurants': restaurants, 
+                                                           'categoriesPlats': categoriesPlats, 
+                                                           'categoriesBoissons': categoriesBoissons, 
+                                                           'plats': plats, 
+                                                           'accompagnementsPlats':accompagnementsPlats, 
+                                                           'boissons':boissons, 
+                                                           'accompagnementsBoissons':accompagnementsBoissons})
 
 def inscription(request):
     if request.user.is_authenticated:  # Vérifie si l'utilisateur est connecté
