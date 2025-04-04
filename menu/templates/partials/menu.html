@@ -14,7 +14,7 @@
                     {% if item.categorie.id == categorie.id and item.menu.id == menu.id %}
                         <li class="menu-item">
                             <p class="nom">{{ item.nom }}</p> 
-                            <p class="prix">- ${{ item.prix }}</p><br>
+                            <p class="prix">- {{ item.prix }}€</p><br>
                             {% if item.image_path %}
                                 <img src="{% static item.image_path %}" alt="{{ item.nom }}"><br>
                             {% endif %}<br>
@@ -24,7 +24,7 @@
                                 {% if item.id == accompagnement.plat.id %}
                                     <li class ="accompagnement">
                                     <p class="nom">{{ accompagnement.nom }}</p> 
-                                    <p class="prix">+ ${{ accompagnement.prix }}</p><br>
+                                    <p class="prix">+ {{ accompagnement.prix }}€</p><br>
                                     {% if accompagnement.image_path %}
                                         <img src="{% static accompagnement.image_path %}" alt="{{ accompagnement.nom }}"><br>
                                     {% endif %}<br>
@@ -48,12 +48,12 @@
             {% for item in boissons %}
                 {% if item.categorie.id == categorie.id  and item.menu.id == menu.id%}
                     <li class="menu-item">
-                        <p class="nom">{{ item.nom }}</p> 
+                        <p class="nom">{{ item.nom }}</p><br>
                         {% if item.prixBouteille %}
-                        <p class="prix">Verre - ${{ item.prixVerre}}</p>
-                            <p class="prix">Bouteille - ${{ item.prixBouteille }}</p><br>
+                        <p class="prix">Verre - {{ item.prixVerre}}€</p><br>
+                        <p class="prix">Bouteille - {{ item.prixBouteille }}€</p><br>
                         {% else %}
-                            <p class="prix">- ${{ item.prixVerre }}</p><br>
+                            <p class="prix">- {{ item.prixVerre }}€</p><br>
                         {%endif%}
                         {% if item.image_path %}
                             <img src="{% static item.image_path %}" alt="{{ item.nom }}"><br>

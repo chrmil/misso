@@ -80,7 +80,7 @@
                     {% for item in plats %}
                         <li class="menu-item">
                             <p class="nom">{{ item.nom }}</p> 
-                            <p class="prix">- ${{ item.prix }}</p><br>
+                            <p class="prix">- {{ item.prix }}€</p><br>
                             {% if item.image_path %}
                                 <img src="{% static item.image_path %}" alt="{{ item.nom }}"><br>
                             {% endif %}<br>
@@ -95,10 +95,10 @@
                         <li class="menu-item">
                             <p class="nom">{{ item.nom }}</p>
                             {% if item.prixVerre %}
-                                <p class="prix">- ${{ item.prixVerre }}</p><br>
+                                <p class="prix">- {{ item.prixVerre }}€</p><br>
                             {% endif %}
                             {% if item.prixBouteille %}
-                                <p class="prix">- ${{ item.prixBouteille }}</p><br>
+                                <p class="prix">- {{ item.prixBouteille }}€</p><br>
                             {% endif %}
                             {% if item.image_path %}
                                 <img src="{% static item.image_path %}" alt="{{ item.nom }}"><br>
