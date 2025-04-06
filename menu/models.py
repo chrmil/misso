@@ -14,18 +14,21 @@ class Menu(models.Model):
     nom = models.CharField(max_length=100, unique=True)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     visible = models.BooleanField(default=True)
+    priorite = models.PositiveIntegerField(default =0, blank =False, null=False)
     def __str__(self):
         return self.nom
 
 class CategorieBoisson(models.Model):
     nom  = models.CharField(max_length=100, unique=True)
     description = models.TextField(blank=True, null=True)
+    priorite = models.PositiveIntegerField(default =0, blank =False, null=False)
     def __str__(self):
         return self.nom
 
 class CategoriePlat(models.Model):
     nom  = models.CharField(max_length=100, unique=True)
     description = models.TextField(blank=True, null=True)
+    priorite = models.PositiveIntegerField(default =0, blank =False, null=False)
     def __str__(self):
         return self.nom
 
@@ -37,6 +40,7 @@ class Plat(models.Model):
     prix = models.DecimalField(max_digits=6, decimal_places=2)
     description = models.TextField(blank=True, null=True)
     image_path = models.CharField(max_length=255, blank=True, null=True) 
+    priorite = models.PositiveIntegerField(default =0, blank =False, null=False)
     def __str__(self):
         return self.nom
     
@@ -46,6 +50,7 @@ class AccompagnementPlat(models.Model):
     prix = models.DecimalField(max_digits=6, decimal_places=2)
     description = models.TextField(blank=True, null=True)
     image_path = models.CharField(max_length=255, blank=True, null=True) 
+    priorite = models.PositiveIntegerField(default =0, blank =False, null=False)
     def __str__(self):
         return self.nom
  
@@ -58,6 +63,7 @@ class Boisson(models.Model):
     prixBouteille = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     image_path = models.CharField(max_length=255, blank=True, null=True) 
+    priorite = models.PositiveIntegerField(default =0, blank =False, null=False)
     def __str__(self):
         return self.nom
     
@@ -68,6 +74,7 @@ class AccompagnementBoisson(models.Model):
     prix = models.DecimalField(max_digits=6, decimal_places=2)
     description = models.TextField(blank=True, null=True)
     image_path = models.CharField(max_length=255, blank=True, null=True) 
+    priorite = models.PositiveIntegerField(default =0, blank =False, null=False)
     def __str__(self):
         return self.nom
   
