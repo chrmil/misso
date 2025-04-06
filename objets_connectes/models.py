@@ -10,7 +10,7 @@ class ObjetConnecte(models.Model):
     derniere_consultation = models.DateTimeField(blank=True, null=True)  # Dernière consultation
     derniere_utilisation = models.DateTimeField(blank=True, null=True)  # Dernière utilisation
     consommation = models.FloatField(null=False, help_text="Consommation en Watt-heure",) #consommation de l'objet en wh
-    consommation_totale = models.FloatField(null=False, default=0,  help_text="Consommation totale de l'objet en Watt-heure")
+    consommation_totale = models.FloatField(null=False, default=0,  help_text="Consommation totale de l'objet")
 
     def consulter(self):
         """Met à jour la date de dernière consultation."""
