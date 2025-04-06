@@ -1,13 +1,16 @@
 {% extends "objets_connectes/base.html" %}
 {% block title %}Rapport Global{% endblock %}
 {% block content %}
-    <p>Ce rapport montre la répartition de la consommation d'énergie et du nombre d'objets connectés entre les différents types (caméras, frigos, fours).</p>
+    <p>Ce rapport montre la répartition de la consommation d'énergie, du nombre d'objets connectés, et des consultations.</p>
     
     <h2>Répartition de la consommation d'énergie</h2>
     <img src="data:image/png;base64,{{ graph1 }}" alt="Graphique de la consommation d'énergie">
 
     <h2>Répartition du nombre d'objets</h2>
     <img src="data:image/png;base64,{{ graph2 }}" alt="Graphique du nombre d'objets">
+
+    <h2>Répartition des consultations</h2>
+    <img src="data:image/png;base64,{{ graph3 }}" alt="Graphique des consultations">
 
     <a href="{% url 'telecharger_rapport_pdf' %}" class="btns">Télécharger le Rapport Complet en PDF</a>
 {% endblock %}

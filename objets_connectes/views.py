@@ -32,6 +32,13 @@ def rapport_global(request):
         "Fours": ObjetConnecte.objects.filter(type_objet="four").count(),
     }
 
+    # Calculer le nombre total de consultations par type
+    consultations_par_type = {
+        "Caméras": ObjetConnecte.objects.filter(type_objet="camera").aggregate(Sum("nombre_consultations"))["nombre_consultations__sum"] or 0,
+        "Frigos": ObjetConnecte.objects.filter(type_objet="frigo").aggregate(Sum("nombre_consultations"))["nombre_consultations__sum"] or 0,
+        "Fours": ObjetConnecte.objects.filter(type_objet="four").aggregate(Sum("nombre_consultations"))["nombre_consultations__sum"] or 0,
+    }
+
     # Préparer les données pour le graphique de consommation
     labels_consommation = consommation_par_type.keys()
     values_consommation = consommation_par_type.values()
@@ -39,6 +46,10 @@ def rapport_global(request):
     # Préparer les données pour le graphique de quantités
     labels_quantite = quantite_par_type.keys()
     values_quantite = quantite_par_type.values()
+
+    # Préparer les données pour le graphique de consultations
+    labels_consultations = consultations_par_type.keys()
+    values_consultations = consultations_par_type.values()
 
     # Générer le graphique de consommation (camembert)
     plt.figure(figsize=(6, 4))  # Taille réduite
@@ -60,7 +71,23 @@ def rapport_global(request):
     graph2 = base64.b64encode(buf2.read()).decode('utf-8')
     buf2.close()
 
-    return render(request, "objets_connectes/rapport_global.html", {"graph1": graph1, "graph2": graph2})
+    # Générer le graphique de consultations (camembert)
+    plt.figure(figsize=(6, 4))
+    plt.pie(
+        values_consultations,
+        labels=labels_consultations,
+        autopct='%1.1f%%',
+        startangle=90,
+        colors=["red", "blue", "green"]
+    )
+    plt.title("Répartition des consultations")
+    buf3 = io.BytesIO()
+    plt.savefig(buf3, format='png')
+    buf3.seek(0)
+    graph3 = base64.b64encode(buf3.read()).decode('utf-8')
+    buf3.close()
+
+    return render(request, "objets_connectes/rapport_global.html", {"graph1": graph1, "graph2": graph2, "graph3": graph3})
 
 
 def rapport_objet(request, objet_id):
@@ -199,7 +226,7 @@ def telecharger_rapport_pdf(request):
     # Ajouter des statistiques avancées
     elements.append(Paragraph("Statistiques avancées :", styles['Heading2']))
     elements.append(Paragraph("1. Consommation totale : 500 kWh", styles['BodyText']))
-    elements.append(Paragraph("2. Nombre total d'objets : 120", styles['BodyText']))
+    elements.append(Paragraph("2. Nombre total d'objets : 10", styles['BodyText']))
     elements.append(Spacer(1, 12))
 
     # Générer le PDF
