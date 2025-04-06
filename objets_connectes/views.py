@@ -4,7 +4,66 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import ObjetConnecte
+from django.db.models import Sum
 from django.utils import timezone
+import matplotlib.pyplot as plt
+import io
+import urllib, base64
+
+def rapport_global(request):
+    # Calculer la consommation totale par type d'objet
+    consommation_par_type = {
+        "Caméras": ObjetConnecte.objects.filter(type_objet="camera").aggregate(Sum("consommation"))["consommation__sum"] or 0,
+        "Frigos": ObjetConnecte.objects.filter(type_objet="frigo").aggregate(Sum("consommation"))["consommation__sum"] or 0,
+        "Fours": ObjetConnecte.objects.filter(type_objet="four").aggregate(Sum("consommation"))["consommation__sum"] or 0,
+    }
+
+    # Préparer les données pour le graphique
+    labels = consommation_par_type.keys()
+    values = consommation_par_type.values()
+
+    # Générer un graphique circulaire (camembert)
+    plt.figure(figsize=(6, 6))
+    plt.pie(values, labels=labels, autopct='%1.1f%%', startangle=90, colors=["blue", "green", "orange"])
+    plt.title("Répartition de la consommation d'énergie par type d'objet")
+
+    # Convertir le graphique en image pour l'afficher dans le template
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    string = base64.b64encode(buf.read())
+    uri = urllib.parse.quote(string)
+    buf.close()
+
+    return render(request, "objets_connectes/rapport_global.html", {"graph": uri})
+
+
+def rapport_objet(request, objet_id):
+    objet = get_object_or_404(ObjetConnecte, id=objet_id)
+
+    # Exemple de données pour le graphique (vous pouvez personnaliser selon vos besoins)
+    labels = ['Consultations', 'Utilisations']
+    values = [
+        (objet.derniere_consultation - objet.derniere_utilisation).total_seconds() / 3600 if objet.derniere_consultation and objet.derniere_utilisation else 0,
+        objet.consommation
+    ]
+
+    # Générer un graphique avec Matplotlib
+    plt.figure(figsize=(6, 4))
+    plt.bar(labels, values, color=['blue', 'green'])
+    plt.title(f"Statistiques pour {objet.nom}")
+    plt.ylabel("Valeurs")
+    plt.xlabel("Catégories")
+
+    # Convertir le graphique en image pour l'afficher dans le template
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    string = base64.b64encode(buf.read())
+    uri = urllib.parse.quote(string)
+    buf.close()
+
+    return render(request, "objets_connectes/rapport_objet.html", {"objet": objet, "graph": uri})
 
 
 @login_required
