@@ -92,9 +92,6 @@ def inscription(request):
             user.is_active = False  # Utilisateur désactivé jusqu'à vérification
             user.save()
 
-            # Enregistrer l'action dans l'historique
-            enregistrer_historique(user, "S'est inscrit(e) au système.")
-
             # Génération du code de vérification
             verification_code = ''.join(random.choices(string.digits, k=6))
             EmailVerification.objects.create(user=user, verification_code=verification_code)
@@ -108,7 +105,6 @@ def inscription(request):
                 fail_silently=False,
             )
 
-            messages.success(request, "Inscription réussie ! Un email de vérification vous a été envoyé.")
             return redirect("verifier_email", user_id=user.id)
     else:
         form = InscriptionForm()
@@ -121,7 +117,6 @@ def verifier_email(request, user_id):
         print(f"Code de vérification trouvé pour l'utilisateur {user_id}")
     except EmailVerification.DoesNotExist:
         print(f"EmailVerification.DoesNotExist déclenché pour l'utilisateur {user_id}")
-        messages.error(request, "Utilisateur ou code introuvable.")
         return redirect("accueil")
 
     if request.method == "POST":
@@ -135,11 +130,11 @@ def verifier_email(request, user_id):
             user.save()
 
             email_verif.delete()
+
+            # Enregistrer l'action dans l'historique
+            enregistrer_historique(user, "S'est inscrit(e) au système.")
             
-            messages.success(request, "Email vérifié avec succès ! Vous pouvez maintenant vous connecter.")
             return redirect("connexion")
-        else:
-            messages.error(request, "Code de vérification incorrect. Réessayez.")
     
     return render(request, "utilisateurs/verifier_email.html", {"email": email_verif.user.email})
 
@@ -165,8 +160,6 @@ def connexion(request):
             # Enregistrer l'action dans l'historique
             enregistrer_historique(user, "S'est connecté(e) au système.")
             return redirect("profil")
-        else:
-            messages.error(request, "Identifiant ou mot de passe incorrect.")
 
     return render(request, "utilisateurs/connexion.html")
 
@@ -205,12 +198,8 @@ def modifier_profil(request):
             profil_form = ProfilForm(request.POST, instance=user)
             if profil_form.is_valid():
                 profil_form.save()
-                messages.success(request, "Votre profil a été mis à jour avec succès.")
-                # Enregistrer une action dans l'historique
-                Historique.objects.create(
-                    utilisateur=request.user,
-                    action="A modifié son profil"
-                )
+                # Enregistrer l'action dans l'historique
+                enregistrer_historique(user, "a modifier son profil.")
                 return redirect("profil")
             else:
                 messages.error(request, "Veuillez corriger les erreurs dans le formulaire de profil.")
@@ -219,10 +208,8 @@ def modifier_profil(request):
             if password_form.is_valid():
                 password_form.save()
                 update_session_auth_hash(request, password_form.user)  # Maintient la session active
-                messages.success(request, "Votre mot de passe a été modifié avec succès.")
                 return redirect("profil")
-            else:
-                messages.error(request, "Veuillez corriger les erreurs dans le formulaire de mot de passe.")
+
 
     return render(request, "utilisateurs/modifier_profil.html", {
         "profil_form": profil_form,
@@ -233,5 +220,4 @@ def modifier_profil(request):
 def ajouter_experience(request):
     user = request.user
     user.ajouter_experience(50)  # Ajoute 50 points d'expérience
-    messages.success(request, "Vous avez gagné 50 points d'expérience !")
     return redirect("profil")
