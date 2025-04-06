@@ -201,6 +201,80 @@ input {
     color: #555; /* Couleur secondaire pour les détails */
 }
 
+/* Conteneur des objets connectés */
+.objets_connectes-container {
+    margin-top: 20px;
+    background: #fff3e0; /* Couleur de fond similaire aux autres sections */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+/* Liste des objets connectés */
+.objets_connectes-container ul {
+    list-style: none; /* Supprime les puces */
+    padding: 0;
+    margin: 0;
+}
+
+/* Élément individuel d'un objet connecté regroupé dans un bloc */
+.objets_connectes-container li {
+    margin: 0; /* Supprime les marges entre les éléments */
+    padding: 0;
+    border: none;
+}
+
+/* Bloc regroupant les informations d'un objet connecté */
+.objets_connectes-container .objet-connecte {
+    background: white; /* Fond blanc pour chaque objet */
+    padding: 15px;
+    margin-bottom: 10px; /* Espacement entre les objets */
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    font-size: 16px;
+    color: #333; /* Couleur du texte */
+    transition: background 0.3s, transform 0.2s; /* Animation au survol */
+}
+
+/* Effet au survol des objets connectés */
+.objets_connectes-container .objet-connecte:hover {
+    background: #ffcc00; /* Couleur de fond au survol */
+    transform: translateY(-2px); /* Légère élévation au survol */
+}
+
+/* Groupe de boutons pour les actions */
+.objets_connectes-container .button-group {
+    display: flex;
+    gap: 10px; /* Espacement entre les boutons */
+    margin-top: 10px;
+}
+
+/* Boutons des objets connectés */
+.objets_connectes-container .btns {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    transition: background 0.3s;
+    cursor: pointer;
+}
+
+.objets_connectes-container .btns:hover {
+    background-color: #0056b3; /* Couleur au survol */
+}
+
+/* Messages d'erreur */
+.objets_connectes-container .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
 /* Section Contact */
 .contact {
     text-align: center;

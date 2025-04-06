@@ -69,6 +69,7 @@
                     <option value="default" {% if type == "default" %}selected{% endif %}>Tous les types</option>
                     <option value="nourriture" {% if type == "nourriture" %}selected{% endif %}>Nourriture</option>
                     <option value="événement" {% if type == "événement" %}selected{% endif %}>Événement</option>
+                    <option value="objet_connecté" {% if type == "objet_connecté" %}selected{% endif %}>Objet connecté</option>
                 </select>
 
                 {% if type == "nourriture" %}
@@ -154,8 +155,30 @@
                 </ul>
             </div>
         {% endif %}
-          
-        {% if not plats and not boissons and not evenements %}
+
+        {% if objets_connectes %}
+            <div class="objets_connectes-container">
+                {% for objet_connecte in objets_connectes %}
+                    <div class="objet-connecte">
+                        <ul>
+                            <li><strong>{{ objet_connecte.nom }}</strong> - {{ objet_connecte.description }}</li>
+                            <li>Niveau requis : {{ objet_connecte.niveau_requis }}</li>
+                            <li>Dernière consultation : {{ objet_connecte.derniere_consultation|date:"d/m/Y H:i" }}</li>
+                            <li>Dernière utilisation : {{ objet_connecte.derniere_utilisation|date:"d/m/Y H:i" }}</li>
+                        </ul>
+                        <div class="button-group">
+                            <a href="{% url 'activer_objet' objet_connecte.id %}" class="btns">
+                                {% if objet_connecte.actif %} Désactiver {% else %} Activer {% endif %}
+                            </a>
+                            <a href="{% url 'modifier_objet' objet_connecte.id %}" class="btns">Modifier</a>
+                            <a href="{% url 'info_objet' objet_connecte.id %}" class="btns">Info</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if not plats and not boissons and not evenements and not objets_connectes %}
             <p>Aucun résultat trouvé.</p>
         {% endif %}
     </section>

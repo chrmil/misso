@@ -8,6 +8,7 @@ from .forms import InscriptionForm, ProfilForm
 from .models import EmailVerification
 from menu.models import *
 from evenements.models import *
+from objets_connectes.models import *
 from django.db.models import Q
 import random
 import string
@@ -25,15 +26,9 @@ def histoire(request):
 def recherche(request):
     plats = Plat.objects.none()
     boissons = Boisson.objects.none()
-    plats = Plat.objects.none()
-    boissons = Boisson.objects.none()
-    restaurants = Restaurant.objects.all()
-    categoriesPlats = CategoriePlat.objects.all()
-    categoriesBoissons = CategorieBoisson.objects.all()
-    accompagnementsPlats = AccompagnementPlat.objects.all()
-    accompagnementsBoissons = AccompagnementBoisson.objects.all()
-
     evenements = Evenement.objects.none()
+
+    objets_connectes = ObjetConnecte.objects.none()
 
     if request.method == "POST":
         query = request.POST.get("name")
@@ -61,6 +56,9 @@ def recherche(request):
 
         if type == "default" or type == "événement":
             evenements = Evenement.objects.filter(Q(titre__icontains=query) | Q(description__icontains=query))
+
+        if (type == "default" or type == "objet_connecté") and request.user.is_authenticated:
+            objets_connectes = ObjetConnecte.objects.filter(Q(nom__icontains=query) | Q(description__icontains=query) | Q(type_objet__icontains=query))
     
     else:
         type = "default"
@@ -68,18 +66,15 @@ def recherche(request):
         categorie = "default"
 
     return render(request, 'utilisateurs/recherche.html', {'type': type, 
-                                                           'nourriture': nourriture,
-                                                           'categorie': categorie,
+                                                           'nourriture': nourriture, 
+                                                           'categorie': categorie, 
                                                            
-                                                           'restaurants': restaurants, 
-                                                           'categoriesPlats': categoriesPlats, 
-                                                           'categoriesBoissons': categoriesBoissons, 
                                                            'plats': plats, 
-                                                           'accompagnementsPlats':accompagnementsPlats, 
                                                            'boissons':boissons, 
-                                                           'accompagnementsBoissons':accompagnementsBoissons,
                                                            
-                                                           'evenements': evenements})
+                                                           'evenements': evenements, 
+                                                           
+                                                           'objets_connectes': objets_connectes})
 
 def inscription(request):
     if request.user.is_authenticated:  # Vérifie si l'utilisateur est déjà connecté
