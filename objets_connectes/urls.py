@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import *
-from .views import telecharger_rapport_pdf, telecharger_rapport_avance_pdf
+from .views import telecharger_rapport_pdf, telecharger_rapport_avance_pdf, obtenir_donnees_graphique
 
 urlpatterns = [
     path("", liste_objets, name="liste_objets"),
@@ -11,4 +11,5 @@ urlpatterns = [
     path("rapport_global/", rapport_global, name="rapport_global"),
     path("rapport_global/pdf/", telecharger_rapport_pdf, name="telecharger_rapport_pdf"),
     path("rapport_global/avance/pdf/", telecharger_rapport_avance_pdf, name="telecharger_rapport_avance_pdf"),
+    path("objet/<int:objet_id>/graphique/", obtenir_donnees_graphique, name="obtenir_donnees_graphique"),
 ]

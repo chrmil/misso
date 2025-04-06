@@ -8,6 +8,75 @@
     <p><strong>Dernière consultation :</strong> {{ objet.derniere_consultation|date:"d/m/Y H:i" }}</p>
     <p><strong>Dernière utilisation :</strong> {{ objet.derniere_utilisation|date:"d/m/Y H:i" }}</p>
     <p><strong>Statut :</strong> {% if objet.actif %} Actif {% else %} Inactif {% endif %}</p>
-    <a href="{% url 'liste_objets' %}">Retour à la liste</a>
-    <a href="{% url 'rapport_objet' objet.id %}" class="btns">Rapport</a>
+
+    <h2>Graphique des Statistiques</h2>
+    <canvas id="graphique" width="600" height="400"></canvas>
+
+    <a href="{% url 'liste_objets' %}" class="btns">Retour à la liste</a>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('graphique').getContext('2d');
+        let chart;
+
+        function chargerGraphique() {
+            fetch("{% url 'obtenir_donnees_graphique' objet.id %}")
+                .then(response => response.json())
+                .then(data => {
+                    const labels = data.labels;
+                    const values = data.values;
+
+                    if (chart) {
+                        chart.destroy(); // Détruire l'ancien graphique avant d'en créer un nouveau
+                    }
+
+                    chart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Statistiques',
+                                data: values,
+                                backgroundColor: ['blue', 'green'],
+                                borderColor: ['blue', 'green'],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: false, // Désactiver la réactivité
+                            maintainAspectRatio: false, // Permet de personnaliser les dimensions
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        font: {
+                                            size: 10 // Réduire la taille de la police
+                                        }
+                                    }
+                                },
+                                x: {
+                                    ticks: {
+                                        font: {
+                                            size: 10 // Réduire la taille de la police
+                                        }
+                                    }
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    labels: {
+                                        font: {
+                                            size: 10 // Réduire la taille de la légende
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                });
+        }
+
+        // Charger le graphique au chargement initial de la page
+        chargerGraphique();
+    </script>
 {%endblock%}

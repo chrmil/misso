@@ -18,6 +18,7 @@ class ObjetConnecte(models.Model):
     type_objet = models.CharField(max_length=10, choices=TYPE_CHOICES, default='camera')  # Type d'objet
     temperature = models.FloatField(blank=True, null=True, help_text="Température en °C (uniquement pour frigo et four)")  # Température
     nombre_consultations = models.PositiveIntegerField(default=0, help_text="Nombre total de consultations")  # Nombre total de consultations
+    nombre_utilisations = models.PositiveIntegerField(default=0, help_text="Nombre total d'activations/désactivations")  # Nombre total d'activations/désactivations
 
     def consulter(self):
         """Met à jour la date de dernière consultation et incrémente le compteur."""
@@ -26,8 +27,9 @@ class ObjetConnecte(models.Model):
         self.save()
 
     def utiliser(self):
-        """Met à jour la date de dernière utilisation."""
+        """Met à jour la date de dernière utilisation et incrémente le compteur d'utilisations."""
         self.derniere_utilisation = now()
+        self.nombre_utilisations += 1  # Incrémente le compteur d'utilisations
         self.save()
 
     def __str__(self):
