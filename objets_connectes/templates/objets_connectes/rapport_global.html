@@ -1,0 +1,7 @@
+{% extends "objets_connectes/base.html" %}
+{% block title %}Rapport Global{% endblock %}
+{% block content %}
+    <p>Ce graphique montre la répartition de la consommation d'énergie entre les différents types d'objets connectés.</p>
+    <img src="data:image/png;base64,{{ graph }}" alt="Graphique des statistiques globales">
+    <a href="{% url 'liste_objets' %}" class="btns">Retour à la liste</a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "objets_connectes/base.html" %}
+{% block title %}Rapport pour {{ objet.nom }}{% endblock %}
+{% block content %}
+    <h1>Rapport pour {{ objet.nom }}</h1>
+    <p><strong>Description :</strong> {{ objet.description }}</p>
+    <p><strong>Type :</strong> {{ objet.get_type_objet_display }}</p>
+    <p><strong>Consommation :</strong> {{ objet.consommation }} Wh</p>
+    {% if objet.temperature %}
+        <p><strong>Température :</strong> {{ objet.temperature }} °C</p>
+    {% endif %}
+    <img src="data:image/png;base64,{{ graph }}" alt="Graphique des statistiques">
+    <a href="{% url 'liste_objets' %}" class="btns">Retour à la liste</a>
+{% endblock %}

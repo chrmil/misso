@@ -9,4 +9,5 @@
     <p><strong>Dernière utilisation :</strong> {{ objet.derniere_utilisation|date:"d/m/Y H:i" }}</p>
     <p><strong>Statut :</strong> {% if objet.actif %} Actif {% else %} Inactif {% endif %}</p>
     <a href="{% url 'liste_objets' %}">Retour à la liste</a>
+    <a href="{% url 'rapport_objet' objet.id %}" class="btns">Rapport</a>
 {%endblock%}
