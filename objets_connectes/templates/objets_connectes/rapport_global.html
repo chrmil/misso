@@ -1,7 +1,14 @@
 {% extends "objets_connectes/base.html" %}
 {% block title %}Rapport Global{% endblock %}
 {% block content %}
-    <p>Ce graphique montre la répartition de la consommation d'énergie entre les différents types d'objets connectés.</p>
-    <img src="data:image/png;base64,{{ graph }}" alt="Graphique des statistiques globales">
+    <h1>Rapport Global</h1>
+    <p>Ce rapport montre la répartition de la consommation d'énergie et du nombre d'objets connectés entre les différents types (caméras, frigos, fours).</p>
+    
+    <h2>Répartition de la consommation d'énergie</h2>
+    <img src="data:image/png;base64,{{ graph1 }}" alt="Graphique de la consommation d'énergie">
+
+    <h2>Répartition du nombre d'objets</h2>
+    <img src="data:image/png;base64,{{ graph2 }}" alt="Graphique du nombre d'objets">
+
     <a href="{% url 'liste_objets' %}" class="btns">Retour à la liste</a>
 {% endblock %}
