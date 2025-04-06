@@ -69,7 +69,9 @@
                     <option value="default" {% if type == "default" %}selected{% endif %}>Tous les types</option>
                     <option value="nourriture" {% if type == "nourriture" %}selected{% endif %}>Nourriture</option>
                     <option value="événement" {% if type == "événement" %}selected{% endif %}>Événement</option>
-                    <option value="objet_connecté" {% if type == "objet_connecté" %}selected{% endif %}>Objet connecté</option>
+                    {% if user.is_authenticated %}
+                        <option value="objet_connecté" {% if type == "objet_connecté" %}selected{% endif %}>Objet connecté</option>
+                    {% endif %}
                 </select>
 
                 {% if type == "nourriture" %}
@@ -107,7 +109,7 @@
         {% if plats or boissons %}
             <div class="menu-container">
                 {% if plats %}
-                    <ol class="plats">
+                    <ul class="plats">
                         {% for item in plats %}
                             <li class="menu-item">
                                 <p class="nom">{{ item.nom }}</p> 
@@ -118,10 +120,10 @@
                                 <pre><p class="description"> {{ item.description }}</p></pre>
                             </li><br>
                         {% endfor %}
-                    </ol>
+                    </ul>
                 {% endif %}
                 {% if boissons %}
-                    <ol class="boisson">
+                    <ul class="boisson">
                         {% for item in boissons %}
                             <li class="menu-item">
                                 <p class="nom">{{ item.nom }}</p>
@@ -137,7 +139,7 @@
                                 <pre><p class="description"> {{ item.description }}</p></pre>
                             </li><br>
                         {% endfor %}
-                    </ol>
+                    </ul>
                 {% endif %}
             </div>
         {% endif %}

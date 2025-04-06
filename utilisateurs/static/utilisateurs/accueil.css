@@ -10,8 +10,6 @@ body {
     overflow-y: auto;
     min-height: 100vh;
     background-image: url('../restaurant/img/texture.jpg');
-    margin: 0;
-    padding: 0;
 }
 
 .mini_logo {
@@ -31,7 +29,7 @@ pre {
     white-space: -pre-wrap;      /* Opera 4-6 */
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
-   }
+}
 
 .section{
     text-align: left;
@@ -45,6 +43,7 @@ pre {
     align-content: center;
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
+
 .main {
     min-height: 100vh;
     position: relative;

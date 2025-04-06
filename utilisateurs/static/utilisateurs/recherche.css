@@ -1,4 +1,4 @@
-/* Import d'une police élégante */
+/* Import de la police */
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap');
 
 /* Style global */
@@ -7,29 +7,60 @@ body {
     margin: 0;
     padding: 0;
     display: block;
-    height: 100vh;
-    color: black;
-    background: #F5F5DC;
+    overflow-y: auto;
+    min-height: 100vh;
+    background-image: url('../restaurant/img/texture.jpg');
 }
 
-/* About Section */
+.mini_logo {
+    width: auto; /* Préserve les proportions de l'image */
+    height: auto; /* Préserve également les proportions */
+    max-width: 5%; /* Contrôle la largeur maximale tout en gardant les proportions */
+    max-height: 5%;
+    position: absolute; /* Permet un placement précis */
+    top: 0 ; /* Place l'image en haut de l'écran */
+    left: 0; /* Place l'image à gauche de l'écran */
+    margin: 10px;
+}
+
+pre {
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+.section{
+    text-align: left;
+    line-height: 1.5;
+    left: 5%;
+    max-height: 40%;
+    border-radius: 0.5;
+    color:black;
+    overflow: auto;
+    cursor: pointer;
+    align-content: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Sections principales */
 .about, .contact {
     text-align: center;
     padding: 50px;
-    background: #ffcc00;
-    color: black;
+    background: rgb(15, 43, 36);
+    color: goldenrod;
 }
 
-/* Footer */
 footer {
-    background: black;
-    color: white;
+    background: rgb(15, 43, 36);
+    color: goldenrod;
     text-align: center;
     padding: 10px;
     margin-top: 20px;
 }
 
-/* Conteneur principal de la recherche */
+/* Conteneur principal */
 .main {
     display: flex;
     flex-direction: column;
@@ -49,13 +80,6 @@ footer {
     text-align: center;
 }
 
-/* Titre */
-h2 {
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
 /* Formulaire */
 form {
     display: flex;
@@ -68,7 +92,7 @@ form {
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 5px;
-    overflow: hidden; /* Assure que les bords sont bien arrondis */
+    overflow: hidden;
 }
 
 input {
@@ -94,7 +118,7 @@ input {
 }
 
 .btn i {
-    font-size: 18px; /* Taille de l'icône */
+    font-size: 18px;
 }
 
 .btn:hover {
@@ -113,7 +137,6 @@ input {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Conteneur des résultats */
 .menu-container {
     display: flex;
     flex-direction: column;
@@ -127,7 +150,6 @@ input {
     list-style: none;
 }
 
-/* Élément d'un plat ou d'une boisson */
 .menu-item {
     background: #fff3e0;
     padding: 15px;
@@ -160,96 +182,43 @@ input {
 }
 
 /* Conteneur des événements */
-.evenements-container {
+.evenements-container, .objets_connectes-container {
     margin-top: 20px;
-    background: #fff3e0; /* Couleur de fond similaire aux plats et boissons */
+    background: #fff3e0;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Liste des événements */
-.evenements-container ul {
-    list-style: none; /* Supprime les puces */
+.evenements-container ul, .objets_connectes-container ul {
+    list-style: none;
     padding: 0;
     margin: 0;
 }
 
-/* Élément individuel d'un événement */
-.evenements-container li {
-    background: white; /* Fond blanc pour chaque événement */
+.evenements-container li, .objets_connectes-container .objet-connecte {
+    background: white;
     padding: 15px;
-    margin-bottom: 10px; /* Espacement entre les événements */
+    margin-bottom: 10px;
     border-radius: 8px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     font-size: 16px;
-    font-weight: bold;
-    color: #333; /* Couleur du texte */
-    cursor: pointer; /* Curseur pointeur pour indiquer un clic */
-    transition: background 0.3s, transform 0.2s; /* Animation au survol */
+    color: #333;
+    transition: background 0.3s, transform 0.2s;
 }
 
-/* Effet au survol des événements */
-.evenements-container li:hover {
-    background: #ffcc00; /* Couleur de fond au survol */
-    transform: translateY(-2px); /* Légère élévation au survol */
+.evenements-container li:hover, .objets_connectes-container .objet-connecte:hover {
+    background: #ffcc00;
+    transform: translateY(-2px);
 }
 
-/* Texte des événements */
-.evenements-container li span {
-    font-size: 14px;
-    color: #555; /* Couleur secondaire pour les détails */
-}
-
-/* Conteneur des objets connectés */
-.objets_connectes-container {
-    margin-top: 20px;
-    background: #fff3e0; /* Couleur de fond similaire aux autres sections */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère */
-}
-
-/* Liste des objets connectés */
-.objets_connectes-container ul {
-    list-style: none; /* Supprime les puces */
-    padding: 0;
-    margin: 0;
-}
-
-/* Élément individuel d'un objet connecté regroupé dans un bloc */
-.objets_connectes-container li {
-    margin: 0; /* Supprime les marges entre les éléments */
-    padding: 0;
-    border: none;
-}
-
-/* Bloc regroupant les informations d'un objet connecté */
-.objets_connectes-container .objet-connecte {
-    background: white; /* Fond blanc pour chaque objet */
-    padding: 15px;
-    margin-bottom: 10px; /* Espacement entre les objets */
-    border-radius: 8px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère */
-    font-size: 16px;
-    color: #333; /* Couleur du texte */
-    transition: background 0.3s, transform 0.2s; /* Animation au survol */
-}
-
-/* Effet au survol des objets connectés */
-.objets_connectes-container .objet-connecte:hover {
-    background: #ffcc00; /* Couleur de fond au survol */
-    transform: translateY(-2px); /* Légère élévation au survol */
-}
-
-/* Groupe de boutons pour les actions */
+/* Groupe de boutons */
 .objets_connectes-container .button-group {
     display: flex;
-    gap: 10px; /* Espacement entre les boutons */
+    gap: 10px;
     margin-top: 10px;
 }
 
-/* Boutons des objets connectés */
 .objets_connectes-container .btns {
     background-color: #007BFF;
     color: white;
@@ -264,7 +233,7 @@ input {
 }
 
 .objets_connectes-container .btns:hover {
-    background-color: #0056b3; /* Couleur au survol */
+    background-color: #0056b3;
 }
 
 /* Messages d'erreur */
@@ -274,24 +243,6 @@ input {
     margin-top: 10px;
     font-weight: bold;
 }
-
-/* Section Contact */
-.contact {
-    text-align: center;
-    padding: 20px;
-    margin-top: 30px;
-}
-
-.contact h2 {
-    font-size: 22px;
-    color: #333;
-}
-
-.contact p {
-    font-size: 16px;
-    color: #555;
-}
-
 
 /* Media Queries */
 @media (max-width: 768px) {
