@@ -1,23 +1,30 @@
 {%extends "objets_connectes/base.html"%}
 {%block title%}Objets Connectés Disponibles{%endblock%}
-{%block content%}    <ul>
+{%block content%}
+    <ul>
         {% for objet in objets %}
             <li>
                 <div class="objet">
-                <ul>
-                <li><strong>{{ objet.nom }}</strong> - {{ objet.description }} </li>
-                <li> Niveau requis : {{ objet.niveau_requis }} </li>
-                <li> Dernière consultation : {{ objet.derniere_consultation|date:"d/m/Y H:i" }} </li>
-                <li>Dernière utilisation : {{ objet.derniere_utilisation|date:"d/m/Y H:i" }} </li>
-                <li class="button-group">
-                <a href="{% url 'activer_objet' objet.id %}" class="btns">
-                    {% if objet.actif %} Désactiver {% else %} Activer {% endif %}
-                </a>
-                <a href="{% url 'modifier_objet' objet.id %}"  class="btns">Modifier</a>
-                <a href="{% url 'info_objet' objet.id %}"  class="btns">Info</a> <!-- Nouveau bouton "Info" -->
-                </li>
-                </ul>
-            </div>
+                    <ul>
+                        <li><strong>{{ objet.nom }}</strong> - {{ objet.description }}</li>
+                        <li>Niveau requis : {{ objet.niveau_requis }}</li>
+                        <li>Dernière consultation : {{ objet.derniere_consultation|date:"d/m/Y H:i" }}</li>
+                        <li>Dernière utilisation : {{ objet.derniere_utilisation|date:"d/m/Y H:i" }}</li>
+                        <li class="button-group">
+                            <a href="{% url 'activer_objet' objet.id %}" class="btns">
+                                {% if objet.actif %} Désactiver {% else %} Activer {% endif %}
+                            </a>
+                            <a href="{% url 'modifier_objet' objet.id %}" class="btns">Modifier</a>
+                            <a href="{% url 'info_objet' objet.id %}" class="btns">Info</a>
+                        </li>
+                    </ul>
+                    <!-- Affichage des messages d'erreur spécifiques à cet objet -->
+                    {% for message in messages %}
+                        {% if message.extra_tags == objet.id|stringformat:"s" %}
+                            <p class="error-message">{{ message }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </li>
         {% endfor %}
     </ul>
