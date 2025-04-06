@@ -9,6 +9,7 @@ from django.utils import timezone
 import matplotlib.pyplot as plt
 import io
 import urllib, base64
+from historique.utils import enregistrer_historique
 
 def rapport_global(request):
     # Calculer la consommation totale par type d'objet
@@ -104,6 +105,10 @@ def activer_objet(request, objet_id):
     objet.actif = not objet.actif
     objet.utiliser()  # Met à jour la date de dernière utilisation
     objet.save()
+
+    # Enregistrer l'action dans l'historique
+    action = f"L'utilisateur {request.user.username} a {'activé' if objet.actif else 'désactivé'} l'objet {objet.nom}."
+    enregistrer_historique(request.user, action)
     
     messages.success(request, f"L'objet '{objet.nom}' a été {'activé' if objet.actif else 'désactivé'}.")
     return redirect("liste_objets")
@@ -111,13 +116,15 @@ def activer_objet(request, objet_id):
 @login_required
 def modifier_objet(request, objet_id):
     objet = get_object_or_404(ObjetConnecte, id=objet_id)
-    if request.user.niveau < 10:
-        return redirect("liste_objets")
     if request.method == "POST":
-        objet.nom = request.POST.get("nom", objet.nom)
-        objet.description = request.POST.get("description", objet.description)
-        objet.utiliser()
+        # Logique de modification de l'objet
+        objet.nom = request.POST.get("nom")
         objet.save()
+
+        # Enregistrer l'action dans l'historique
+        action = f"L'utilisateur {request.user.username} a modifié l'objet {objet.nom}."
+        enregistrer_historique(request.user, action)
+
         return redirect("liste_objets")
     return render(request, "objets_connectes/modifier_objet.html", {"objet": objet})
 
@@ -125,4 +132,9 @@ def modifier_objet(request, objet_id):
 def info_objet(request, objet_id):
     objet = get_object_or_404(ObjetConnecte, id=objet_id)
     objet.consulter()  # Met à jour la date de dernière consultation
+
+    # Enregistrer l'action dans l'historique
+    action = f"L'utilisateur {request.user.username} a consulté les informations de l'objet {objet.nom}."
+    enregistrer_historique(request.user, action)
+
     return render(request, "objets_connectes/info_objet.html", {"objet": objet})
