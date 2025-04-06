@@ -12,7 +12,9 @@ body {
     display: block;
     overflow-y: auto;
     min-height: 100vh;
-    background-color: beige;
+    background-image: url('../restaurant/img/texture.jpg');
+    margin: 0;
+    padding: 0;
 }
 
 .main {
@@ -20,9 +22,9 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
-    background-color:beige;
-    background-size: cover;
-    background-position: center;
+    background-image: url('../restaurant/img/texture.jpg');
+    margin: 0;
+    padding: 0;
     padding-bottom: 1%;
 }
 
