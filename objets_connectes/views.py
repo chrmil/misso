@@ -20,19 +20,15 @@ def activer_objet(request, objet_id):
     
     # Vérifie si l'utilisateur a le niveau requis
     if request.user.niveau < objet.niveau_requis:
-        messages.error(request, "Vous n'avez pas le niveau requis pour activer cet objet.", extra_tags=str(objet.id))
+        messages.error(request, "Vous n'avez pas le niveau requis pour activer cet objet.")
         return redirect("liste_objets")
     
     # Alterne le statut actif/inactif de l'objet
     objet.actif = not objet.actif
-
-    objet.utiliser()  # Met à jour la date de dernière consultation
-    if(not(objet.actif)):
-        objet.consommation_totale = objet.consommation_totale+((timezone.now()-objet.derniere_utilisation).total_seconds()/360)*objet.consommation
-
+    objet.utiliser()  # Met à jour la date de dernière utilisation
     objet.save()
     
-    messages.success(request, f"L'objet '{objet.nom}' a été {'activé' if objet.actif else 'désactivé'}.", extra_tags=str(objet.id))
+    messages.success(request, f"L'objet '{objet.nom}' a été {'activé' if objet.actif else 'désactivé'}.")
     return redirect("liste_objets")
 
 @login_required
