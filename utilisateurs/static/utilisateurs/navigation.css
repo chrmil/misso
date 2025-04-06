@@ -4,7 +4,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 15px 50px;
-    background: black;
+    background: rgb(21, 63, 28);
     top: 0;
     left: 0;
     z-index: 1000;
@@ -14,7 +14,7 @@ nav {
 nav .logo {
     font-size: 24px;
     font-weight: bold;
-    color: goldenrod;
+    color: rgb(218, 141, 32);
 }
 
 nav ul {
@@ -29,7 +29,7 @@ nav ul li {
 
 nav a {
     text-decoration: none;
-    color: goldenrod;
+    color: rgb(218, 141, 32);
     ;
     font-weight: 500;
     transition: color 0.3s;
@@ -41,7 +41,7 @@ nav a:hover {
 
 /* Bouton */
 .btns {
-    background-color: darkgoldenrod;
+    background-color: rgb(218, 141, 32);
     padding: 10px 20px;
     border-radius: 5px;
     color: white;
@@ -51,7 +51,7 @@ nav a:hover {
 }
 
 .btns:hover {
-    background-color: goldenrod;
+    background-color: rgb(218, 141, 32);
 }
 
 /* ...existing code... */
