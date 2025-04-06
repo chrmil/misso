@@ -32,12 +32,13 @@
           <div class="image-container">
             <div class="image">
               <img src="{% static image.image_path %}" alt="{{ image.nom }}">
-              {%if image.legende%}
-              <pre class="legende">
-                {{image.legende}}
-              </pre>
-              {%endif%}
+              
             </div>
+            {%if image.legende%}
+            <pre class="legende">
+              {{image.legende}}
+            </pre>
+            {%endif%}
           </div>
           {%endif%}
         {%endfor%}
