@@ -9,6 +9,7 @@ class ObjetConnecte(models.Model):
     actif = models.BooleanField(default=False)  # Statut actif/inactif
     derniere_consultation = models.DateTimeField(blank=True, null=True)  # Dernière consultation
     derniere_utilisation = models.DateTimeField(blank=True, null=True)  # Dernière utilisation
+    consommation = models.PositiveIntegerField(null=False, help_text="Consommation en Watt-heure") #consommation de l'objet en wh
 
     def consulter(self):
         """Met à jour la date de dernière consultation."""
