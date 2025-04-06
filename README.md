@@ -64,11 +64,11 @@ python manage.py runserver
 
 # Structure du projet
 
-```utilisateurs/``` : Gestion des utilisateurs (inscription, connexion, profil, etc.).
-```objets_connectes/``` : Gestion des objets connectés et rapports associés.
-```evenements/``` : Gestion des événements et demandes.
-```menu/``` : Gestion des menus et restaurants.
-```historique/``` : Suivi des actions utilisateur.
+- ```utilisateurs/``` : Gestion des utilisateurs (inscription, connexion, profil, etc.).
+- ```objets_connectes/``` : Gestion des objets connectés et rapports associés.
+- ```evenements/``` : Gestion des événements et demandes.
+- ```menu/``` : Gestion des menus et restaurants.
+- ```historique/``` : Suivi des actions utilisateur.
 
 # Commandes utiles
 
