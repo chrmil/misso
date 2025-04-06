@@ -1,7 +1,11 @@
+from datetime import date, datetime, timedelta, timezone
+from datetime import time
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import ObjetConnecte
+from django.utils import timezone
+
 
 @login_required
 def liste_objets(request):
@@ -21,7 +25,11 @@ def activer_objet(request, objet_id):
     
     # Alterne le statut actif/inactif de l'objet
     objet.actif = not objet.actif
-    objet.utiliser()  # Met à jour la date de dernière utilisation
+
+    objet.utiliser()  # Met à jour la date de dernière consultation
+    if(not(objet.actif)):
+        objet.consommation_totale = objet.consommation_totale+((timezone.now()-objet.derniere_utilisation).total_seconds()/360)*objet.consommation
+
     objet.save()
     
     messages.success(request, f"L'objet '{objet.nom}' a été {'activé' if objet.actif else 'désactivé'}.", extra_tags=str(objet.id))
