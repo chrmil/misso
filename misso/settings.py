@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "evenements",
     "objets_connectes",
     "page",
+    "historique"
 ]
 
 MEDIA_URL = '/media/'

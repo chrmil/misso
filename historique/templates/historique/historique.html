@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historique des actions</title>
+    {% load static %} <!-- Charger le tag static -->
+    <link rel="stylesheet" href="{% static 'utilisateurs/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Historique des actions</h1>
+    </header>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in historique %}
+                <tr>
+                    <td>{{ entry.utilisateur.username }}</td>
+                    <td>{{ entry.date }}</td>
+                    <td>{{ entry.action }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

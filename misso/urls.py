@@ -11,4 +11,5 @@ urlpatterns = [
     path("objets_connectes/", include("objets_connectes.urls")),
     path('', include('page.urls')),
     path('', lambda request: redirect(page_view, page_nom='accueil', permanent=False)),
-]
+    path('historique/', include('historique.urls')),
+    ]

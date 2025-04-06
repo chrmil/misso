@@ -12,7 +12,7 @@ from evenements.models import *
 from django.db.models import Q
 import random
 import string
-
+from historique.models import Historique
 
 
 def institut(request):
@@ -205,6 +205,11 @@ def modifier_profil(request):
             if profil_form.is_valid():
                 profil_form.save()
                 messages.success(request, "Votre profil a été mis à jour avec succès.")
+                # Enregistrer une action dans l'historique
+                Historique.objects.create(
+                    utilisateur=request.user,
+                    action="A modifié son profil"
+                )
                 return redirect("profil")
             else:
                 messages.error(request, "Veuillez corriger les erreurs dans le formulaire de profil.")
