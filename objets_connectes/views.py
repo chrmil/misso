@@ -34,25 +34,26 @@ def rapport_global(request):
     values_quantite = quantite_par_type.values()
 
     # Générer le graphique de consommation (camembert)
-    plt.figure(figsize=(12, 6))
-    plt.subplot(1, 2, 1)  # Premier graphique
+    plt.figure(figsize=(6, 4))  # Taille réduite
     plt.pie(values_consommation, labels=labels_consommation, autopct='%1.1f%%', startangle=90, colors=["blue", "green", "orange"])
     plt.title("Répartition de la consommation d'énergie")
+    buf1 = io.BytesIO()
+    plt.savefig(buf1, format='png')
+    buf1.seek(0)
+    graph1 = base64.b64encode(buf1.read()).decode('utf-8')
+    buf1.close()
 
     # Générer le graphique de quantités (camembert)
-    plt.subplot(1, 2, 2)  # Deuxième graphique
+    plt.figure(figsize=(6, 4))  # Taille réduite
     plt.pie(values_quantite, labels=labels_quantite, autopct='%1.1f%%', startangle=90, colors=["purple", "cyan", "yellow"])
     plt.title("Répartition du nombre d'objets")
+    buf2 = io.BytesIO()
+    plt.savefig(buf2, format='png')
+    buf2.seek(0)
+    graph2 = base64.b64encode(buf2.read()).decode('utf-8')
+    buf2.close()
 
-    # Convertir les graphiques en image pour l'afficher dans le template
-    buf = io.BytesIO()
-    plt.savefig(buf, format='png')
-    buf.seek(0)
-    string = base64.b64encode(buf.read())
-    uri = urllib.parse.quote(string)
-    buf.close()
-
-    return render(request, "objets_connectes/rapport_global.html", {"graph": uri})
+    return render(request, "objets_connectes/rapport_global.html", {"graph1": graph1, "graph2": graph2})
 
 
 def rapport_objet(request, objet_id):
