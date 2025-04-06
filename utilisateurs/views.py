@@ -12,8 +12,7 @@ from django.db.models import Q
 import random
 import string
 
-def accueil(request):
-    return render(request, 'utilisateurs/accueil.html')
+
 
 def institut(request):
     return render(request, 'utilisateurs/institut.html')
@@ -24,6 +23,8 @@ def histoire(request):
 def recherche(request):
     plats = Plat.objects.none()
     boissons = Boisson.objects.none()
+    plats = Plat.objects.none()
+    boissons = Boisson.objects.none()
     restaurants = Restaurant.objects.all()
     categoriesPlats = CategoriePlat.objects.all()
     categoriesBoissons = CategorieBoisson.objects.all()
@@ -32,6 +33,8 @@ def recherche(request):
 
     if request.method == "POST":
         query = request.POST.get("name")
+        type = request.POST.get("type")
+        categorie = request.POST.get("categorie")
         type = request.POST.get("type")
         categorie = request.POST.get("categorie")
 
@@ -48,6 +51,14 @@ def recherche(request):
     else:
         type = "default"
 
+    return render(request, 'utilisateurs/recherche.html', {'type': type, 
+                                                           'restaurants': restaurants, 
+                                                           'categoriesPlats': categoriesPlats, 
+                                                           'categoriesBoissons': categoriesBoissons, 
+                                                           'plats': plats, 
+                                                           'accompagnementsPlats':accompagnementsPlats, 
+                                                           'boissons':boissons, 
+                                                           'accompagnementsBoissons':accompagnementsBoissons})
     return render(request, 'utilisateurs/recherche.html', {'type': type, 
                                                            'restaurants': restaurants, 
                                                            'categoriesPlats': categoriesPlats, 

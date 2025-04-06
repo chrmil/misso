@@ -11,16 +11,16 @@
 </head>
 <header>
     <nav>
-        <div class="logo"> <a href="{% url 'accueil' %}#accueil">MiSSO</a> </div>
+        <div class="logo"> <a href="{% url 'page_view' 'accueil'  %}#accueil">MiSSO</a> </div>
         <ul>
             <li><a href="{% url 'menu' 'traiteur' %}">Traiteur</a></li>
             <li><a href="{% url 'menu' 'hanok' %}">Hanok Restaurant</a></li>
             <li><a href="{% url 'menu' 'rooftop' %}">Terrasse</a></li>
             <li><a href="{% url 'evenements' %}">Evenements</a></li> 
-            <li><a href="{% url 'institut' %}">Institut</a></li>                 
-            <li><a href="{% url 'histoire' %}">À propos</a></li>
+            <li><a href="{% url 'page_view' 'institut'%}">Institut</a></li>                 
+            <li><a href="{% url 'page_view' 'a-propos' %}">À propos</a></li>
             <li><a href="{% url 'recherche' %}">Recherche</a></li>
-            <li><a href="{% url 'accueil' %}#contact">Contact</a></li>
+            <li><a href="{% url 'page_view' 'accueil' %}#contact">Contact</a></li>
             <li>
                 {% if user.is_authenticated %}
                     <a href="{% url 'profil' %}" class="btns">Profil</a>
