@@ -12,4 +12,6 @@ urlpatterns = [
     path("confirmer_reservation/", confirmer_reservation, name="confirmer_reservation"),
     path('modifier_profil/', modifier_profil, name='modifier_profil'),
     path('ajouter_experience/', ajouter_experience, name='ajouter_experience'),
+    path("recherche_utilisateurs/", recherche_utilisateurs, name="recherche_utilisateurs"),
+    path("profil/<str:username>/", profil_public, name="profil_public"),
 ]

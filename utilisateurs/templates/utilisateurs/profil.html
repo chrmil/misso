@@ -62,14 +62,17 @@
             <a href="{% url 'vos_evenements' %}" class="btns">Vos événements</a>
             <a href="{% url 'modifier_profil' %}" class="btns">Modifier le profil</a>
             <a href="{% url 'liste_objets' %}" class="btns">Objets Connectés</a>
+            <a href="{% url 'recherche_utilisateurs' %}" class="btn">Rechercher des utilisateurs</a>
         </div>
 
         <div class="profile-info">
             <p><strong>Email :</strong> {{ user.email }}</p>
             <p><strong>Date de naissance :</strong> {{ user.date_de_naissance }}</p>
             <p><strong>Genre :</strong> {{ user.get_genre_display }}</p>
+            <p><strong>Type de personne :</strong> {{ user.get_type_personne_display }}</p>
             <p><strong>Niveau :</strong> {{ user.niveau }}</p>
             <p><strong>Expérience :</strong> {{ user.experience }}/{{ experience_necessaire }}</p>
+            
 
             <!-- Barre d'expérience -->
             <div class="experience-bar">
@@ -77,6 +80,7 @@
             </div>
         </div>
         <a href="{% url 'deconnexion' %}" class="btn logout-btn">Se déconnecter</a>
+        
     </div>
 </body>
 </html>

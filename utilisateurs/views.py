@@ -228,3 +228,19 @@ def ajouter_experience(request):
     user = request.user
     user.ajouter_experience(50)  # Ajoute 50 points d'expérience
     return redirect("profil")
+
+def profil_public(request, username):
+    Utilisateur = get_user_model()
+    utilisateur = get_object_or_404(Utilisateur, username=username)  # Récupère l'utilisateur ou renvoie une 404
+    return render(request, "utilisateurs/profil_public.html", {"utilisateur": utilisateur})
+
+def recherche_utilisateurs(request):
+    Utilisateur = get_user_model()
+    utilisateurs = Utilisateur.objects.none()  # Par défaut, aucun utilisateur n'est affiché
+
+    if request.method == "GET":
+        query = request.GET.get("q", "")  # Récupère la requête de recherche
+        if query:
+            utilisateurs = Utilisateur.objects.filter(username__icontains=query)  # Recherche par nom d'utilisateur
+
+    return render(request, "utilisateurs/recherche_utilisateurs.html", {"utilisateurs": utilisateurs})
