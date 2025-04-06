@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import redirect
+from page.views import *
 
 urlpatterns = [
     path('restaurants/', include('menu.urls')),
@@ -9,5 +10,5 @@ urlpatterns = [
     path('evenements/',include('evenements.urls')),
     path("objets_connectes/", include("objets_connectes.urls")),
     path('', include('page.urls')),
-    path('', lambda request: redirect('accueil/', permanent=False)),
+    path('', lambda request: redirect(page_view, page_nom='accueil', permanent=False)),
 ]

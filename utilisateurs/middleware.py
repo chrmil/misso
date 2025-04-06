@@ -1,5 +1,6 @@
 from django.shortcuts import redirect
 from django.urls import resolve
+from page.views import *
 
 class LoginRequiredMiddleware:
     def __init__(self, get_response):
@@ -14,7 +15,7 @@ class LoginRequiredMiddleware:
 
         # Vérifie si l'utilisateur essaie d'accéder à une page protégée
         if not request.user.is_authenticated and resolve(request.path_info).url_name not in pages_publiques:
-            return redirect('accueil')  # Redirection vers l'accueil
+            return redirect(page_view, page_nom='accueil')  # Redirection vers l'accueil
 
         
         response = self.get_response(request)
