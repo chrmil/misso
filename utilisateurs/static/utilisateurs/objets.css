@@ -9,7 +9,9 @@ body {
     display: block;
     overflow-y: auto;
     min-height: 100vh;
-    background-color: beige;
+    margin: 0;
+    padding: 0;
+    background-image: url('../restaurant/img/texture.jpg');
 }
 
 .main {

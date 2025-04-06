@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MiSSO - Restaurant Coréen à Paris</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'utilisateurs/accueil.css' %}">
+    <link rel="stylesheet" href="{% static 'utilisateurs/restaurant.css' %}">
     <link rel="stylesheet" href="{% static 'utilisateurs/navigation.css' %}">
     <link rel="icon" type="image/png" href="{% static 'restaurant/img/misso_logo_old.jpg' %}">
     {% if page.image_path%}
@@ -16,7 +16,11 @@
 <body>
     <header>
         <nav>
-            <div class="logo"> <a href="{% url 'page_view' 'accueil'  %}#accueil">MiSSO</a> </div>
+            <div class="logo">         
+                <a href="{% url 'page_view' 'accueil' %}#accueil">
+                  <img class="mini_logo" src="{% static 'restaurant/img/logo_jaune.png' %}" alt="MiSSO"/>
+                </a>
+            </div>
             <ul>
                 <li><a href="{% url 'menu' 'traiteur' %}">Traiteur</a></li>
                 <li><a href="{% url 'menu' 'hanok' %}">Hanok Restaurant</a></li>

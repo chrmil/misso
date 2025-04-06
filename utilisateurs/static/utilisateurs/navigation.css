@@ -17,6 +17,17 @@ nav .logo {
     color: rgb(218, 141, 32);
 }
 
+nav .mini_logo {
+    width: auto; /* Préserve les proportions de l'image */
+    height: auto; /* Préserve également les proportions */
+    max-width: 4%; /* Contrôle la largeur maximale tout en gardant les proportions */
+    max-height: 4%;
+    position: absolute; /* Permet un placement précis */
+    top: 0 ; /* Place l'image en haut de l'écran */
+    left: 0; /* Place l'image à gauche de l'écran */
+    margin: 20px;
+}
+
 nav ul {
     list-style: none;
     display: flex;
