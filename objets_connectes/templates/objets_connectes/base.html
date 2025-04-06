@@ -26,20 +26,8 @@
                 <li><a href="{% url 'evenements' %}">Evenements</a></li> 
                 <li><a href="{% url 'page_view' 'institut'%}">Institut</a></li>                 
                 <li><a href="{% url 'page_view' 'a-propos' %}">À propos</a></li>
-<<<<<<< Updated upstream
-                <li ><a href="{% url 'recherche' %}">Recherche</a></li>
-                <li ><a href="{% url 'page_view' 'accueil' %}#contact">Contact</a></li>
-                {% if user.is_authenticated %}
-                  <li>  <a href="{% url 'profil' %}" class="btns">Profil</a></li>
-                {% else %}
-                    <li>   <a href="{% url 'connexion' %}" class="btns">Se connecter</a></li>
-                {% endif %}
-                </ul>
-                </div>
-=======
                 <li><a href="{% url 'recherche' %}">Recherche</a></li>
                 <li><a href="{% url 'page_view' 'accueil' %}#contact">Contact</a></li>
-                <li><a href="{% url 'afficher_historique' %}">Historique</a></li>
                 <li>
                     {% if user.is_authenticated %}
                         <a href="{% url 'profil' %}" class="btns">Profil</a>
@@ -48,7 +36,6 @@
                     {% endif %}
                 </li>
             </ul>
->>>>>>> Stashed changes
         </nav>
         <script>
             function show() {
