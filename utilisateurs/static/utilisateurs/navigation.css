@@ -19,7 +19,7 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    padding-bottom:10px;
+    padding:3%;
     background: rgb(21, 63, 28);
     color: rgb(218, 141, 32);
     position: fixed;
@@ -27,7 +27,6 @@
     left: 0;
     right:0;
     z-index: 1000;
-    padding: 2%;
   }
   
   /* Logo */
@@ -46,9 +45,10 @@
     position:fixed;
     max-height: 45px;
     margin-right: 10px;
-    top: 0 ; /* Place l'image en haut de l'écran */
-    left: 0; /* Place l'image à gauche de l'écran */
+    top: 3px ; /* Place l'image en haut de l'écran */
+    left: 3px; /* Place l'image à gauche de l'écran */
     padding-bottom: 5px;
+    margin: 10px;
 }
   
   
@@ -67,6 +67,10 @@
   
   /* Menu */
   .nav-menu {
+    position: absolute;
+    top:2%;
+    padding: 1%;
+    right:0;
     display: flex;
     flex-direction: row;
     gap: 15px;
@@ -95,7 +99,8 @@
   /* Boutons */
   .btns {
     background-color: rgb(218, 141, 32);
-    padding: 8px 16px;
+    padding: 8px 16px ;
+    margin-bottom: 5px;
     border-radius: 5px;
     color: white;
     text-decoration: none;
@@ -113,9 +118,6 @@
     }
     .nav-menu {
         display: block;
-    }
-    .nav-menu ul li a{
-        padding-bottom: 5px;
     }
   
   }
