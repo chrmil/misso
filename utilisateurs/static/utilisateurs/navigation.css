@@ -1,84 +1,179 @@
-/* Navigation */
-nav {
+
+* {
+    box-sizing: border-box;
+  }
+
+  body{
+    margin-top: 100px;
+  }
+  
+  /* Navbar */
+  nav {
+    min-height:40px;
+    max-height:50px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 50px;
+    flex-wrap: wrap;
+    padding: 10px 20px;
     background: rgb(21, 63, 28);
+    color: rgb(218, 141, 32);
+    position: fixed;
     top: 0;
     left: 0;
+    right:0;
     z-index: 1000;
-    text-align: center;
-}
-
-nav .logo {
+    padding: 2%;
+  }
+  
+  /* Logo */
+  nav .logo {
+    display: flex;
+    align-items: center;
+    max-height:fit-content;
+  }
+  
+  nav .mini_logo {
+    max-height: 35px;
+    margin-right: 10px;
+  }
+  
+  /* Profil */
+  .nav-profil {
+    margin-left: auto;
+  }
+  
+  /* Menu icon  */
+  .nav-menu-icon {
+    display: none;
     font-size: 24px;
-    font-weight: bold;
+    cursor: pointer;
     color: rgb(218, 141, 32);
-}
-
-nav .mini_logo {
-    width: auto; /* Préserve les proportions de l'image */
-    height: auto; /* Préserve également les proportions */
-    max-width: 4%; /* Contrôle la largeur maximale tout en gardant les proportions */
-    max-height: 4%;
-    position: absolute; /* Permet un placement précis */
-    top: 0 ; /* Place l'image en haut de l'écran */
-    left: 0; /* Place l'image à gauche de l'écran */
-    margin: 20px;
-}
-
-nav ul {
-    list-style: none;
+  }
+  
+  /* Menu */
+  .nav-menu {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+  }
+  
+  .nav-menu ul {
     display: flex;
     gap: 20px;
-}
-
-nav ul li {
-    display: inline;
-}
-
-nav a {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-menu li a {
+    color: white;
     text-decoration: none;
-    color: rgb(218, 141, 32);
-    ;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-nav a:hover {
-    color: #f3f0e4;
-}
-
-/* Bouton */
-.btns {
+  }
+  
+  .nav-menu li a:hover {
+    background-color: rgb(170, 100, 20);
+    padding: 5px 10px;
+    border-radius: 4px;
+  }
+  
+  /* Boutons */
+  .btns {
     background-color: rgb(218, 141, 32);
-    padding: 10px 20px;
+    padding: 8px 16px;
     border-radius: 5px;
     color: white;
     text-decoration: none;
     font-weight: bold;
     transition: background 0.3s;
-}
+  }
+  
+  .btns:hover {
+    background-color: rgb(170, 100, 20);
+  }
+  @media (min-width: 1001px) {
+    nav{
+        margin-bottom:1%;
+    }
+    .nav-menu {
+        display: block;
+    }
+  
+  }
 
-.btns:hover {
-    background-color: rgb(218, 141, 32);
-}
+  /* Responsive Design */
+  @media (max-width: 1000px) {
+      /* Logo */
+  nav .logo {
+    display: flex;
+    align-items: center;
+    max-height:fit-content;
+  }
 
-/* ...existing code... */
-
-/* Media Queries */
-@media (max-width: 1100px) {
+ 
+    .nav-menu-icon {
+        position: fixed;
+        right:10px;
+        top:0;
+      display: block;
+    }
+  
     nav {
-        flex-direction: column;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .nav-menu ul {
+      flex-direction: column;
+      width: 100%;
+    }
+  
+    .nav-menu li a {
+      padding: 10px 0;
+      width: 100%;
+      margin:1%
     }
 
-    nav ul {
+    .nav-menu {
+        display: none;
+        max-height:50vw;
         flex-direction: column;
-        gap: 10px;
+        background-color: rgb(218, 141, 32);
+        position: absolute;
+        top: 40px; /* below navbar */
+        right: 10px;
+        width: 220px;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        z-index: 999;
+        overflow: scroll;
     }
 
-    .btns {
-        padding: 8px 16px;
+    .nav-menu.show {
+        display: flex;
+    }
+
+    .nav-menu ul {
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-menu li {
+        padding: 8px 0;
+        text-align: left;
+    }
+
+    .nav-menu a {
+        color: white;
+        padding: 8px 12px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+
+    .nav-menu a:hover {
+        background-color: rgb(170, 100, 20);
     }
 }
