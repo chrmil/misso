@@ -59,14 +59,6 @@ def recherche(request):
                                                            'accompagnementsPlats':accompagnementsPlats, 
                                                            'boissons':boissons, 
                                                            'accompagnementsBoissons':accompagnementsBoissons})
-    return render(request, 'utilisateurs/recherche.html', {'type': type, 
-                                                           'restaurants': restaurants, 
-                                                           'categoriesPlats': categoriesPlats, 
-                                                           'categoriesBoissons': categoriesBoissons, 
-                                                           'plats': plats, 
-                                                           'accompagnementsPlats':accompagnementsPlats, 
-                                                           'boissons':boissons, 
-                                                           'accompagnementsBoissons':accompagnementsBoissons})
 
 def inscription(request):
     if request.user.is_authenticated:  # Vérifie si l'utilisateur est connecté
