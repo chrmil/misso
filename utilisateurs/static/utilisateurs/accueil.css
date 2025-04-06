@@ -25,6 +25,26 @@ body {
     margin: 10px;
 }
 
+pre {
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+   }
+
+.section{
+    text-align: left;
+    line-height: 1.5;
+    left: 5%;
+    max-height: 40%;
+    border-radius: 0.5;
+    color:black;
+    overflow: auto;
+    cursor: pointer;
+    align-content: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
 .main {
     min-height: 100vh;
     position: relative;
