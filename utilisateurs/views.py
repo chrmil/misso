@@ -26,6 +26,9 @@ def histoire(request):
 def recherche(request):
     plats = Plat.objects.none()
     boissons = Boisson.objects.none()
+    categoriesPlats = CategoriePlat.objects.all()
+    categoriesBoissons = CategorieBoisson.objects.all()
+
     evenements = Evenement.objects.none()
 
     objets_connectes = ObjetConnecte.objects.none()
@@ -34,14 +37,23 @@ def recherche(request):
         query = request.POST.get("name")
         type = request.POST.get("type")
         if type != "default":
-            nourriture = request.POST.get("nourriture")
-            if nourriture != "default":
-                categorie = request.POST.get("categorie")
+            if type == "nourriture":
+                nourriture = request.POST.get("nourriture")
+                if nourriture != "default":
+                    categorie = request.POST.get("categorie")
+                else:
+                    categorie = "default"
             else:
+                nourriture = "default"
                 categorie = "default"
+            if type == "objet_connecté":
+                type_objet_connecte = request.POST.get("type_objet_connecte")
+            else:
+                type_objet_connecte = "default"
         else:
             nourriture = "default"
             categorie = "default"
+            type_objet_connecte = "default"
 
         if type == "default" or type == "nourriture":
             if nourriture == "default" or nourriture == "plat":
@@ -59,11 +71,14 @@ def recherche(request):
 
         if (type == "default" or type == "objet_connecté") and request.user.is_authenticated:
             objets_connectes = ObjetConnecte.objects.filter(Q(nom__icontains=query) | Q(description__icontains=query) | Q(type_objet__icontains=query))
+            if type_objet_connecte != "default":
+                objets_connectes = objets_connectes.filter(type_objet=type_objet_connecte)
     
     else:
         type = "default"
         nourriture = "default"
         categorie = "default"
+        type_objet_connecte = "default"
 
     return render(request, 'utilisateurs/recherche.html', {'type': type, 
                                                            'nourriture': nourriture, 
@@ -71,10 +86,13 @@ def recherche(request):
                                                            
                                                            'plats': plats, 
                                                            'boissons':boissons, 
+                                                           'categoriesPlats': categoriesPlats,
+                                                           'categoriesBoissons': categoriesBoissons,
                                                            
                                                            'evenements': evenements, 
                                                            
-                                                           'objets_connectes': objets_connectes})
+                                                           'objets_connectes': objets_connectes,
+                                                           'type_objet_connecte': type_objet_connecte})
 
 def inscription(request):
     if request.user.is_authenticated:  # Vérifie si l'utilisateur est déjà connecté

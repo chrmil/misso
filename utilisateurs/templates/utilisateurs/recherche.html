@@ -82,8 +82,8 @@
                     </select>
 
                     {% if nourriture == "plat" or nourriture == "boisson" %}
-                        <select name="categorie">
-                            <option value="default">Toutes les catégories</option>
+                        <select name="categorie" onchange="this.form.submit()">
+                            <option value="default" {% if categorie == "default" %}selected{% endif %}>Toutes les catégories</option>
                             {% if nourriture == "plat" %}
                                 {% for categorie in categoriesPlats %}
                                     <option value="{{ categorie.id }}" {% if categorie.id|stringformat:"s" == categorie_selected %}selected{% endif %}>
@@ -99,6 +99,15 @@
                             {% endif %}
                         </select>
                     {% endif %}
+                {% endif %}
+
+                {% if type == "objet_connecté" %}
+                    <select name="type_objet_connecte" onchange="this.form.submit()">
+                        <option value="default" {% if type_objet_connecte == "default" %}selected{% endif %}>Tous les types</option>
+                        <option value="camera" {% if type_objet_connecte == "camera" %}selected{% endif %}>Caméra</option>
+                        <option value="frigo" {% if type_objet_connecte == "frigo" %}selected{% endif %}>Frigo</option>
+                        <option value="four" {% if type_objet_connecte == "four" %}selected{% endif %}>Four</option>
+                    </select>
                 {% endif %}
             </form>
         </div>
