@@ -35,7 +35,7 @@
     </header>
 
     <div class="main">
-        <div class="container">
+        <div class="recherche-container">
             <h2>Recherche</h2>
             <form method="post" action="{% url 'recherche' %}">
                 {% csrf_token %}
@@ -48,70 +48,97 @@
 
                 <select name="type" onchange="this.form.submit()">
                     <option value="default" {% if type == "default" %}selected{% endif %}>Tous les types</option>
-                    <option value="plat" {% if type == "plat" %}selected{% endif %}>Plat</option>
-                    <option value="boisson" {% if type == "boisson" %}selected{% endif %}>Boisson</option>
+                    <option value="nourriture" {% if type == "nourriture" %}selected{% endif %}>Nourriture</option>
+                    <option value="événement" {% if type == "événement" %}selected{% endif %}>Événement</option>
                 </select>
 
-                <select name="categorie">
-                    <option value="default">Toutes les catégories</option>
-                    {% if type == "plat" %}
-                        {% for categorie in categoriesPlats %}
-                            <option value="{{ categorie.id }}" {% if categorie.id|stringformat:"s" == categorie_selected %}selected{% endif %}>
-                                {{ categorie.nom }}
-                            </option>
-                        {% endfor %}
-                    {% elif type == "boisson" %}
-                        {% for categorie in categoriesBoissons %}
-                            <option value="{{ categorie.id }}" {% if categorie.id|stringformat:"s" == categorie_selected %}selected{% endif %}>
-                                {{ categorie.nom }}
-                            </option>
-                        {% endfor %}
+                {% if type == "nourriture" %}
+                    <select name="nourriture" onchange="this.form.submit()">
+                        <option value="default" {% if nourriture == "default" %}selected{% endif %}>Tous les nouritures</option>
+                        <option value="plat" {% if nourriture == "plat" %}selected{% endif %}>Plat</option>
+                        <option value="boisson" {% if nourriture == "boisson" %}selected{% endif %}>Boisson</option>
+                    </select>
+
+                    {% if nourriture == "plat" or nourriture == "boisson" %}
+                        <select name="categorie">
+                            <option value="default">Toutes les catégories</option>
+                            {% if nourriture == "plat" %}
+                                {% for categorie in categoriesPlats %}
+                                    <option value="{{ categorie.id }}" {% if categorie.id|stringformat:"s" == categorie_selected %}selected{% endif %}>
+                                        {{ categorie.nom }}
+                                    </option>
+                                {% endfor %}
+                            {% elif nourriture == "boisson" %}
+                                {% for categorie in categoriesBoissons %}
+                                    <option value="{{ categorie.id }}" {% if categorie.id|stringformat:"s" == categorie_selected %}selected{% endif %}>
+                                        {{ categorie.nom }}
+                                    </option>
+                                {% endfor %}
+                            {% endif %}
+                        </select>
                     {% endif %}
-                </select>
+                {% endif %}
             </form>
         </div>
     </div>
 
 
     <section id="resultat" class="resultat">
-        <div class="menu-container">
-            {% if plats %}
-                <ol class="plats">
-                    {% for item in plats %}
-                        <li class="menu-item">
-                            <p class="nom">{{ item.nom }}</p> 
-                            <p class="prix">- {{ item.prix }}€</p><br>
-                            {% if item.image_path %}
-                                <img src="{% static item.image_path %}" alt="{{ item.nom }}"><br>
-                            {% endif %}<br>
-                            <pre><p class="description"> {{ item.description }}</p></pre>
-                        </li><br>
+        {% if plats or boissons %}
+            <div class="menu-container">
+                {% if plats %}
+                    <ol class="plats">
+                        {% for item in plats %}
+                            <li class="menu-item">
+                                <p class="nom">{{ item.nom }}</p> 
+                                <p class="prix">- {{ item.prix }}€</p><br>
+                                {% if item.image_path %}
+                                    <img src="{% static item.image_path %}" alt="{{ item.nom }}"><br>
+                                {% endif %}<br>
+                                <pre><p class="description"> {{ item.description }}</p></pre>
+                            </li><br>
+                        {% endfor %}
+                    </ol>
+                {% endif %}
+                {% if boissons %}
+                    <ol class="boisson">
+                        {% for item in boissons %}
+                            <li class="menu-item">
+                                <p class="nom">{{ item.nom }}</p>
+                                {% if item.prixVerre %}
+                                    <p class="prix">- {{ item.prixVerre }}€</p><br>
+                                {% endif %}
+                                {% if item.prixBouteille %}
+                                    <p class="prix">- {{ item.prixBouteille }}€</p><br>
+                                {% endif %}
+                                {% if item.image_path %}
+                                    <img src="{% static item.image_path %}" alt="{{ item.nom }}"><br>
+                                {% endif %}<br>
+                                <pre><p class="description"> {{ item.description }}</p></pre>
+                            </li><br>
+                        {% endfor %}
+                    </ol>
+                {% endif %}
+            </div>
+        {% endif %}
+ 
+        {% if evenements %}
+            <div class="evenements-container">
+                <ul>
+                    {% for evenement in evenements %}
+                        {% if evenement.est_valide %}
+                            <li class="btns" onclick='location.href="{{ evenement.get_absolute_url }}";'>
+                                <span>{{ evenement.date }} :  {{ evenement.titre }}</span>
+                            </li>
+                        {% endif %}
                     {% endfor %}
-                </ol>
-            {% endif %}
-            {% if boissons %}
-                <ol class="boisson">
-                    {% for item in boissons %}
-                        <li class="menu-item">
-                            <p class="nom">{{ item.nom }}</p>
-                            {% if item.prixVerre %}
-                                <p class="prix">- {{ item.prixVerre }}€</p><br>
-                            {% endif %}
-                            {% if item.prixBouteille %}
-                                <p class="prix">- {{ item.prixBouteille }}€</p><br>
-                            {% endif %}
-                            {% if item.image_path %}
-                                <img src="{% static item.image_path %}" alt="{{ item.nom }}"><br>
-                            {% endif %}<br>
-                            <pre><p class="description"> {{ item.description }}</p></pre>
-                        </li><br>
-                    {% endfor %}
-                </ol>
-            {% if not plats and not boissons %}
-                <p>Aucune résultat trouvée.</p>
-            {% endif %}
-            {% endif %}
-        </div>
+                </ul>
+            </div>
+        {% endif %}
+          
+        {% if not plats and not boissons and not evenements %}
+            <p>Aucune résultat trouvée.</p>
+        {% endif %}
     </section>
  
     <section id="contact" class="contact">

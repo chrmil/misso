@@ -8,6 +8,7 @@ from django.conf import settings
 from .forms import InscriptionForm, ProfilForm
 from .models import EmailVerification
 from menu.models import *
+from evenements.models import *
 from django.db.models import Q
 import random
 import string
@@ -31,34 +32,53 @@ def recherche(request):
     accompagnementsPlats = AccompagnementPlat.objects.all()
     accompagnementsBoissons = AccompagnementBoisson.objects.all()
 
+    evenements = Evenement.objects.none()
+
     if request.method == "POST":
         query = request.POST.get("name")
         type = request.POST.get("type")
-        categorie = request.POST.get("categorie")
-        type = request.POST.get("type")
-        categorie = request.POST.get("categorie")
+        if type != "default":
+            nourriture = request.POST.get("nourriture")
+            if nourriture != "default":
+                categorie = request.POST.get("categorie")
+            else:
+                categorie = "default"
+        else:
+            nourriture = "default"
+            categorie = "default"
 
-        if type == "default" or type == "plat":
-            plats = Plat.objects.filter(Q(nom__icontains=query) | Q(description__icontains=query))
-            if categorie != "default":
-                plats = plats.filter(categorie=categorie)
-            
-        if type == "default" or type == "boisson":
-            boissons = Boisson.objects.filter(Q(nom__icontains=query) | Q(description__icontains=query))
-            if categorie != "default":
-                boissons = boissons.filter(categorie=categorie)
+        if type == "default" or type == "nourriture":
+            if nourriture == "default" or nourriture == "plat":
+                plats = Plat.objects.filter(Q(nom__icontains=query) | Q(description__icontains=query))
+                if categorie != "default":
+                    plats = plats.filter(categorie=categorie)
+                
+            if nourriture == "default" or nourriture == "boisson":
+                boissons = Boisson.objects.filter(Q(nom__icontains=query) | Q(description__icontains=query))
+                if categorie != "default":
+                    boissons = boissons.filter(categorie=categorie)
+
+        if type == "default" or type == "événement":
+            evenements = Evenement.objects.filter(Q(titre__icontains=query) | Q(description__icontains=query))
     
     else:
         type = "default"
+        nourriture = "default"
+        categorie = "default"
 
     return render(request, 'utilisateurs/recherche.html', {'type': type, 
+                                                           'nourriture': nourriture,
+                                                           'categorie': categorie,
+                                                           
                                                            'restaurants': restaurants, 
                                                            'categoriesPlats': categoriesPlats, 
                                                            'categoriesBoissons': categoriesBoissons, 
                                                            'plats': plats, 
                                                            'accompagnementsPlats':accompagnementsPlats, 
                                                            'boissons':boissons, 
-                                                           'accompagnementsBoissons':accompagnementsBoissons})
+                                                           'accompagnementsBoissons':accompagnementsBoissons,
+                                                           
+                                                           'evenements': evenements})
 
 def inscription(request):
     if request.user.is_authenticated:  # Vérifie si l'utilisateur est connecté
