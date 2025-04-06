@@ -21,7 +21,7 @@ class InscriptionForm(UserCreationForm):
 
     class Meta:
         model = Utilisateur
-        fields = ['username', 'email', 'date_de_naissance', 'genre', 'password1', 'password2']
+        fields = ['username', 'email', 'date_de_naissance', 'genre', 'type_personne', 'password1', 'password2']
 
     def clean_date_de_naissance(self):
         date_naissance = self.cleaned_data.get("date_de_naissance")

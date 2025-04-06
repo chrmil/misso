@@ -16,6 +16,15 @@ class Utilisateur(AbstractUser):
     genre = models.CharField(max_length=1, choices=GENRE_CHOIX, null=True, blank=True)
     niveau = models.PositiveIntegerField(default=1)  # Niveau de l'utilisateur
     experience = models.PositiveIntegerField(default=0)  # Points d'expérience de l'utilisateur
+    valide = models.BooleanField(default=False)  # Validation par un administrateur
+    
+    TYPE_PERSONNE_CHOIX = [
+        ('Serveur', 'Serveur'),
+        ('Chef', 'Chef'),
+        ('Client', 'Client'),
+    ]
+    type_personne = models.CharField(max_length=10, choices=TYPE_PERSONNE_CHOIX, default='Client')
+
 
     def ajouter_experience(self, points):
         """Ajoute des points d'expérience et gère le passage au niveau supérieur."""

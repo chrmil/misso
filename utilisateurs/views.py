@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout, get_user_model, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import InscriptionForm, ProfilForm
@@ -14,6 +13,7 @@ import random
 import string
 from historique.models import Historique
 from historique.utils import enregistrer_historique 
+from django.contrib import messages
 
 
 def institut(request):
@@ -90,6 +90,8 @@ def inscription(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.is_active = False  # Utilisateur désactivé jusqu'à vérification
+            user.valide = False  # Compte non validé par défaut
+            user.type_personne = form.cleaned_data.get("type_personne")  # Récupère le type de personne
             user.save()
 
             # Génération du code de vérification
@@ -105,6 +107,7 @@ def inscription(request):
                 fail_silently=False,
             )
 
+            messages.success(request, "Inscription réussie ! Un email de vérification vous a été envoyé.")
             return redirect("verifier_email", user_id=user.id)
     else:
         form = InscriptionForm()
@@ -156,10 +159,14 @@ def connexion(request):
 
         user = authenticate(request, username=identifiant, password=password)
         if user is not None:
+            if not user.valide:  # Vérifie si le compte est validé
+                messages.error(request, "Votre compte n'a pas encore été validé par un administrateur.")
+                return redirect("connexion")
             login(request, user)
-            # Enregistrer l'action dans l'historique
             enregistrer_historique(user, "S'est connecté(e) au système.")
             return redirect("profil")
+        else:
+            messages.error(request, "Identifiant ou mot de passe incorrect.")
 
     return render(request, "utilisateurs/connexion.html")
 
