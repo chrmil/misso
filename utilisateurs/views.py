@@ -13,6 +13,7 @@ from django.db.models import Q
 import random
 import string
 from historique.models import Historique
+from historique.utils import enregistrer_historique 
 
 
 def institut(request):
@@ -81,26 +82,21 @@ def recherche(request):
                                                            'evenements': evenements})
 
 def inscription(request):
-    if request.user.is_authenticated:  # Vérifie si l'utilisateur est connecté
+    if request.user.is_authenticated:  # Vérifie si l'utilisateur est déjà connecté
         return redirect("profil")
     
     if request.method == "POST":
         form = InscriptionForm(request.POST)
         if form.is_valid():
-            # Assure-toi qu'il n'y a pas déjà un utilisateur avec cet email
-            email = form.cleaned_data["email"]
-            if get_user_model().objects.filter(email=email).exists():
-                messages.error(request, "Un utilisateur avec cet email existe déjà.")
-                return render(request, "utilisateurs/inscription.html", {'form': form})
-
             user = form.save(commit=False)
             user.is_active = False  # Utilisateur désactivé jusqu'à vérification
             user.save()
 
+            # Enregistrer l'action dans l'historique
+            enregistrer_historique(user, "S'est inscrit(e) au système.")
+
             # Génération du code de vérification
             verification_code = ''.join(random.choices(string.digits, k=6))
-            
-            # Stocker le code dans la base de données
             EmailVerification.objects.create(user=user, verification_code=verification_code)
 
             # Envoi du code de vérification par email
@@ -116,7 +112,7 @@ def inscription(request):
             return redirect("verifier_email", user_id=user.id)
     else:
         form = InscriptionForm()
-    return render(request, 'utilisateurs/inscription.html', {'form': form})
+    return render(request, "utilisateurs/inscription.html", {'form': form})
 
 
 def verifier_email(request, user_id):
@@ -149,7 +145,7 @@ def verifier_email(request, user_id):
 
 
 def connexion(request):
-    if request.user.is_authenticated:  # Vérifie si l'utilisateur est connecté
+    if request.user.is_authenticated:  # Vérifie si l'utilisateur est déjà connecté
         return redirect("profil")
 
     if request.method == "POST":
@@ -166,6 +162,8 @@ def connexion(request):
         user = authenticate(request, username=identifiant, password=password)
         if user is not None:
             login(request, user)
+            # Enregistrer l'action dans l'historique
+            enregistrer_historique(user, "S'est connecté(e) au système.")
             return redirect("profil")
         else:
             messages.error(request, "Identifiant ou mot de passe incorrect.")
@@ -173,6 +171,9 @@ def connexion(request):
     return render(request, "utilisateurs/connexion.html")
 
 def deconnexion(request):
+    if request.user.is_authenticated:
+        # Enregistrer l'action dans l'historique
+        enregistrer_historique(request.user, "S'est déconnecté(e) du système.")
     logout(request)
     return redirect("connexion")
 
