@@ -36,17 +36,19 @@ class EvenementDetailView(DetailView):
         slug = self.kwargs.get('slug')
         return context
     
-@login_required(redirect_field_name="connexion")
+
 def demande_evenement(request):
-    if not (request.user.is_authenticated):  # Vérifie si l'utilisateur n'est pas connecté
-        return redirect("connexion")
+
     if request.method == "POST":
         form = EvenementForm(request.POST)
         if form.is_valid():
-            # Récupère l'email de l'utilisateur
-            user=request.user
-            email = user.email
             evenement = form.save(commit=False)
+            if (request.user.is_authenticated):  # Récupère l'email de l'utilisateur
+                user=request.user
+                email = user.email
+                evenement.email=email
+            evenement = form.save(commit=False)
+           
             evenement.email=email
             evenement.etat = False  # Demande désactivée jusqu'à vérification
             evenement.save()

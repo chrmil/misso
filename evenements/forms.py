@@ -1,13 +1,18 @@
-from urllib import request
+from django.contrib.auth.forms import UserCreationForm
+from utilisateurs.models import EmailVerification, Utilisateur
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django import forms
 from evenements.models import *
 from datetime import date, datetime, timedelta
 from datetime import time
+from django.http.request import *
+from django.shortcuts import *
 class EvenementForm(forms.ModelForm):
     titre = forms.CharField(
         label="Titre",
         help_text=""
         )
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'type':'email'}))
     date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     debut = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
     fin = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
@@ -46,4 +51,4 @@ class EvenementForm(forms.ModelForm):
         if fin and fin!=time(0,0) and debut >  fin:
             raise forms.ValidationError("L'horaire de début ne peut pas être après l'horaire de fin.")
         return debut
-        
+ 
