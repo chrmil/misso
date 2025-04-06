@@ -167,6 +167,7 @@ def info_objet(request, objet_id):
 
     return render(request, "objets_connectes/info_objet.html", {"objet": objet})
 
+@login_required
 def telecharger_rapport_pdf(request):
     # Créer un buffer pour le PDF
     buffer = BytesIO()
@@ -188,33 +189,64 @@ def telecharger_rapport_pdf(request):
         "Frigos": ObjetConnecte.objects.filter(type_objet="frigo").aggregate(Sum("consommation"))["consommation__sum"] or 0,
         "Fours": ObjetConnecte.objects.filter(type_objet="four").aggregate(Sum("consommation"))["consommation__sum"] or 0,
     }
-
-    quantite_par_type = {
-        "Caméras": ObjetConnecte.objects.filter(type_objet="camera").count(),
-        "Frigos": ObjetConnecte.objects.filter(type_objet="frigo").count(),
-        "Fours": ObjetConnecte.objects.filter(type_objet="four").count(),
+    consultations_utilisations = {
+        "Consultations": ObjetConnecte.objects.aggregate(Sum("nombre_consultations"))["nombre_consultations__sum"] or 0,
+        "Utilisations": ObjetConnecte.objects.aggregate(Sum("nombre_utilisations"))["nombre_utilisations__sum"] or 0,
     }
 
-    consultations_par_type = {
-        "Caméras": ObjetConnecte.objects.filter(type_objet="camera").aggregate(Sum("nombre_consultations"))["nombre_consultations__sum"] or 0,
-        "Frigos": ObjetConnecte.objects.filter(type_objet="frigo").aggregate(Sum("nombre_consultations"))["nombre_consultations__sum"] or 0,
-        "Fours": ObjetConnecte.objects.filter(type_objet="four").aggregate(Sum("nombre_consultations"))["nombre_consultations__sum"] or 0,
-    }
+    # Générer un graphique pour la consommation
+    labels = consommation_par_type.keys()
+    values = consommation_par_type.values()
 
-    # Ajouter les données au PDF
+    plt.figure(figsize=(6, 4))
+    plt.bar(labels, values, color=['blue', 'green', 'orange'])
+    plt.title("Consommation par Type d'Objet")
+    plt.xlabel("Type d'Objet")
+    plt.ylabel("Consommation (Wh)")
+
+    # Sauvegarder le graphique dans un buffer
+    graph_buffer = io.BytesIO()
+    plt.savefig(graph_buffer, format='png')
+    graph_buffer.seek(0)
+    plt.close()
+
+    # Convertir le graphique en image pour le PDF
+    graph_image = Image(graph_buffer, width=400, height=300)
+    elements.append(Paragraph("Graphique : Consommation par Type d'Objet", styles['Heading2']))
+    elements.append(graph_image)
+    elements.append(Spacer(1, 12))
+
+    # Générer un graphique pour les consultations et utilisations
+    labels_cu = consultations_utilisations.keys()
+    values_cu = consultations_utilisations.values()
+
+    plt.figure(figsize=(6, 4))
+    plt.bar(labels_cu, values_cu, color=['purple', 'cyan'])
+    plt.title("Consultations et Utilisations")
+    plt.xlabel("Catégories")
+    plt.ylabel("Nombre Total")
+
+    # Sauvegarder le graphique dans un buffer
+    graph_buffer_cu = io.BytesIO()
+    plt.savefig(graph_buffer_cu, format='png')
+    graph_buffer_cu.seek(0)
+    plt.close()
+
+    # Convertir le graphique en image pour le PDF
+    graph_image_cu = Image(graph_buffer_cu, width=400, height=300)
+    elements.append(Paragraph("Graphique : Consultations et Utilisations", styles['Heading2']))
+    elements.append(graph_image_cu)
+    elements.append(Spacer(1, 12))
+
+    # Ajouter les données textuelles
     elements.append(Paragraph("Consommation par type d'objet :", styles['Heading2']))
     for type_objet, consommation in consommation_par_type.items():
         elements.append(Paragraph(f"{type_objet} : {consommation} Wh", styles['BodyText']))
     elements.append(Spacer(1, 12))
 
-    elements.append(Paragraph("Quantité par type d'objet :", styles['Heading2']))
-    for type_objet, quantite in quantite_par_type.items():
-        elements.append(Paragraph(f"{type_objet} : {quantite} objets", styles['BodyText']))
-    elements.append(Spacer(1, 12))
-
-    elements.append(Paragraph("Consultations par type d'objet :", styles['Heading2']))
-    for type_objet, consultations in consultations_par_type.items():
-        elements.append(Paragraph(f"{type_objet} : {consultations} consultations", styles['BodyText']))
+    elements.append(Paragraph("Consultations et utilisations :", styles['Heading2']))
+    for categorie, total in consultations_utilisations.items():
+        elements.append(Paragraph(f"{categorie} : {total}", styles['BodyText']))
     elements.append(Spacer(1, 12))
 
     # Générer le PDF
