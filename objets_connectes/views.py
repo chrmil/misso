@@ -10,6 +10,12 @@ import matplotlib.pyplot as plt
 import io
 import urllib, base64
 from historique.utils import enregistrer_historique
+from django.http import HttpResponse
+from io import BytesIO
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
+from reportlab.lib.styles import getSampleStyleSheet
 
 def rapport_global(request):
     # Calculer la consommation totale par type d'objet
@@ -138,3 +144,86 @@ def info_objet(request, objet_id):
     enregistrer_historique(request.user, action)
 
     return render(request, "objets_connectes/info_objet.html", {"objet": objet})
+
+def telecharger_rapport_pdf(request):
+    # Créer un buffer pour le PDF
+    buffer = BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=letter)
+    styles = getSampleStyleSheet()
+    elements = []
+
+    # Ajouter le titre
+    elements.append(Paragraph("Rapport Global et Avancé", styles['Title']))
+    elements.append(Spacer(1, 12))
+
+    # Ajouter une description
+    elements.append(Paragraph("Ce rapport montre la répartition de la consommation d'énergie et du nombre d'objets connectés, ainsi que des statistiques avancées.", styles['BodyText']))
+    elements.append(Spacer(1, 12))
+
+    # Ajouter le graphique de consommation
+    buf1 = io.BytesIO()
+    plt.figure(figsize=(6, 4))
+    plt.pie(
+        [30, 50, 20],  # Exemple de données
+        labels=["Caméras", "Frigos", "Fours"],
+        autopct='%1.1f%%',
+        startangle=90,
+        colors=["blue", "green", "orange"]
+    )
+    plt.title("Répartition de la consommation d'énergie")
+    plt.savefig(buf1, format='png')
+    buf1.seek(0)
+    elements.append(Image(buf1, width=400, height=300))
+    plt.close()  # Fermer la figure pour libérer la mémoire
+
+    elements.append(Spacer(1, 12))
+
+    # Ajouter le graphique de quantités
+    buf2 = io.BytesIO()
+    plt.figure(figsize=(6, 4))
+    plt.pie(
+        [40, 35, 25],  # Exemple de données
+        labels=["Caméras", "Frigos", "Fours"],
+        autopct='%1.1f%%',
+        startangle=90,
+        colors=["purple", "cyan", "yellow"]
+    )
+    plt.title("Répartition du nombre d'objets")
+    plt.savefig(buf2, format='png')
+    buf2.seek(0)
+    elements.append(Image(buf2, width=400, height=300))
+    plt.close()  # Fermer la figure pour libérer la mémoire
+
+    elements.append(Spacer(1, 12))
+
+    # Ajouter des statistiques avancées
+    elements.append(Paragraph("Statistiques avancées :", styles['Heading2']))
+    elements.append(Paragraph("1. Consommation totale : 500 kWh", styles['BodyText']))
+    elements.append(Paragraph("2. Nombre total d'objets : 120", styles['BodyText']))
+    elements.append(Spacer(1, 12))
+
+    # Générer le PDF
+    doc.build(elements)
+
+    # Retourner le PDF en tant que réponse HTTP
+    buffer.seek(0)
+    return HttpResponse(buffer, content_type='application/pdf')
+
+def telecharger_rapport_avance_pdf(request):
+    # Créer un buffer pour le PDF
+    buffer = BytesIO()
+    p = canvas.Canvas(buffer)
+
+    # Ajouter du contenu détaillé au PDF
+    p.drawString(100, 800, "Rapport Avancé")
+    p.drawString(100, 780, "Détails sur l'utilisation globale de la plateforme.")
+    p.drawString(100, 760, "Inclut des statistiques avancées et des analyses.")
+    # Ajoutez ici plus de contenu selon vos besoins
+
+    # Terminer le PDF
+    p.showPage()
+    p.save()
+
+    # Retourner le PDF en tant que réponse HTTP
+    buffer.seek(0)
+    return HttpResponse(buffer, content_type='application/pdf')
