@@ -9,16 +9,17 @@ body {
     display: block;
     height: 100vh;
     color: black;
-    background: #F5F5DC;
+    background-image: url('../restaurant/img/texture.jpg');
+    margin: 0;
+    padding: 0;
 }
 
 
 .main {
     max-width: 75%;
-    margin: 20px auto;
-    padding: 20px;
-    background: linear-gradient(135deg, #ffffff, #f8f8f8);
-    border-radius: 12px;
+    background-image: url('../restaurant/img/texture.jpg');
+    margin: 0;
+    padding: 0;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: justify;
     font-family: 'Georgia', serif;

@@ -9,9 +9,9 @@ body {
     display: block;
     overflow-y: auto;
     min-height: 100vh;
+    background-image: url('../restaurant/img/texture.jpg');
     margin: 0;
     padding: 0;
-    background-image: url('../restaurant/img/texture.jpg');
 }
 
 .mini_logo {
