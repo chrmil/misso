@@ -84,4 +84,4 @@ python manage.py clear_users
 
 # Auteur
 
-Ce projet a été développé par Christelle Millet, Eric Shao, Leon Chen, Aline Kim, Mattéo Manresa.
+Ce projet a été développé par Christelle Millet, Junjie (Eric) Shao, Leon Chen, Aline Kim, Mattéo Manresa.
