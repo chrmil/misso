@@ -84,7 +84,29 @@ pre {
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
+.image-container {
+    display: flex;
+    flex-direction: column; /* Aligne les éléments verticalement */
+    align-items: center; /* Centre horizontalement */
+    justify-content: center; /* Centre verticalement si nécessaire */
+    margin: 20px auto; /* Ajoute un espacement autour et centre le conteneur */
+    text-align: center; /* Centre le texte des légendes */
+}
 
+.image img {
+    max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
+    height: auto; /* Maintient les proportions de l'image */
+    border-radius: 8px; /* Ajoute des coins arrondis si nécessaire */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Ajoute une ombre légère */
+}
+
+.legende {
+    font-size: 14px;
+    color: #555; /* Couleur de texte pour la légende */
+    margin-top: 10px; /* Espacement entre l'image et la légende */
+    text-align: center; /* Centre le texte de la légende */
+    white-space: pre-wrap; /* Permet de gérer les retours à la ligne dans la légende */
+}
   
 .center img {
     width: 45%; /* Taille par défaut de l'image */

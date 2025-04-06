@@ -29,13 +29,15 @@
           </pre>
         {%for image in images%}
           {%if image.paragraphe.id == paragraphe.id %}
-          <div class="image">
-            <img src="{% static image.image_path %}" alt="{{ image.nom }}">
-            {%if image.legende%}
-            <pre class="legende">
-              {{image.legende}}
+          <div class="image-container">
+            <div class="image">
+              <img src="{% static image.image_path %}" alt="{{ image.nom }}">
+              {%if image.legende%}
+              <pre class="legende">
+                {{image.legende}}
               </pre>
-            {%endif%}
+              {%endif%}
+            </div>
           </div>
           {%endif%}
         {%endfor%}
